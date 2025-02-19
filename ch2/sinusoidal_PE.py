@@ -4,7 +4,7 @@ In this file, I create sinusoidal absolute positional embeddings and add it to t
 
 import torch 
 import torch.nn as nn 
-from sliding_window import create_dataloader 
+from ch2.sliding_window import create_dataloader 
 import tiktoken 
 import math 
 
@@ -21,7 +21,7 @@ class SinusoidalEmbeddingLayer():
         pos_embeddings[:, 0::2] = torch.sin(positions * div_term) 
         pos_embeddings[:, 1::2] = torch.cos(positions * div_term) 
         
-        return pos_embeddings
+        return pos_embeddings 
 
 if __name__ == '__main__': 
     vocab_size = 50257 # GPT2 vocab size in BPE tokenizer 

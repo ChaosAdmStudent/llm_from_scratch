@@ -10,4 +10,5 @@ if __name__ == '__main__':
     print(embeddings.weight) 
     print(embeddings(torch.tensor([2,1])))
 
+
     
