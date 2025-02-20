@@ -76,10 +76,13 @@ class MultiHeadAttention_V2(nn.Module):
         V = self.W_v(inputs) 
 
         # Split K,Q,V into multiple heads 
+
+        # Split context_dim into different heads 
         K = K.view(B, num_tokens, self.num_heads, self.head_dim) # Splits the last context_dim across heads. 
         Q = Q.view(B, num_tokens, self.num_heads, self.head_dim) 
         V = V.view(B, num_tokens, self.num_heads, self.head_dim) 
 
+        # Switch positions of num_heads so that batch matrix multiplication can be done across several heads in parallel 
         K = K.transpose(1,2) # (B, num_heads, N , head_dim) 
         Q = Q.transpose(1,2) 
         V = V.transpose(1,2) 
