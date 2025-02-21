@@ -19,7 +19,6 @@ def generate_new_tokens(model, max_new_tokens: int, token_ids: torch.Tensor, con
     """ 
 
     B, num_tokens = token_ids.shape 
-    model.eval() 
 
     for _ in range(max_new_tokens): 
         with torch.no_grad(): 
