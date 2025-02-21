@@ -51,9 +51,9 @@ class MultiHeadAttention_V2(nn.Module):
         self.context_dim = context_dim 
         self.num_heads = num_heads  
         self.head_dim = context_dim // num_heads 
-        self.W_q = nn.Linear(inp_emb_dim, context_dim) 
-        self.W_k = nn.Linear(inp_emb_dim, context_dim) 
-        self.W_v = nn.Linear(inp_emb_dim, context_dim) 
+        self.W_q = nn.Linear(inp_emb_dim, context_dim, bias=qkv_bias) 
+        self.W_k = nn.Linear(inp_emb_dim, context_dim, bias=qkv_bias) 
+        self.W_v = nn.Linear(inp_emb_dim, context_dim, bias=qkv_bias) 
 
         self.dropout = nn.Dropout(dropout) 
         self.register_buffer( # Mask for causal self attention
