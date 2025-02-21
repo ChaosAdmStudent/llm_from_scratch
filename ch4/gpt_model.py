@@ -10,7 +10,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import torch 
 import torch.nn as nn 
 import tiktoken
-from ch4.utils import GELU 
+from ch4.utils import GELU, generate_new_tokens
 from ch3.multihead_attention import MultiHeadAttention_V2
 
 class GPTModel(nn.Module): 
@@ -51,7 +51,7 @@ class GPTModel(nn.Module):
         input_embeddings = self.drop_inp_emb(input_embeddings)  
 
         # Pass through transformer blocks 
-        out = self.trf_blocks(input_embeddings) 
+        out = self.trf_blocks(input_embeddings)  
 
         # Pass through layer norm 
         out = self.final_norm(out) 
@@ -146,21 +146,29 @@ if __name__ == '__main__':
     # print('Input tokens shape: ', token_ids.shape) 
     # print('GPT Output shape: ',out.shape)  
 
-    # Ex 4.1 
+    # # Ex 4.1 
 
-    feed_forward = FeedForward(768) 
-    multihead_att = MultiHeadAttention_V2(
-        GPT_CONFIG_124M["token_emb_dim"], 
-        GPT_CONFIG_124M["token_emb_dim"], 
-        GPT_CONFIG_124M["context_length"], 
-        GPT_CONFIG_124M["droprate"], 
-        GPT_CONFIG_124M["num_heads"], 
-        GPT_CONFIG_124M["qkv_bias"]
-        )
+    # feed_forward = FeedForward(768) 
+    # multihead_att = MultiHeadAttention_V2(
+    #     GPT_CONFIG_124M["token_emb_dim"], 
+    #     GPT_CONFIG_124M["token_emb_dim"], 
+    #     GPT_CONFIG_124M["context_length"], 
+    #     GPT_CONFIG_124M["droprate"], 
+    #     GPT_CONFIG_124M["num_heads"], 
+    #     GPT_CONFIG_124M["qkv_bias"]
+    #     )
     
-    print('Number of parameters in FeedForward Module: ', sum(p.numel() for p in feed_forward.parameters()))
-    print('Number of parameters in MultiHead Attention Module: ', sum(p.numel() for p in multihead_att.parameters()))
+    # print('Number of parameters in FeedForward Module: ', sum(p.numel() for p in feed_forward.parameters()))
+    # print('Number of parameters in MultiHead Attention Module: ', sum(p.numel() for p in multihead_att.parameters()))
     
 
+    # Using text generator 
+    gpt_model.eval()
+    new_token_ids = generate_new_tokens(gpt_model, 6, token_ids, GPT_CONFIG_124M["context_length"]) 
+    print(f'Before generating 6 tokens, shape: {token_ids.shape}') 
+    print(f'After generating 6 tokens, shape: {new_token_ids.shape}') 
+    print('Initial token IDs: \n', token_ids) 
+    print('After generating new tokens: \n', new_token_ids) 
 
-    
+    sentences = [tokenizer.decode(sentence.tolist()) for sentence in new_token_ids] 
+    print(sentences) 
