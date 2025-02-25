@@ -41,7 +41,7 @@ def generate(max_new_tokens: int, model, input_token_embeddings: torch.Tensor, c
         if top_k is not None: 
             top_logits, top_pos = torch.topk(last_token_logits, k=top_k, dim=-1) 
             last_token_logits = torch.where(
-                condition = last_token_logits < top_logits[-1], # top_logits[-1] is the smallest element in top-k 
+                condition = last_token_logits < top_logits[:, [-1]], # top_logits[-1] is the smallest element in top-k 
                 input= torch.tensor(-torch.inf) , 
                 other = last_token_logits # Retain values in indices where condition is False 
             ) 
@@ -58,7 +58,7 @@ def generate(max_new_tokens: int, model, input_token_embeddings: torch.Tensor, c
             break 
         
         # Merge token ids 
-        input_token_embeddings = torch.cat((input_token_embeddings, next_token_ids), dim=0) # (B, token_id+1) 
+        input_token_embeddings = torch.cat((input_token_embeddings, next_token_ids), dim=-1) # (B, token_id+1) 
     
     out_token_embeddings = input_token_embeddings
     return out_token_embeddings

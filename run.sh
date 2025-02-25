@@ -11,4 +11,8 @@
 #SBATCH --error=llm_error.err    # Standard error
 
 source ../llm/bin/activate
+
+# Test if the virtual environment is loaded properly
+echo "Python executable: $(which python)"
+export PYTHONUNBUFFERED=1
 python ch5/pretraining.py

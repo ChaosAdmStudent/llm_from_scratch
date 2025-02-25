@@ -65,7 +65,7 @@ if __name__ == '__main__':
         "vocab_size": 50257, 
         "context_length": 4, 
         "num_heads": 12, 
-        "num_layers": 4, 
+        "num_layers": 12, 
         "qkv_bias": False 
     }    
 
@@ -96,7 +96,7 @@ if __name__ == '__main__':
         tokenizer,
         max_length=GPT_CONFIG_124M["context_length"], 
         stride=GPT_CONFIG_124M["context_length"], 
-        batch_size=8, 
+        batch_size=64, 
         drop_last=True, 
         shuffle=True
     )
@@ -106,7 +106,7 @@ if __name__ == '__main__':
         tokenizer,
         max_length=GPT_CONFIG_124M["context_length"], 
         stride=GPT_CONFIG_124M["context_length"], 
-        batch_size=2, 
+        batch_size=64, 
         drop_last=True, 
         shuffle=True
     ) 
@@ -130,7 +130,7 @@ if __name__ == '__main__':
             optimizer.step() # Perform gradient descent with commputed param gradients 
             optimizer.zero_grad() # Clear accumulated gradients  
 
-            if i % 3: 
+            if i == 10:  
                 print('Saving model and optimizer...') 
                 
                 # Save model 
@@ -152,6 +152,8 @@ if __name__ == '__main__':
             if i % 10 == 0: 
                 train_loss, val_loss = evaluate_model(train_loader, val_loader, model, device, 10)
                 print(f'\t epoch {epoch}/10 batch {i}/{len(train_loader)} Train loss: {train_loss}, Eval loss: {val_loss}')   
+            else: 
+                print(f'Processed batch {i}, epoch {epoch}')
 
 
     # Decoding strategies 
@@ -162,11 +164,11 @@ if __name__ == '__main__':
     
     print(f"With temperature 5: ") 
     generated_text = [tokenizer.decode(token_ids.tolist()) for token_ids in generated_tokens] 
-    print(generated_tokens) 
+    print(generated_text) 
     print('---------------------------') 
 
     print(f"With temperature 0.1: ") 
     generated_tokens = generate(max_new_tokens, model, input_token_embeddings, GPT_CONFIG_124M["context_length"], device, temperature=0.1, top_k=5)
     generated_text = [tokenizer.decode(token_ids.tolist()) for token_ids in generated_tokens] 
-    print(generated_tokens) 
+    print(generated_text) 
     print('---------------------------')
