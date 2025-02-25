@@ -46,7 +46,7 @@ def generate(max_new_tokens: int, model, input_token_embeddings: torch.Tensor, c
                 other = last_token_logits # Retain values in indices where condition is False 
             ) 
         
-        if temperature > 1: 
+        if temperature > 0: 
             last_token_logits = last_token_logits/temperature 
             next_token_probas = torch.softmax(last_token_logits,dim=-1) # (B, 1, vocab_size)   
             next_token_probas = next_token_probas.squeeze(1) # (B, vocab_size) 
