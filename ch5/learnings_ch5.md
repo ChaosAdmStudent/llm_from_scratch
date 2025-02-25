@@ -28,6 +28,8 @@ It gives an interpretable number that tells you how many out of the N vocab word
 
 ## Decoding Strategies for variety
 
+### Temperature Scaling 
+
 - Temperature Scaling is a technique used in conjunction with a probabilistic sampling method to control the probability distribution of logits output by the LLM model to vary the diversity of the next token word selected during decoding.
 - In greedy decoding, we always pick the token with max probability score. However, the problem with this is that the model will always give the same output text for a given input context. This is not good  for diversity responses.
 - Thus, during evaluation when we are decoding, we can use a probabilistic sampling which samples based on the probability scores of the logits.
@@ -37,3 +39,16 @@ It gives an interpretable number that tells you how many out of the N vocab word
     
     Hence, dividing by a number less than 1 results in more confident/less diverse model outputs
     - Similarly, scaling down reduces the gap between e^x terms, (x is the logit here). Thus, the higher the number is than 1, the more uniform the probability distributions become, and the more random the outputs start looking.
+
+### Top-K sampling
+
+- TopK sampling is used in conjunction with temperature scaling and probabilistic sampling. The idea is to sample logits from top-K probabilities instead of all the probabilities.
+- TopK gives another level of control on the model output variety. In cases where we want to restrict the number of outputs, we should go for a lower TopK number.
+
+## Other Learnings
+
+- Other than the above, I mostly spent time writing the code for generating tokens, setting up the training loop, saving weights and loading open AI weights.
+- A key part was also checking how to validate weights while loading into a GPT architecture.
+- I took a long time to diagnose a problem with my GPT model, where the pretrained weights were giving really weird text outputs. After a long time of thinking, I found that my formula for calculating attention weights in MultiHeadAttention module was wrong. I was scaling down the attention scores by $d_{context\_dim}$ instead of $d_{head\_dim}$. Even though this is just a scalar that helps to bring down large values and thereby prevent smaller gradients, I think either would probably work, but the weights need to be trained for that scalar value.
+    
+    The Open AI GPT model was trained with division by $d_{head\_dim}$. Changing that fixed everything in the output that I was seeing and it became coherent.
