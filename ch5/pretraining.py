@@ -14,6 +14,7 @@ from ch4.gpt_model import GPTModel
 from ch5.utils import * 
 from ch5.loss import cross_entropy_loss
 from ch2.sliding_window import create_dataloader
+from ch5.utils import  generate
 
 def calc_loss_batch(input_batch, target_batch, model, device): 
     """
@@ -62,15 +63,17 @@ if __name__ == '__main__':
         "token_emb_dim": 768, 
         "droprate": 0.1, 
         "vocab_size": 50257, 
-        "context_length": 256, 
+        "context_length": 4, 
         "num_heads": 12, 
-        "num_layers": 12, 
+        "num_layers": 4, 
         "qkv_bias": False 
     }    
 
     torch.manual_seed(123) 
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    print('Using device: ', device) 
+
     model = GPTModel(GPT_CONFIG_124M) 
     model = model.to(device) 
 
@@ -93,7 +96,7 @@ if __name__ == '__main__':
         tokenizer,
         max_length=GPT_CONFIG_124M["context_length"], 
         stride=GPT_CONFIG_124M["context_length"], 
-        batch_size=4, 
+        batch_size=8, 
         drop_last=True, 
         shuffle=True
     )
@@ -129,9 +132,22 @@ if __name__ == '__main__':
 
             if i % 10 == 0: 
                 train_loss, val_loss = evaluate_model(train_loader, val_loader, model, device, 10)
-                print(f'\t Train loss: {train_loss}, Eval loss: {val_loss}')   
+                print(f'\t epoch {epoch}/10 batch {i}/{len(train_loader)} Train loss: {train_loss}, Eval loss: {val_loss}')   
 
 
-        
+    # Decoding strategies 
+    model.eval()  
+    max_new_tokens = 25 
+    input_token_embeddings = torch.tensor([tokenizer.encode(text) for text in ["I love your", "Do you know"]]) 
+    generated_tokens = generate(max_new_tokens, model, input_token_embeddings, GPT_CONFIG_124M["context_length"], device, temperature=5, top_k=5)
+    
+    print(f"With temperature 5: ") 
+    generated_text = [tokenizer.decode(token_ids.tolist()) for token_ids in generated_tokens] 
+    print(generated_tokens) 
+    print('---------------------------') 
 
-
+    print(f"With temperature 0.1: ") 
+    generated_tokens = generate(max_new_tokens, model, input_token_embeddings, GPT_CONFIG_124M["context_length"], device, temperature=0.1, top_k=5)
+    generated_text = [tokenizer.decode(token_ids.tolist()) for token_ids in generated_tokens] 
+    print(generated_tokens) 
+    print('---------------------------')
