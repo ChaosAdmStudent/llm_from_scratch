@@ -130,6 +130,25 @@ if __name__ == '__main__':
             optimizer.step() # Perform gradient descent with commputed param gradients 
             optimizer.zero_grad() # Clear accumulated gradients  
 
+            if i % 3: 
+                print('Saving model and optimizer...') 
+                
+                # Save model 
+                torch.save({
+                    'model_state_dict': model.state_dict(), 
+                    'optimizer_state_dict': optimizer.state_dict()
+                }, 'ch5/model_checkpoint.pth')  
+
+                # Load model 
+                model = GPTModel(GPT_CONFIG_124M) 
+                model = model.to(device) 
+                optimizer = torch.optim.AdamW(model.parameters(), weight_decay=0.1) 
+
+                checkpoint = torch.load('ch5/model_checkpoint.pth', map_location=device)
+                model.load_state_dict(checkpoint['model_state_dict'])
+                optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+                print('Model loaded again!')
+
             if i % 10 == 0: 
                 train_loss, val_loss = evaluate_model(train_loader, val_loader, model, device, 10)
                 print(f'\t epoch {epoch}/10 batch {i}/{len(train_loader)} Train loss: {train_loss}, Eval loss: {val_loss}')   

@@ -1,2 +1,6 @@
 llm
 **/__pycache__/ 
+**/.pth
+*.pth 
+*.out
+*.err
