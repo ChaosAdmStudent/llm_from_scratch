@@ -4,3 +4,4 @@ llm
 *.pth 
 *.out
 *.err
+**/gpt2

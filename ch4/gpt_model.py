@@ -19,7 +19,7 @@ class GPTModel(nn.Module):
 
         # Token and position embedding layers 
         self.token_emb_layer = nn.Embedding(cfg["vocab_size"], cfg["token_emb_dim"]) 
-        self.pos_emb_layer = nn.Embedding(cfg["vocab_size"], cfg["token_emb_dim"])  
+        self.pos_emb_layer = nn.Embedding(cfg["context_length"], cfg["token_emb_dim"])  
 
         # Dropout layer for generated input embeddings 
         self.drop_inp_emb = nn.Dropout(cfg["droprate"])
@@ -65,7 +65,7 @@ class TransformerBlock(nn.Module):
     def __init__(self, cfg): 
         super(TransformerBlock, self).__init__()  
         self.layer_norm1 = LayerNorm(cfg["token_emb_dim"]) 
-        self.multihead_attention = MultiHeadAttention_V2(
+        self.att = MultiHeadAttention_V2(
             cfg["token_emb_dim"], 
             cfg["token_emb_dim"], 
             cfg["context_length"], 
@@ -78,14 +78,17 @@ class TransformerBlock(nn.Module):
         self.ff = FeedForward(cfg["token_emb_dim"]) 
 
     def forward(self, x): 
+        res = x # First res connection
         out = self.layer_norm1(x) # (B,N,token_emb) 
-        out = self.multihead_attention(out) # (B,N, token_emb)
+        out = self.att(out) # (B,N, token_emb)
         out = self.dropout(out) # (B, N, token_emb) 
-        x = out + x # Res connection # (B,N, token_emb) 
-        out = self.layer_norm2(x) # (B, N, token_emb) 
+        out = out + res # Res connection # (B,N, token_emb) 
+
+        res = out # Second res connection
+        out = self.layer_norm2(out) # (B, N, token_emb) 
         out = self.ff(out) # (B, N, token_emb) 
         out = self.dropout(out) # (B,N,token_emb) 
-        out = out + x # Res connection # (B,N,token_emb) 
+        out = out + res # Res connection # (B,N,token_emb) 
 
         return out 
     
@@ -112,10 +115,10 @@ class FeedForward(nn.Module):  # Feed Forward modules help a lot in model unders
         self.act = GELU() 
         self.ff2 = nn.Linear(4*emb_dim, emb_dim)  
 
-        self.ff = nn.Sequential(self.ff1, self.act, self.ff2)
+        self.layers = nn.Sequential(self.ff1, self.act, self.ff2)
      
     def forward(self, x): 
-        return self.ff(x) 
+        return self.layers(x) 
 
 if __name__ == '__main__': 
     GPT_CONFIG_124M = {

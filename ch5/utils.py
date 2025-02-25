@@ -36,29 +36,28 @@ def generate(max_new_tokens: int, model, input_token_embeddings: torch.Tensor, c
 
     for _ in range(max_new_tokens): 
         logits = model(input_token_embeddings[:, -context_length:]) # (B,N,vocab_size) 
-        last_token_logits = logits[:, -1, :]  
+        last_token_logits = logits[:, -1, :]   # (B, vocab_size) 
 
         if top_k is not None: 
             top_logits, top_pos = torch.topk(last_token_logits, k=top_k, dim=-1) 
-            last_token_logits = torch.where(
+            last_token_logits = torch.where( 
                 condition = last_token_logits < top_logits[:, [-1]], # top_logits[-1] is the smallest element in top-k 
-                input= torch.tensor(-torch.inf) , 
+                input= torch.tensor(-torch.inf).to(last_token_logits.device) , 
                 other = last_token_logits # Retain values in indices where condition is False 
             ) 
         
         if temperature > 0: 
             last_token_logits = last_token_logits/temperature 
-            next_token_probas = torch.softmax(last_token_logits,dim=-1) # (B, 1, vocab_size)   
-            next_token_probas = next_token_probas.squeeze(1) # (B, vocab_size) 
+            next_token_probas = torch.softmax(last_token_logits,dim=-1) # (B, vocab_size)   
             next_token_ids = torch.multinomial(next_token_probas, num_samples=1)  # (B,token_id) 
         else: 
-            next_token_ids = torch.argmax(last_token_logits, dim=-1, keepdim=False) # (B,token_id) 
-        
-        if next_token_ids == eos_id: 
+            next_token_ids = torch.argmax(last_token_logits, dim=-1, keepdim=True) # (B,token_id) 
+
+        if next_token_ids.shape[0] == 1 and next_token_ids == eos_id: # Only stop generation if batch size of 1 is given (inference)
             break 
         
         # Merge token ids 
-        input_token_embeddings = torch.cat((input_token_embeddings, next_token_ids), dim=-1) # (B, token_id+1) 
+        input_token_embeddings = torch.cat((input_token_embeddings, next_token_ids), dim=1) # (B, token_id+1) 
     
     out_token_embeddings = input_token_embeddings
     return out_token_embeddings

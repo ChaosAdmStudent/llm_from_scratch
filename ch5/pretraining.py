@@ -16,6 +16,16 @@ from ch5.loss import cross_entropy_loss
 from ch2.sliding_window import create_dataloader
 from ch5.utils import  generate
 
+GPT_CONFIG_124M = {
+        "token_emb_dim": 768, 
+        "droprate": 0.1, 
+        "vocab_size": 50257, 
+        "context_length": 4, 
+        "num_heads": 12, 
+        "num_layers": 12, 
+        "qkv_bias": False 
+    }    
+
 def calc_loss_batch(input_batch, target_batch, model, device): 
     """
     Calculates loss of a single batch 
@@ -59,15 +69,6 @@ def evaluate_model(train_loader, val_loader, model, device, num_batches=None):
 
 if __name__ == '__main__': 
     tokenizer = tiktoken.get_encoding('gpt2') 
-    GPT_CONFIG_124M = {
-        "token_emb_dim": 768, 
-        "droprate": 0.1, 
-        "vocab_size": 50257, 
-        "context_length": 4, 
-        "num_heads": 12, 
-        "num_layers": 12, 
-        "qkv_bias": False 
-    }    
 
     torch.manual_seed(123) 
 
