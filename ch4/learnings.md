@@ -31,7 +31,8 @@
 
 - Final gpt model output is of shape (B, num_tokens, vocab_size)
 - The final generated values for each token is a tensor of size vocab_size, basically an unbounded logit value for each token.
-- First, we convert logits into probabilities using softmax. Since, softmax is a monotonic function, i.e, it retains the order of the inputs, the argmax of logits and softmax will be the same. However, in the code I still do this to give model more intuition about the token selected. This is called “greedy decoding”
+- First, we convert logits into probabilities using softmax. Since, softmax is a monotonic function, i.e, it retains the order of the inputs, the argmax of logits and softmax will be the same. However, in the code I still do this to give model more intuition about the token selected. 
+- Picking the token with max predicted probability during decoding is called "greedy decoding"
 - We extract token id from the very last generated token’s probability scores. This is because the last generated output is the new word.
 - Next, we add this generated output to the input tokens and return it.
 - We end up returning a token iD which can be passed into the tokenizer’s decoder to get the corresponding text.
