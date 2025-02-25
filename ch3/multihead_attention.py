@@ -51,9 +51,9 @@ class MultiHeadAttention_V2(nn.Module):
         self.context_dim = context_dim 
         self.num_heads = num_heads  
         self.head_dim = context_dim // num_heads 
-        self.W_q = nn.Linear(inp_emb_dim, context_dim, bias=qkv_bias) 
-        self.W_k = nn.Linear(inp_emb_dim, context_dim, bias=qkv_bias) 
-        self.W_v = nn.Linear(inp_emb_dim, context_dim, bias=qkv_bias) 
+        self.W_query = nn.Linear(inp_emb_dim, context_dim, bias=qkv_bias) 
+        self.W_key = nn.Linear(inp_emb_dim, context_dim, bias=qkv_bias) 
+        self.W_value = nn.Linear(inp_emb_dim, context_dim, bias=qkv_bias) 
 
         self.dropout = nn.Dropout(dropout) 
         self.register_buffer( # Mask for causal self attention
@@ -71,9 +71,9 @@ class MultiHeadAttention_V2(nn.Module):
         B, num_tokens, _ = inputs.shape 
         
         # Create merged K,Q,V 
-        K = self.W_k(inputs) # Shape = (B,N,context_dim) 
-        Q = self.W_q(inputs) 
-        V = self.W_v(inputs) 
+        K = self.W_key(inputs) # Shape = (B,N,context_dim) 
+        Q = self.W_query(inputs) 
+        V = self.W_value(inputs) 
 
         # Split K,Q,V into multiple heads 
 
@@ -90,10 +90,10 @@ class MultiHeadAttention_V2(nn.Module):
         # Calculate attention weights 
         attention_scores = Q @ K.transpose(2,3) # (B, num_heads , N , N) 
         attention_scores.masked_fill_(self.mask.bool()[:num_tokens, :num_tokens], -torch.inf) # Causal self attention
-        attention_weights = torch.softmax(attention_scores/self.context_dim ** 0.5, dim=-1) 
+        attention_weights = torch.softmax(attention_scores/K.shape[-1] ** 0.5, dim=-1) # d_k is the dimension per head in this case
 
         # Dropout on attention weights 
-        self.dropout(attention_weights)
+        attention_weights = self.dropout(attention_weights)
 
         # Calculate context vectors 
         Z = attention_weights @ V # (B, num_heads, N, head_dim) 
@@ -101,9 +101,9 @@ class MultiHeadAttention_V2(nn.Module):
         Z = Z.view(B, num_tokens, self.context_dim)  # (B, N, context_dim) 
 
         # Linearly project merged head information to get final context vector 
-        Z = self.proj_out(Z) # (B, N, context_dim) 
+        context_vec = self.proj_out(Z) # (B, N, context_dim) 
 
-        return Z 
+        return context_vec
 
 
 if __name__ == '__main__': 
