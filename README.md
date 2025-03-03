@@ -5,9 +5,15 @@ In this repository, I am uploading every little code and experiment that I do to
 
 ## List of topics that I augmented to Sebastian's book in this repo 
 
+### Position Embeddings 
+
 1. Sinusoidal Positional Embedding code
+
+### Attention Mechanisms 
+
+1. Multi-Query Attention 
 
 ## Topics to implement: 
 
 1. Relative Position embedding
-2. Flash attention, shared attention, KV-cache and multi-query attention
+2. Flash attention, shared attention, KV-cache
