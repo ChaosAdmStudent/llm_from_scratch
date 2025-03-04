@@ -12,6 +12,8 @@ In this repository, I am uploading every little code and experiment that I do to
 ### Attention Mechanisms 
 
 1. Multi-Query Attention 
+2. Grouped Query Attention 
+3. KV-Cache Mechanism for faster inference. 
 
 ## Topics to implement: 
 
