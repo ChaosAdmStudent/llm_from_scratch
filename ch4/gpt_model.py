@@ -14,7 +14,7 @@ from ch4.utils import GELU, generate_new_tokens
 from ch3.multihead_attention import MultiHeadAttention_V2, ModelArgs
 
 class GPTModel(nn.Module): 
-    def __init__(self, cfg: dict, kv_args: ModelArgs, use_kv_cache=False): 
+    def __init__(self, cfg: dict, kv_args: ModelArgs): 
         super(GPTModel, self).__init__() 
 
         # Token and position embedding layers 
@@ -26,7 +26,7 @@ class GPTModel(nn.Module):
 
         # Transformer blocks 
         self.trf_blocks = nn.ModuleList(
-            [TransformerBlock(cfg, kv_args, use_kv_cache) for _ in range(cfg["num_layers"])]
+            [TransformerBlock(cfg, kv_args) for _ in range(cfg["num_layers"])]
         )
 
         # Layer norm 
@@ -62,13 +62,18 @@ class GPTModel(nn.Module):
         out = self.out_head(out) 
 
         return out 
+    
+    def toggle_kv_cache(self, use_kv_cache: bool):
+        """Dynamically enable/disable KV cache in all transformer blocks"""
+        for block in self.trf_blocks:
+            block.use_kv_cache = use_kv_cache
 
 class TransformerBlock(nn.Module): 
-    def __init__(self, cfg, kv_args: ModelArgs, use_kv_cache = False): 
+    def __init__(self, cfg, kv_args: ModelArgs): 
         super(TransformerBlock, self).__init__()  
         self.layer_norm1 = LayerNorm(cfg["token_emb_dim"]) 
         self.kv_args = kv_args # Parameters required for KV Cache
-        self.use_kv_cache = use_kv_cache
+        self.use_kv_cache = False
         self.att = MultiHeadAttention_V2(
             cfg["token_emb_dim"], 
             cfg["token_emb_dim"], 
@@ -83,13 +88,10 @@ class TransformerBlock(nn.Module):
 
     def forward(self, x, start_pos: int = None): 
 
-        if self.training: 
-            self.att.kv_cache_enabled = False  
-        elif not self.training and self.use_kv_cache: 
+        self.att.kv_cache_enabled = self.use_kv_cache and not self.training  
+        if self.att.kv_cache_enabled: 
             assert start_pos is not None, "Must provide start_pos during inference for using KV Cache!" 
-            self.att.kv_cache_enabled = True
-            print('KV Cache enabled!')  
-
+            
         res = x # First res connection
         out = self.layer_norm1(x) # (B,N,token_emb) 
         out = self.att(out, self.kv_args, start_pos) # (B,N, token_emb) 

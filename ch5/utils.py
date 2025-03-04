@@ -36,10 +36,10 @@ def generate(max_new_tokens: int, model, input_token_embeddings: torch.Tensor, c
         assert len(input_token_embeddings) <= args.max_batch_size, f"Input should not have more than {args.max_batch_size} batches" 
         assert context_length <= args.max_seq_len, f"Input context length should not have more than {args.max_seq_len} sequence length"
 
-        total_len = min(args.max_seq_len, context_length + max_new_tokens) # This is the total length of the generated sequence since we return what was input as well.
+        total_len = min(args.max_seq_len, min(context_length, input_token_embeddings.shape[1]) + max_new_tokens) # This is the total length of the generated sequence since we return what was input as well.
     else: 
         total_len = max_new_tokens 
-
+    
     model = model.to(device) 
     input_token_embeddings = input_token_embeddings.to(device) # (B, token_id) 
     out_token_embeddings = input_token_embeddings # Initialize output token embedding sequence with the input (This will be extended with new tokens in this function)
@@ -47,7 +47,7 @@ def generate(max_new_tokens: int, model, input_token_embeddings: torch.Tensor, c
     cur_pos = 0
     while cur_pos < total_len:
         if cur_pos == 0 and use_kv_cache: 
-            logits = model(input_token_embeddings[:, -context_length:], start_pos=cur_pos) # (B,N,vocab_size) 
+            logits = model(input_token_embeddings[:, -context_length:], start_pos=0) # (B,N,vocab_size) 
             last_token_logits = logits[:, -1, :]   # (B, vocab_size)
             cur_pos += input_token_embeddings.shape[1] - 1 # These number of tokens have been seen for each batch (Current assumption: All batches have same number of tokens) 
 

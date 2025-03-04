@@ -20,8 +20,8 @@ from dataclasses import dataclass
 class ModelArgs: 
 
     # Required for KV Cache
-    max_batch_size: int = 8, 
-    max_seq_len: int = 500  
+    max_batch_size: int = 4
+    max_seq_len: int = 300
 
 class MultiHeadAttentionWrapperClass_V1(nn.Module): 
     """
@@ -74,7 +74,7 @@ class MultiHeadAttention_V2(nn.Module):
         self.register_buffer("cache_k", None) # Buffers for caches 
         self.register_buffer("cache_v", None)  
 
-    def forward(self, inputs, args:ModelArgs = None, start_pos: int = None): 
+    def forward(self, inputs: torch.Tensor, args:ModelArgs = None, start_pos: int = None): 
         assert len(inputs.shape) == 3, "Input must be of shape (num_batches, num_tokens, token_dimensions)"  
         assert inputs.shape[-1] == self.inp_emb_dim, "Input hidden dimension must be equal to inp_emb_dim passed into MHA!"
         if self.kv_cache_enabled: 
@@ -97,8 +97,8 @@ class MultiHeadAttention_V2(nn.Module):
         if self.kv_cache_enabled: 
             if self.cache_k is None: 
                 # Initialize cache for keys and values 
-                self.cache_k = torch.zeros(args.max_batch_size, args.max_seq_len, self.num_heads, self.head_dim)
-                self.cache_v = torch.zeros_like(self.cache_k) 
+                self.cache_k = torch.zeros(args.max_batch_size, args.max_seq_len, self.num_heads, self.head_dim, device=inputs.device)
+                self.cache_v = torch.zeros_like(self.cache_k, device=inputs.device) 
 
             # Cache keys and values 
             self.cache_k[:B, start_pos: start_pos + num_tokens] = K 
@@ -107,6 +107,7 @@ class MultiHeadAttention_V2(nn.Module):
             # Extract cached keys and values for computations 
             K = self.cache_k[:B, :start_pos + num_tokens] # (B, N', num_heads, head_dim) 
             V = self.cache_v[:B, :start_pos + num_tokens] 
+
 
         # Switch positions of num_heads so that batch matrix multiplication can be done across several heads in parallel 
         K = K.transpose(1,2) # (B,num_heads, N, head_dim) OR  (B, num_heads, N' , head_dim) if kv_Cache
