@@ -20,7 +20,7 @@ GPT_CONFIG_124M = {
         "token_emb_dim": 768, 
         "droprate": 0.1, 
         "vocab_size": 50257, 
-        "context_length": 4, 
+        "context_length": 50, 
         "num_heads": 12, 
         "num_layers": 12, 
         "qkv_bias": False 
@@ -97,7 +97,7 @@ if __name__ == '__main__':
         tokenizer,
         max_length=GPT_CONFIG_124M["context_length"], 
         stride=GPT_CONFIG_124M["context_length"], 
-        batch_size=64, 
+        batch_size=4, 
         drop_last=True, 
         shuffle=True
     )
@@ -107,15 +107,19 @@ if __name__ == '__main__':
         tokenizer,
         max_length=GPT_CONFIG_124M["context_length"], 
         stride=GPT_CONFIG_124M["context_length"], 
-        batch_size=64, 
+        batch_size=4, 
         drop_last=True, 
         shuffle=True
     ) 
+
+    print(f"Length of train_text: {len(train_text)}")
+    print(f"Number of batches in train_loader: {len(train_loader)}")
 
     # Optimizer 
     optimizer = torch.optim.AdamW(model.parameters(), weight_decay=0.1) # AdamW has better weight decay implementation than Adam. Heavily used in LLMs 
 
     # Training loop 
+    print('Starting training')
     model.train() 
     for epoch in range(10): 
         for i, (x_train, y_train) in enumerate(train_loader): 
