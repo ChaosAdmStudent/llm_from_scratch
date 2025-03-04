@@ -34,13 +34,30 @@ def generate(max_new_tokens: int, model, input_token_embeddings: torch.Tensor, c
     if use_kv_cache: 
         args = ModelArgs() 
         assert len(input_token_embeddings) <= args.max_batch_size, f"Input should not have more than {args.max_batch_size} batches" 
+        assert context_length <= args.max_seq_len, f"Input context length should not have more than {args.max_seq_len} sequence length"
+
+        total_len = min(args.max_seq_len, context_length + max_new_tokens) # This is the total length of the generated sequence since we return what was input as well.
+    else: 
+        total_len = max_new_tokens 
 
     model = model.to(device) 
     input_token_embeddings = input_token_embeddings.to(device) # (B, token_id) 
+    out_token_embeddings = input_token_embeddings # Initialize output token embedding sequence with the input (This will be extended with new tokens in this function)
 
-    for _ in range(max_new_tokens): 
-        logits = model(input_token_embeddings[:, -context_length:]) # (B,N,vocab_size) 
-        last_token_logits = logits[:, -1, :]   # (B, vocab_size) 
+    cur_pos = 0
+    while cur_pos < total_len:
+        if cur_pos == 0 and use_kv_cache: 
+            logits = model(input_token_embeddings[:, -context_length:], start_pos=cur_pos) # (B,N,vocab_size) 
+            last_token_logits = logits[:, -1, :]   # (B, vocab_size)
+            cur_pos += input_token_embeddings.shape[1] - 1 # These number of tokens have been seen for each batch (Current assumption: All batches have same number of tokens) 
+
+        elif use_kv_cache: 
+            last_token_logits = model(next_token_ids, start_pos=cur_pos) # (B, 1, vocab_size) 
+            last_token_logits = last_token_logits.squeeze(1) # (B, vocab_size) 
+
+        else: 
+            logits = model(out_token_embeddings[:, -context_length:]) # (B,N,vocab_size) 
+            last_token_logits = logits[:, -1, :] # (B, vocab_size) 
 
         if top_k is not None: 
             top_logits, top_pos = torch.topk(last_token_logits, k=top_k, dim=-1) 
@@ -53,27 +70,14 @@ def generate(max_new_tokens: int, model, input_token_embeddings: torch.Tensor, c
         if temperature > 0: 
             last_token_logits = last_token_logits/temperature 
             next_token_probas = torch.softmax(last_token_logits,dim=-1) # (B, vocab_size)   
-            next_token_ids = torch.multinomial(next_token_probas, num_samples=1)  # (B,token_id) 
+            next_token_ids = torch.multinomial(next_token_probas, num_samples=1)  # (B,1) 
         else: 
-            next_token_ids = torch.argmax(last_token_logits, dim=-1, keepdim=True) # (B,token_id) 
+            next_token_ids = torch.argmax(last_token_logits, dim=-1, keepdim=True) # (B,1) 
 
         if next_token_ids.shape[0] == 1 and next_token_ids == eos_id: # Only stop generation if batch size of 1 is given (inference)
             break 
         
-        # Merge token ids 
-        input_token_embeddings = torch.cat((input_token_embeddings, next_token_ids), dim=1) # (B, token_id+1) 
+        out_token_embeddings = torch.cat((out_token_embeddings, next_token_ids), dim=1) # (B, token_id+1) 
+        cur_pos += 1 
     
-    out_token_embeddings = input_token_embeddings
-    return out_token_embeddings
-
-     
-if __name__ == '__main__': 
-    torch.manual_seed(123) 
-    a = torch.randint(0, 10, (3,6)) 
-    print(a) 
-    print(torch.max(a, dim=-1)[0].max()) 
-    print('----------') 
-    print(torch.max(a)) 
-
-
-    
+    return out_token_embeddings 

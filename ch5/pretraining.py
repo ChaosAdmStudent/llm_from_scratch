@@ -25,9 +25,7 @@ GPT_CONFIG_124M = {
         "context_length": 50, 
         "num_heads": 12, 
         "num_layers": 12, 
-        "qkv_bias": False, 
-        "max_batch_size": 8, 
-        "max_seq_len": 100 
+        "qkv_bias": False
     }
 
 def calc_loss_batch(input_batch, target_batch, model, device): 
@@ -124,7 +122,7 @@ if __name__ == '__main__':
 
     # Training loop 
     model.train() 
-    for epoch in range(10): 
+    for epoch in range(7): 
         for i, (x_train, y_train) in enumerate(train_loader): 
             if i == 0: # For visualization purposes. 
                 print('Sample Inputs: ', tokenizer.decode(x_train[0].tolist())) 
@@ -163,6 +161,14 @@ if __name__ == '__main__':
             else: 
                 print(f'Processed batch {i}, epoch {epoch}')
 
+
+    print('Saving model and optimizer...') 
+    # Save model after training 
+    torch.save({
+        'model_state_dict': model.state_dict(), 
+        'optimizer_state_dict': optimizer.state_dict()
+    }, 'ch5/model_checkpoint.pth') 
+    print('Model saved!') 
 
     # Decoding strategies 
     model.eval()  
