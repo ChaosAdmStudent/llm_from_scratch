@@ -5,3 +5,4 @@ llm
 *.out
 *.err
 **/gpt2
+*.sh

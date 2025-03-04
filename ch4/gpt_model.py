@@ -35,7 +35,7 @@ class GPTModel(nn.Module):
         # Output prediction head 
         self.out_head = nn.Linear(cfg["token_emb_dim"], cfg["vocab_size"]) 
     
-    def forward(self, x, args: ModelArgs = None, start_pos: int = None):
+    def forward(self, x):
         """
         x: Tokenized text. Will have shape (B, num_tokens) 
         output: (B, num_tokens, vocab_size) 
@@ -77,7 +77,7 @@ class TransformerBlock(nn.Module):
         self.layer_norm2 = LayerNorm(cfg["token_emb_dim"]) 
         self.ff = FeedForward(cfg["token_emb_dim"]) 
 
-    def forward(self, x, args:ModelArgs, start_pos= None): 
+    def forward(self, x): 
         if self.training: 
             self.att.kv_cache_enabled = False  
         else: 
