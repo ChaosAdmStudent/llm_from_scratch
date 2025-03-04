@@ -77,7 +77,7 @@ class MultiHeadAttention_V2(nn.Module):
     def forward(self, inputs, args:ModelArgs = None, start_pos: int = None): 
         assert len(inputs.shape) == 3, "Input must be of shape (num_batches, num_tokens, token_dimensions)"  
         assert inputs.shape[-1] == self.inp_emb_dim, "Input hidden dimension must be equal to inp_emb_dim passed into MHA!"
-        if self.kv_cache: 
+        if self.kv_cache_enabled: 
             assert start_pos is not None, "Must provide start_pos argument if using kv-cache"
 
         B, num_tokens, _ = inputs.shape 
