@@ -83,11 +83,10 @@ class TransformerBlock(nn.Module):
 
     def forward(self, x, start_pos: int = None): 
 
-        assert not self.training and start_pos is None, "Must provide start_pos during inference for using KV Cache!" 
-
         if self.training: 
             self.att.kv_cache_enabled = False  
         elif not self.training and self.use_kv_cache: 
+            assert start_pos is not None, "Must provide start_pos during inference for using KV Cache!" 
             self.att.kv_cache_enabled = True
             print('KV Cache enabled!')  
 

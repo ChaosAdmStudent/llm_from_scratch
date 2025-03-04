@@ -1,9 +1,8 @@
 import torch 
-import tiktoken
 import os 
-import sys
+import sys 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) 
-from ch4.gpt_model import GPTModel
+from ch3.multihead_attention import ModelArgs
 
 def text_to_ids(text: str, tokenizer): 
     return tokenizer.encode(text) 
@@ -26,11 +25,16 @@ def print_sampled_tokens(probas: torch.Tensor, vocab):
     for token_id, freq in enumerate(sampled_bincount): 
         print(f'\t{vocab[token_id]} -> {freq} times') 
 
-def generate(max_new_tokens: int, model, input_token_embeddings: torch.Tensor, context_length: int, device, temperature=1.0, top_k=None, eos_id=None): 
+def generate(max_new_tokens: int, model, input_token_embeddings: torch.Tensor, context_length: int, device, temperature=1.0, top_k=None, eos_id=None, use_kv_cache=False): 
     
     """
-    Takes input_token_embeddings and generates new tokens from the LLM model
+    Takes input_token_embeddings and generates new tokens from the LLM model 
     """ 
+
+    if use_kv_cache: 
+        args = ModelArgs() 
+        assert len(input_token_embeddings) <= args.max_batch_size, f"Input should not have more than {args.max_batch_size} batches" 
+
     model = model.to(device) 
     input_token_embeddings = input_token_embeddings.to(device) # (B, token_id) 
 
@@ -64,4 +68,12 @@ def generate(max_new_tokens: int, model, input_token_embeddings: torch.Tensor, c
 
      
 if __name__ == '__main__': 
-    pass 
+    torch.manual_seed(123) 
+    a = torch.randint(0, 10, (3,6)) 
+    print(a) 
+    print(torch.max(a, dim=-1)[0].max()) 
+    print('----------') 
+    print(torch.max(a)) 
+
+
+    

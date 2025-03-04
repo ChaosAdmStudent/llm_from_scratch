@@ -15,7 +15,13 @@ import torch
 import torch.nn as nn 
 from ch3.casual_self_attention import CausalSelfAttention
 from dataclasses import dataclass
-from ch5.pretraining import ModelArgs
+
+@dataclass
+class ModelArgs: 
+
+    # Required for KV Cache
+    max_batch_size: int = 8, 
+    max_seq_len: int = 2048  
 
 class MultiHeadAttentionWrapperClass_V1(nn.Module): 
     """

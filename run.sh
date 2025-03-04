@@ -5,7 +5,7 @@
 #SBATCH --mem-per-cpu=16G
 #SBATCH --time=01:00:00
 #SBATCH --partition=gpunodes
-#SBATCH --nodelist=gpunode30
+#SBATCH --nodelist=gpunode29
 #SBATCH --gres=gpu:rtx_a4500:1
 #SBATCH --output=llm_output.out   # Standard output
 #SBATCH --error=llm_error.err    # Standard error

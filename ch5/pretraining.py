@@ -16,6 +16,7 @@ from ch5.loss import cross_entropy_loss
 from ch2.sliding_window import create_dataloader
 from ch5.utils import  generate
 from dataclasses import dataclass
+from ch3.multihead_attention import ModelArgs
 
 GPT_CONFIG_124M = {
         "token_emb_dim": 768, 
@@ -28,13 +29,6 @@ GPT_CONFIG_124M = {
         "max_batch_size": 8, 
         "max_seq_len": 100 
     }
-
-@dataclass
-class ModelArgs: 
-
-    # Required for KV Cache
-    max_batch_size: int = 8, 
-    max_seq_len: int = 2048    
 
 def calc_loss_batch(input_batch, target_batch, model, device): 
     """
