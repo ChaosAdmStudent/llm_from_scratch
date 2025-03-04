@@ -15,6 +15,7 @@ from ch5.utils import *
 from ch5.loss import cross_entropy_loss
 from ch2.sliding_window import create_dataloader
 from ch5.utils import  generate
+from dataclasses import dataclass
 
 GPT_CONFIG_124M = {
         "token_emb_dim": 768, 
@@ -23,8 +24,17 @@ GPT_CONFIG_124M = {
         "context_length": 50, 
         "num_heads": 12, 
         "num_layers": 12, 
-        "qkv_bias": False 
-    }    
+        "qkv_bias": False, 
+        "max_batch_size": 8, 
+        "max_seq_len": 100 
+    }
+
+@dataclass
+class ModelArgs: 
+
+    # Required for KV Cache
+    max_batch_size: int = 8, 
+    max_seq_len: int = 2048    
 
 def calc_loss_batch(input_batch, target_batch, model, device): 
     """
@@ -44,7 +54,7 @@ def calc_loss_loader(data_loader, model, device, num_batches = None):
     """
     total_loss = 0 
     if len(data_loader) == 0: 
-        return torch.float("nan") 
+        return torch.tensor(float("nan"))
     elif num_batches == None: 
         num_batches = len(data_loader)
     else: 
@@ -69,13 +79,13 @@ def evaluate_model(train_loader, val_loader, model, device, num_batches=None):
 
 if __name__ == '__main__': 
     tokenizer = tiktoken.get_encoding('gpt2') 
-
+    kv_args = ModelArgs() 
     torch.manual_seed(123) 
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     print('Using device: ', device) 
 
-    model = GPTModel(GPT_CONFIG_124M) 
+    model = GPTModel(GPT_CONFIG_124M, kv_args) 
     model = model.to(device) 
 
     # Read raw text corpus 
@@ -112,14 +122,13 @@ if __name__ == '__main__':
         shuffle=True
     ) 
 
-    print(f"Length of train_text: {len(train_text)}")
     print(f"Number of batches in train_loader: {len(train_loader)}")
+    print(f"Number of batches in val_loader: {len(val_loader)}")
 
     # Optimizer 
     optimizer = torch.optim.AdamW(model.parameters(), weight_decay=0.1) # AdamW has better weight decay implementation than Adam. Heavily used in LLMs 
 
     # Training loop 
-    print('Starting training')
     model.train() 
     for epoch in range(10): 
         for i, (x_train, y_train) in enumerate(train_loader): 
@@ -145,7 +154,7 @@ if __name__ == '__main__':
                 }, 'ch5/model_checkpoint.pth')  
 
                 # Load model 
-                model = GPTModel(GPT_CONFIG_124M) 
+                model = GPTModel(GPT_CONFIG_124M, kv_args) 
                 model = model.to(device) 
                 optimizer = torch.optim.AdamW(model.parameters(), weight_decay=0.1) 
 

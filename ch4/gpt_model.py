@@ -14,7 +14,7 @@ from ch4.utils import GELU, generate_new_tokens
 from ch3.multihead_attention import MultiHeadAttention_V2, ModelArgs
 
 class GPTModel(nn.Module): 
-    def __init__(self, cfg: dict): 
+    def __init__(self, cfg: dict, kv_args: ModelArgs, use_kv_cache=False): 
         super(GPTModel, self).__init__() 
 
         # Token and position embedding layers 
@@ -25,8 +25,8 @@ class GPTModel(nn.Module):
         self.drop_inp_emb = nn.Dropout(cfg["droprate"])
 
         # Transformer blocks 
-        self.trf_blocks = nn.Sequential(
-            *[TransformerBlock(cfg) for _ in range(cfg["num_layers"])]
+        self.trf_blocks = nn.ModuleList(
+            [TransformerBlock(cfg, kv_args, use_kv_cache) for _ in range(cfg["num_layers"])]
         )
 
         # Layer norm 
@@ -35,7 +35,7 @@ class GPTModel(nn.Module):
         # Output prediction head 
         self.out_head = nn.Linear(cfg["token_emb_dim"], cfg["vocab_size"]) 
     
-    def forward(self, x):
+    def forward(self, x, start_pos: int = None):
         """
         x: Tokenized text. Will have shape (B, num_tokens) 
         output: (B, num_tokens, vocab_size) 
@@ -51,7 +51,9 @@ class GPTModel(nn.Module):
         input_embeddings = self.drop_inp_emb(input_embeddings)  
 
         # Pass through transformer blocks 
-        out = self.trf_blocks(input_embeddings)  
+        out = input_embeddings
+        for trf_block in self.trf_blocks: 
+            out = trf_block(out, start_pos)  
 
         # Pass through layer norm 
         out = self.final_norm(out) 
@@ -62,9 +64,11 @@ class GPTModel(nn.Module):
         return out 
 
 class TransformerBlock(nn.Module): 
-    def __init__(self, cfg): 
+    def __init__(self, cfg, kv_args: ModelArgs, use_kv_cache = False): 
         super(TransformerBlock, self).__init__()  
         self.layer_norm1 = LayerNorm(cfg["token_emb_dim"]) 
+        self.kv_args = kv_args # Parameters required for KV Cache
+        self.use_kv_cache = use_kv_cache
         self.att = MultiHeadAttention_V2(
             cfg["token_emb_dim"], 
             cfg["token_emb_dim"], 
@@ -77,15 +81,19 @@ class TransformerBlock(nn.Module):
         self.layer_norm2 = LayerNorm(cfg["token_emb_dim"]) 
         self.ff = FeedForward(cfg["token_emb_dim"]) 
 
-    def forward(self, x): 
+    def forward(self, x, start_pos: int = None): 
+
+        assert not self.training and start_pos is None, "Must provide start_pos during inference for using KV Cache!" 
+
         if self.training: 
             self.att.kv_cache_enabled = False  
-        else: 
-            self.att.kv_cache_enabled = False 
+        elif not self.training and self.use_kv_cache: 
+            self.att.kv_cache_enabled = True
+            print('KV Cache enabled!')  
 
         res = x # First res connection
         out = self.layer_norm1(x) # (B,N,token_emb) 
-        out = self.att(out) # (B,N, token_emb) 
+        out = self.att(out, self.kv_args, start_pos) # (B,N, token_emb) 
         out = self.dropout(out) # (B, N, token_emb) 
         out = out + res # Res connection # (B,N, token_emb) 
 
