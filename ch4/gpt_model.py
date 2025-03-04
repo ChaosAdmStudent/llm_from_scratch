@@ -51,7 +51,7 @@ class GPTModel(nn.Module):
         input_embeddings = self.drop_inp_emb(input_embeddings)  
 
         # Pass through transformer blocks 
-        out = self.trf_blocks(input_embeddings, args, start_pos)  
+        out = self.trf_blocks(input_embeddings)  
 
         # Pass through layer norm 
         out = self.final_norm(out) 
@@ -79,13 +79,13 @@ class TransformerBlock(nn.Module):
 
     def forward(self, x, args:ModelArgs, start_pos= None): 
         if self.training: 
-            self.att.kv_cache_enabled = True 
+            self.att.kv_cache_enabled = False  
         else: 
             self.att.kv_cache_enabled = False 
-                
+
         res = x # First res connection
         out = self.layer_norm1(x) # (B,N,token_emb) 
-        out = self.att(out, args, start_pos) # (B,N, token_emb) 
+        out = self.att(out) # (B,N, token_emb) 
         out = self.dropout(out) # (B, N, token_emb) 
         out = out + res # Res connection # (B,N, token_emb) 
 
