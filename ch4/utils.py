@@ -11,7 +11,7 @@ class GELU(nn.Module):
         )
         ) 
 
-def generate_new_tokens(model, max_new_tokens: int, token_ids: torch.Tensor, context_length: int): 
+def generate_new_tokens(model, max_new_tokens: int, token_ids: torch.Tensor, context_length: int, use_kv_cache=False): 
     """
     max_new_tokens: Number of tokens you want to generate 
     token_ids: Input tensor with token IDs. Needs to have shape (B, num_tokens) 
@@ -20,14 +20,18 @@ def generate_new_tokens(model, max_new_tokens: int, token_ids: torch.Tensor, con
 
     B, num_tokens = token_ids.shape 
 
-    for _ in range(max_new_tokens): 
-        with torch.no_grad(): 
-            logits = model(token_ids[:, -context_length:])  # (B, num_tokens, vocab_size) 
-        logits = logits[:, -1, :] # Extracting logits for the last token. That's the new word we are interested in
-        probs = torch.softmax(logits, dim=-1)   
-        new_token_id = torch.argmax(probs, dim=-1, keepdim=True) 
-        token_ids = torch.cat((token_ids, new_token_id), dim=1) # Adding token in the last dimension. Thus, we get (B, num_tokens+1) 
-    
-    return token_ids 
+    if use_kv_cache: 
+        pass 
+
+    else: 
+        for _ in range(max_new_tokens): 
+            with torch.no_grad(): 
+                logits = model(token_ids[:, -context_length:])  # (B, num_tokens, vocab_size) 
+            logits = logits[:, -1, :] # Extracting logits for the last token. That's the new word we are interested in
+            probs = torch.softmax(logits, dim=-1)   
+            new_token_id = torch.argmax(probs, dim=-1, keepdim=True) 
+            token_ids = torch.cat((token_ids, new_token_id), dim=1) # Adding token in the last dimension. Thus, we get (B, num_tokens+1) 
+        
+        return token_ids 
 
 

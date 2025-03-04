@@ -11,7 +11,7 @@ import torch
 import torch.nn as nn 
 import tiktoken
 from ch4.utils import GELU, generate_new_tokens
-from ch3.multihead_attention import MultiHeadAttention_V2
+from ch3.multihead_attention import MultiHeadAttention_V2, ModelArgs
 
 class GPTModel(nn.Module): 
     def __init__(self, cfg: dict): 
@@ -35,7 +35,7 @@ class GPTModel(nn.Module):
         # Output prediction head 
         self.out_head = nn.Linear(cfg["token_emb_dim"], cfg["vocab_size"]) 
     
-    def forward(self, x):
+    def forward(self, x, args: ModelArgs = None, start_pos: int = None):
         """
         x: Tokenized text. Will have shape (B, num_tokens) 
         output: (B, num_tokens, vocab_size) 
@@ -51,7 +51,7 @@ class GPTModel(nn.Module):
         input_embeddings = self.drop_inp_emb(input_embeddings)  
 
         # Pass through transformer blocks 
-        out = self.trf_blocks(input_embeddings)  
+        out = self.trf_blocks(input_embeddings, args, start_pos)  
 
         # Pass through layer norm 
         out = self.final_norm(out) 
@@ -77,10 +77,15 @@ class TransformerBlock(nn.Module):
         self.layer_norm2 = LayerNorm(cfg["token_emb_dim"]) 
         self.ff = FeedForward(cfg["token_emb_dim"]) 
 
-    def forward(self, x): 
+    def forward(self, x, args:ModelArgs, start_pos= None): 
+        if self.training: 
+            self.att.kv_cache_enabled = True 
+        else: 
+            self.att.kv_cache_enabled = False 
+                
         res = x # First res connection
         out = self.layer_norm1(x) # (B,N,token_emb) 
-        out = self.att(out) # (B,N, token_emb)
+        out = self.att(out, args, start_pos) # (B,N, token_emb) 
         out = self.dropout(out) # (B, N, token_emb) 
         out = out + res # Res connection # (B,N, token_emb) 
 
