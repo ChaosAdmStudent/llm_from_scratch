@@ -11,6 +11,7 @@ import numpy as np
 from ch5.pretraining import GPT_CONFIG_124M, GPTModel
 from ch5.utils import generate
 import tiktoken
+from ch3.multihead_attention import ModelArgs
 
 def assign(left: torch.Tensor, right: torch.Tensor): 
     if left.shape != right.shape: 
@@ -91,6 +92,7 @@ if __name__ == '__main__':
         "gpt2-large (774M)": {"emb_dim": 1280, "n_layers": 36, "n_heads": 20},
         "gpt2-xl (1558M)": {"emb_dim": 1600, "n_layers": 48, "n_heads": 25},
     }
+    kv_args = ModelArgs()
 
     # Copy the base configuration and update with specific model settings
     model_name = "gpt2-small (124M)"  # Example model name
@@ -98,7 +100,7 @@ if __name__ == '__main__':
     NEW_CONFIG.update(model_configs[model_name])
     NEW_CONFIG.update({"context_length": 1024, "qkv_bias": True})
 
-    gpt = GPTModel(NEW_CONFIG)
+    gpt = GPTModel(NEW_CONFIG, kv_args)
     gpt.eval() 
     device = 'cuda' if torch.cuda.is_available() else 'cpu' 
 

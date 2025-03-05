@@ -16,7 +16,6 @@ import torch
 from time import perf_counter
 import numpy as np 
 import matplotlib.pyplot as plt 
-import random
 
 class Timer(): 
     def __init__(self):
@@ -98,7 +97,7 @@ def plot_inference_times(seq_lens, times_kv, times_no_kv, out_folder):
     plt.savefig(f'{out_folder}/compare_time_kv_nokv.png', bbox_inches='tight') 
 
 # Improved testing function
-def run_benchmarks(chk_path, tokenizer, device, max_new_tokens, out_folder):
+def run_benchmarks(cfg, chk_path, tokenizer, device, max_new_tokens, out_folder):
     text_prompts = [
         "I am",  # Very short
         "I am going to be a really good person.",  # Medium
@@ -110,7 +109,7 @@ def run_benchmarks(chk_path, tokenizer, device, max_new_tokens, out_folder):
 
     checkpoint = torch.load(chk_path, map_location=device)
     kv_args = ModelArgs()
-    model = GPTModel(GPT_CONFIG_124M, kv_args) 
+    model = GPTModel(cfg, kv_args) 
     model = model.to(device)
     model.load_state_dict(checkpoint['model_state_dict'])
     model.eval() 
@@ -127,13 +126,13 @@ def run_benchmarks(chk_path, tokenizer, device, max_new_tokens, out_folder):
         
         # Warmup runs (avoid cold start measurements like one time cuda kernel launch latency)
         _ = compare_average_inference_time(model, input_tokens, max_new_tokens, 
-                                         GPT_CONFIG_124M["context_length"], device, 
+                                         cfg["context_length"], device, 
                                          temperature=1, num_runs=1)
         
         # Actual measurement
         time_kv, time_no_kv = compare_average_inference_time(
             model, input_tokens, max_new_tokens, 
-            GPT_CONFIG_124M["context_length"], device, temperature=1, num_runs=3
+            cfg["context_length"], device, temperature=1, num_runs=3
         )
         
         seq_lens.append(seq_len)
@@ -159,7 +158,7 @@ if __name__ == '__main__':
     out_folder = 'ch5/plots'
 
     # Compare inference times with and without KV cache for different sequence lengths 
-    seq_lens, kv_times, no_kv_times = run_benchmarks(chk_path, tokenizer, device, max_new_tokens, out_folder) 
+    seq_lens, kv_times, no_kv_times = run_benchmarks(GPT_CONFIG_124M ,chk_path, tokenizer, device, max_new_tokens, out_folder) 
     
     print(seq_lens) 
     print(kv_times)
