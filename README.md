@@ -18,4 +18,4 @@ In this repository, I am uploading every little code and experiment that I do to
 ## Topics to implement: 
 
 1. Relative Position embedding
-2. Flash attention, shared attention
+2. Flash attention
