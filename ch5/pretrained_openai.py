@@ -118,52 +118,70 @@ if __name__ == '__main__':
     input_token_ids = torch.tensor([tokenizer.encode(text) for text in texts])
 
     # Low temp and low topK 
-    temperature = 0.1   
-    top_k = 10
-    max_new_tokens = 25
+    # temperature = 0.1   
+    # top_k = 10
+    # max_new_tokens = 25
 
-    output_tokens = generate(max_new_tokens, gpt, input_token_ids, NEW_CONFIG["context_length"], device, temperature, top_k) 
-    print(f'Temperature: {temperature}, topK: {top_k}') 
-    print('--------------------------------------------')
-    print([tokenizer.decode(output_batch.tolist()) for output_batch in output_tokens]) 
-    print('--------------------------------------------')
+    # output_tokens = generate(max_new_tokens, gpt, input_token_ids, NEW_CONFIG["context_length"], device, temperature, top_k) 
+    # print(f'Temperature: {temperature}, topK: {top_k}') 
+    # print('--------------------------------------------')
+    # print([tokenizer.decode(output_batch.tolist()) for output_batch in output_tokens]) 
+    # print('--------------------------------------------')
 
-    # High temp and high topK 
-    temperature = 5
-    top_k = 100
+    # # High temp and high topK 
+    # temperature = 5
+    # top_k = 100
 
-    output_tokens = generate(max_new_tokens, gpt, input_token_ids, NEW_CONFIG["context_length"], device, temperature, top_k) 
-    print(f'Temperature: {temperature}, topK: {top_k}') 
-    print('--------------------------------------------')
-    print([tokenizer.decode(output_batch.tolist()) for output_batch in output_tokens]) 
-    print('--------------------------------------------') 
+    # output_tokens = generate(max_new_tokens, gpt, input_token_ids, NEW_CONFIG["context_length"], device, temperature, top_k) 
+    # print(f'Temperature: {temperature}, topK: {top_k}') 
+    # print('--------------------------------------------')
+    # print([tokenizer.decode(output_batch.tolist()) for output_batch in output_tokens]) 
+    # print('--------------------------------------------') 
 
-    temperature = 1.5
-    top_k = 50
+    # temperature = 1.5
+    # top_k = 50
 
-    output_tokens = generate(max_new_tokens, gpt, input_token_ids, NEW_CONFIG["context_length"], device, temperature, top_k) 
-    print(f'Temperature: {temperature}, topK: {top_k}') 
-    print('--------------------------------------------')
-    print([tokenizer.decode(output_batch.tolist()) for output_batch in output_tokens]) 
-    print('--------------------------------------------')  
+    # output_tokens = generate(max_new_tokens, gpt, input_token_ids, NEW_CONFIG["context_length"], device, temperature, top_k) 
+    # print(f'Temperature: {temperature}, topK: {top_k}') 
+    # print('--------------------------------------------')
+    # print([tokenizer.decode(output_batch.tolist()) for output_batch in output_tokens]) 
+    # print('--------------------------------------------')   
 
     # Compare inference speeds with larger contexts 
-    del output_tokens, input_token_ids 
-    torch.cuda.empty_cache()
-    gc.collect() 
+    # del output_tokens, input_token_ids 
+    # torch.cuda.empty_cache()
+    # gc.collect() 
 
-    with open('ch2/the-verdict.txt', 'r') as book: 
-        raw_text = book.read() 
+    # with open('ch2/the-verdict.txt', 'r') as book: 
+    #     raw_text = book.read() 
 
-    texts = [raw_text[:5], raw_text[:15],raw_text[:100], raw_text[:600], raw_text[:1500], raw_text[:4000]]
-    # texts = [raw_text[:100], raw_text[:600], raw_text[:4000]]
-    max_new_tokens = 30 
-    out_folder = 'ch5/plots'
-    seq_lens, kv_times, no_kv_times = run_benchmarks(gpt, GPT_CONFIG_124M , texts, tokenizer, device, max_new_tokens, out_folder) 
+    # texts = [raw_text[:5], raw_text[:15],raw_text[:100], raw_text[:600], raw_text[:1500], raw_text[:4000]]
+    # # texts = [raw_text[:100], raw_text[:600], raw_text[:4000]]
+    # max_new_tokens = 30 
+    # out_folder = 'ch5/plots'
+    # seq_lens, kv_times, no_kv_times = run_benchmarks(gpt, GPT_CONFIG_124M , texts, tokenizer, device, max_new_tokens, out_folder) 
     
-    print('Sequence lengths: ',seq_lens) 
-    print('Total KV times: ',kv_times)
-    print('Total No KV times: ',no_kv_times)
+    # print('Sequence lengths: ',seq_lens) 
+    # print('Total KV times: ',kv_times)
+    # print('Total No KV times: ',no_kv_times)
+
+    # Check if KV Cache is able to reproduce outputs like non KV
+    temperature = 0 
+    top_k = None
+    max_new_tokens = 25
+
+    output_tokens = generate(max_new_tokens, gpt, input_token_ids, NEW_CONFIG["context_length"], device, temperature, top_k, use_kv_cache=False) 
+    print(f'Without KV Cache') 
+    print('--------------------------------------------')
+    print([tokenizer.decode(output_batch.tolist()) for output_batch in output_tokens]) 
+    print('--------------------------------------------')
+
+    gpt.toggle_kv_cache(True) 
+    output_tokens = generate(max_new_tokens, gpt, input_token_ids, NEW_CONFIG["context_length"], device, temperature, top_k, use_kv_cache=True) 
+    print(f'With KV Cache') 
+    print('--------------------------------------------')
+    print([tokenizer.decode(output_batch.tolist()) for output_batch in output_tokens]) 
+    print('--------------------------------------------')
     
 
 

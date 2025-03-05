@@ -25,7 +25,7 @@ def print_sampled_tokens(probas: torch.Tensor, vocab):
     for token_id, freq in enumerate(sampled_bincount): 
         print(f'\t{vocab[token_id]} -> {freq} times') 
 
-def generate(max_new_tokens: int, model, input_token_embeddings: torch.Tensor, context_length: int, device, temperature=1.0, top_k=None, eos_id=None, use_kv_cache=False): 
+def generate(max_new_tokens: int, model, input_token_embeddings: torch.Tensor, context_length: int, device, temperature=0.0, top_k=None, eos_id=None, use_kv_cache=False): 
     
     """
     Takes input_token_embeddings and generates new tokens from the LLM model 
@@ -36,7 +36,7 @@ def generate(max_new_tokens: int, model, input_token_embeddings: torch.Tensor, c
         assert len(input_token_embeddings) <= args.max_batch_size, f"Input should not have more than {args.max_batch_size} batches" 
         assert context_length <= args.max_seq_len, f"Input context length should not have more than {args.max_seq_len} sequence length"
 
-        total_len = min(args.max_seq_len, min(context_length, input_token_embeddings.shape[1]) + max_new_tokens) # This is the total length of the generated sequence since we return what was input as well.
+        total_len = min(args.max_seq_len, min(context_length, input_token_embeddings.shape[1]) + max_new_tokens - 1) # This is the total length of the generated sequence since we return what was input as well.
     else: 
         total_len = max_new_tokens 
     

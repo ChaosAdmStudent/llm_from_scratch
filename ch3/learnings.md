@@ -82,3 +82,17 @@
     - The efficient way of doing it is to split the required context vector dimensions across multiple heads. This way each head will  operate on hidden dimension of $context\_dim/num\_heads$ . The outputs for the heads are concatenated at the end to give us context vector of hidden dimensions $context\_dim$. 
     
     This method is efficient because what this means is we are just essentially splitting the weight matrices for Q,K,V across different heads by leveraging tensor reshaping and transpose operations. This is efficient because the heads’ operations are not sequential,  but rather being done in parallel using batched matrix multiplication.
+
+### What is Multi Query Attention? 
+
+- In MQA, you share the same weights for K and V across all heads and only maintain separate query tokens. This significantly helps reduce the number of parameters, makes the model much much faster during inference and also quicker to train. However, it does come with some lost accuracy. 
+
+### What is Grouped Multi Query Attention?
+
+- It is the middle ground between multi-head attention and MQA, wherein some heads share common weights, but not all of them. For instance, if there were 8 heads, 2 heads could be sharing the same weights for K and V. This helps establish a tradeoff between speed and accuracy. 
+
+### What is KV Cache mechanism?
+
+- KV Cache mechanism is a technique used in LLMs to speed up inference time. It works by identifying a central problem in LLMs sequence generation task: traditional MHA works by concatenating the obtained last token to the input token list and pass it through the model again. This leads to many repeated attention score computations for the initial tokens which we already computed before. Attention score scales O(N^2), so this is a big overhead. To combat this, KV caching uses a cache where the initial prompt tokens' K and V are stored in memory. Then, instead of passing  the concatenated input tokens with the output token, we just pass the output token to the model directly. This way the query token is always just 1 and we retrieve the K and V of previous tokens from memory. 
+
+- KV Cache brings an overhead of memory at the cost of speed. With large scale LLM systems, this would be something to manage very carefully and there are strategies around it, primarily around cache invalidation and cache reuse. Depending on the use-case, we can choose between session-based invalidation, TTL invalidation or event-based invalidation. 

@@ -16,6 +16,7 @@ from ch3.multihead_attention import MultiHeadAttention_V2, ModelArgs
 class GPTModel(nn.Module): 
     def __init__(self, cfg: dict, kv_args: ModelArgs): 
         super(GPTModel, self).__init__() 
+        self.use_kv_cache = False 
 
         # Token and position embedding layers 
         self.token_emb_layer = nn.Embedding(cfg["vocab_size"], cfg["token_emb_dim"]) 
@@ -35,7 +36,7 @@ class GPTModel(nn.Module):
         # Output prediction head 
         self.out_head = nn.Linear(cfg["token_emb_dim"], cfg["vocab_size"]) 
     
-    def forward(self, x, start_pos: int = None):
+    def forward(self, x, start_pos: int = None, debug=False, debug_block_idx = None):
         """
         x: Tokenized text. Will have shape (B, num_tokens) 
         output: (B, num_tokens, vocab_size) 
@@ -44,7 +45,12 @@ class GPTModel(nn.Module):
         B, num_tokens = x.shape 
 
         token_embeddings = self.token_emb_layer(x) # (B, num_tokens, token_emb_dim) 
-        pos_embeddings = self.pos_emb_layer(torch.arange(num_tokens, device=x.device)) 
+        
+        if self.use_kv_cache and num_tokens == 1:  # KV cache must add the position embedding according to current position in generated sequence. Otherwise, we always add PE of 0th position. 
+            pos_embeddings = self.pos_emb_layer(torch.tensor([start_pos], device=x.device)) 
+        else: 
+            pos_embeddings = self.pos_emb_layer(torch.arange(num_tokens, device=x.device)) 
+
         input_embeddings = token_embeddings + pos_embeddings 
 
         # Dropout on input embeddings 
@@ -52,8 +58,11 @@ class GPTModel(nn.Module):
 
         # Pass through transformer blocks 
         out = input_embeddings
-        for trf_block in self.trf_blocks: 
-            out = trf_block(out, start_pos)  
+        for i,trf_block in enumerate(self.trf_blocks): 
+            if debug and i == debug_block_idx: 
+                out, qkv_to_return, input_qkv = trf_block(out, start_pos, debug)
+            else: 
+                out = trf_block(out, start_pos)  
 
         # Pass through layer norm 
         out = self.final_norm(out) 
@@ -61,10 +70,14 @@ class GPTModel(nn.Module):
         # Pass through prediction head 
         out = self.out_head(out) 
 
-        return out 
+        if debug: 
+            return out, qkv_to_return, input_qkv, input_embeddings, token_embeddings
+        else: 
+            return out 
     
     def toggle_kv_cache(self, use_kv_cache: bool):
         """Dynamically enable/disable KV cache in all transformer blocks"""
+        self.use_kv_cache = use_kv_cache
         for block in self.trf_blocks:
             block.use_kv_cache = use_kv_cache
 
@@ -86,7 +99,7 @@ class TransformerBlock(nn.Module):
         self.layer_norm2 = LayerNorm(cfg["token_emb_dim"]) 
         self.ff = FeedForward(cfg["token_emb_dim"]) 
 
-    def forward(self, x, start_pos: int = None): 
+    def forward(self, x, start_pos: int = None, debug=False): 
 
         self.att.kv_cache_enabled = self.use_kv_cache and not self.training  
         if self.att.kv_cache_enabled: 
@@ -94,7 +107,10 @@ class TransformerBlock(nn.Module):
             
         res = x # First res connection
         out = self.layer_norm1(x) # (B,N,token_emb) 
-        out = self.att(out, self.kv_args, start_pos) # (B,N, token_emb) 
+        if debug: 
+            out, (Q,K,V), input_kqv = self.att(out, self.kv_args, start_pos, debug)
+        else: 
+            out = self.att(out, self.kv_args, start_pos) # (B,N, token_emb) 
         out = self.dropout(out) # (B, N, token_emb) 
         out = out + res # Res connection # (B,N, token_emb) 
 
@@ -104,7 +120,10 @@ class TransformerBlock(nn.Module):
         out = self.dropout(out) # (B,N,token_emb) 
         out = out + res # Res connection # (B,N,token_emb) 
 
-        return out 
+        if debug: 
+            return out, (Q,K,V), input_kqv
+        else: 
+            return out 
     
 class LayerNorm(nn.Module): 
     def __init__(self, emb_dim: int, eps=1e-5): 

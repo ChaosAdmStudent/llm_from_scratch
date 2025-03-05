@@ -74,7 +74,7 @@ class MultiHeadAttention_V2(nn.Module):
         self.register_buffer("cache_k", None) # Buffers for caches 
         self.register_buffer("cache_v", None)  
 
-    def forward(self, inputs: torch.Tensor, args:ModelArgs = None, start_pos: int = None): 
+    def forward(self, inputs: torch.Tensor, args:ModelArgs = None, start_pos: int = None, debug=False): 
         assert len(inputs.shape) == 3, "Input must be of shape (num_batches, num_tokens, token_dimensions)"  
         assert inputs.shape[-1] == self.inp_emb_dim, "Input hidden dimension must be equal to inp_emb_dim passed into MHA!"
         if self.kv_cache_enabled: 
@@ -87,6 +87,9 @@ class MultiHeadAttention_V2(nn.Module):
         Q = self.W_query(inputs) 
         V = self.W_value(inputs) 
 
+        if debug: 
+            input_k, input_q, input_v = K,Q,V
+
         # Split K,Q,V into multiple heads 
 
         # Split context_dim into different heads 
@@ -97,9 +100,9 @@ class MultiHeadAttention_V2(nn.Module):
         if self.kv_cache_enabled: 
             if self.cache_k is None: 
                 # Initialize cache for keys and values 
-                self.cache_k = torch.zeros(args.max_batch_size, args.max_seq_len, self.num_heads, self.head_dim, device=inputs.device)
-                self.cache_v = torch.zeros_like(self.cache_k, device=inputs.device) 
-
+                self.cache_k = torch.empty(args.max_batch_size, args.max_seq_len, self.num_heads, self.head_dim, device=inputs.device)
+                self.cache_v = torch.empty_like(self.cache_k, device=inputs.device) 
+            
             # Cache keys and values 
             self.cache_k[:B, start_pos: start_pos + num_tokens] = K 
             self.cache_v[:B, start_pos: start_pos + num_tokens] = V 
@@ -116,20 +119,25 @@ class MultiHeadAttention_V2(nn.Module):
 
         # Calculate attention weights 
         attention_scores = Q @ K.transpose(2,3) # (B, num_heads , N, N) or (B, num_heads, 1, N') if kv_cache 
-        attention_scores.masked_fill_(self.mask.bool()[:num_tokens, :num_tokens], -torch.inf) # Causal self attention
+        if not self.kv_cache_enabled or attention_scores.shape[-2] != 1: # Causal self attention only if KV cache is not being used or for initial input prompt using KV cache
+            attention_scores.masked_fill_(self.mask.bool()[:num_tokens, :num_tokens], -torch.inf) 
         attention_weights = torch.softmax(attention_scores/K.shape[-1] ** 0.5, dim=-1) # d_k is the dimension per head in this case
 
         # Dropout on attention weights 
         attention_weights = self.dropout(attention_weights)
 
         # Calculate context vectors 
-        Z = attention_weights @ V # (B, num_heads, N, head_dim) 
-        Z = Z.transpose(1,2).contiguous() # (B, N, num_heads, head_dim)  
-        Z = Z.view(B, num_tokens, self.context_dim)  # (B, N, context_dim) 
+        Z = attention_weights @ V # (B, num_heads, N, head_dim) OR (B, num_heads, 1 , head_dim) 
+        Z = Z.transpose(1,2).contiguous() # (B, N, num_heads, head_dim) OR (B, 1, num_heads , head_dim)
+        Z = Z.view(B, num_tokens, self.context_dim)  # (B, N, context_dim) OR (B,1, context_dim) 
 
         # Linearly project merged head information to get final context vector 
-        context_vec = self.proj_out(Z) # (B, N, context_dim) 
-        return context_vec 
+        context_vec = self.proj_out(Z) # (B, N, context_dim) OR (B,1, context_dim)
+
+        if debug: 
+            return context_vec, (Q,K,V), (input_q, input_k, input_v) 
+        else: 
+            return context_vec 
 
 if __name__ == '__main__': 
     # Simulate generated input embeddings 
