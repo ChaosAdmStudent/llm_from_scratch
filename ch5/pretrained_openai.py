@@ -12,6 +12,8 @@ from ch5.pretraining import GPT_CONFIG_124M, GPTModel
 from ch5.utils import generate
 import tiktoken
 from ch3.multihead_attention import ModelArgs
+from ch5.inference import run_benchmarks
+import gc
 
 def assign(left: torch.Tensor, right: torch.Tensor): 
     if left.shape != right.shape: 
@@ -143,10 +145,27 @@ if __name__ == '__main__':
     print(f'Temperature: {temperature}, topK: {top_k}') 
     print('--------------------------------------------')
     print([tokenizer.decode(output_batch.tolist()) for output_batch in output_tokens]) 
-    print('--------------------------------------------') 
+    print('--------------------------------------------')  
 
+    # Compare inference speeds with larger contexts 
+    del output_tokens, input_token_ids 
+    torch.cuda.empty_cache()
+    gc.collect() 
 
+    with open('ch2/the-verdict.txt', 'r') as book: 
+        raw_text = book.read() 
+
+    texts = [raw_text[:5], raw_text[:15],raw_text[:100], raw_text[:600], raw_text[:1500], raw_text[:4000]]
+    # texts = [raw_text[:100], raw_text[:600], raw_text[:4000]]
+    max_new_tokens = 30 
+    out_folder = 'ch5/plots'
+    seq_lens, kv_times, no_kv_times = run_benchmarks(gpt, GPT_CONFIG_124M , texts, tokenizer, device, max_new_tokens, out_folder) 
     
+    print('Sequence lengths: ',seq_lens) 
+    print('Total KV times: ',kv_times)
+    print('Total No KV times: ',no_kv_times)
+    
+
 
 
 
