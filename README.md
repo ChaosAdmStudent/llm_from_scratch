@@ -7,12 +7,12 @@ In this repository, I am uploading every little code and experiment that I do to
 
 ### Position Embeddings 
 
-1. Sinusoidal Positional Embedding code
+1. Sinusoidal Positional Embedding
 
 ### Attention Mechanisms 
 
 1. Multi-Query Attention 
-2. Grouped Query Attention 
+2. Grouped Query Attention
 3. KV-Cache Mechanism for faster inference. 
 
 ## Topics to implement: 
