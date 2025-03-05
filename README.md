@@ -19,3 +19,8 @@ In this repository, I am uploading every little code and experiment that I do to
 
 1. Relative Position embedding
 2. Flash attention
+
+## Interesting observations 
+
+### KV Cache inference speed up with increasing sequence lengths 
+![Inference speed comparison with and without KV Cache mechanism](ch5/plots/compare_time_kv_nokv.png)
