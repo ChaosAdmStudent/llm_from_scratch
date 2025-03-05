@@ -147,7 +147,7 @@ def run_benchmarks(model, cfg, text_prompts,  tokenizer, device, max_new_tokens,
     for i,prompt in enumerate(text_prompts):
         print(f'Processing prompt {i}')
         # Tokenize and process
-        input_tokens = torch.tensor([tokenizer.encode(prompt)]).to(device).repeat(3, 1)
+        input_tokens = torch.tensor([tokenizer.encode(prompt)]).to(device).repeat(4, 1)
         seq_len = input_tokens.shape[1]
         
         # Warmup runs (avoid cold start measurements like one time cuda kernel launch latency)
