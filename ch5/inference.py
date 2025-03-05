@@ -182,33 +182,3 @@ def run_benchmarks(model, cfg, text_prompts,  tokenizer, device, max_new_tokens,
     plot_inference_times(seq_lens, kv_times, no_kv_times, out_folder)
     
     return seq_lens, kv_times, no_kv_times
-
-
-if __name__ == '__main__': 
-    device = 'cuda' if torch.cuda.is_available() else 'cpu' 
-    tokenizer = tiktoken.get_encoding('gpt2') 
-    max_new_tokens = 300
-    chk_path = 'ch5/model_checkpoint.pth' 
-    out_folder = 'ch5/plots'
-
-    text_prompts = [
-        "I am",  # Very short
-        "I am going to be a really good person.",  # Medium
-        "I am going to be a really good person. I don't know how that feels like but",  # Long
-        "I am going to be a really good person. I don't know how that feels like but there is just something that I know deep down that I can go for it if I",  # Very long
-        "The error likely stems from a mismatch in the GPU type specification. Based on the node's GRES (Generic Resources) configuration, here's how to adjust your script I always said that God makes the answer in everything, now you got my answer in musical notes, I feel as if she brings peace to me, she tells me that what my heart wants is right, even though I'm surrounded by a pathetic reality, but I feel like something"
-    ]
-
-    checkpoint = torch.load(chk_path, map_location=device)
-    kv_args = ModelArgs()
-    model = GPTModel(GPT_CONFIG_124M, kv_args) 
-    model = model.to(device)
-    model.load_state_dict(checkpoint['model_state_dict'])
-    model.eval()
-
-    # Compare inference times with and without KV cache for different sequence lengths 
-    seq_lens, kv_times, no_kv_times = run_benchmarks(model, GPT_CONFIG_124M , text_prompts, tokenizer, device, max_new_tokens, out_folder) 
-    
-    print(seq_lens) 
-    print(kv_times)
-    print(no_kv_times) 
