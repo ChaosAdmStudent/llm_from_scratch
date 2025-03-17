@@ -93,8 +93,8 @@ if __name__ == '__main__':
     torch.manual_seed(123) 
 
     url = "https://archive.ics.uci.edu/static/public/228/sms+spam+collection.zip"
-    zip_path = "sms_spam_collection.zip"
-    extracted_path = "ch6/sms_spam_collection"
+    zip_path = "classification_finetuning/sms_spam_collection.zip"
+    extracted_path = "classification_finetuning/sms_spam_collection"
     data_file_path = Path(extracted_path) / "SMSSpamCollection.tsv" 
     tokenizer = tiktoken.get_encoding('gpt2')
     pad_token = tokenizer.encode("<|endoftext|>", allowed_special={"<|endoftext|>"})[0]
