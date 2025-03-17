@@ -8,10 +8,10 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) 
 import tiktoken 
-from ch5.pretraining import GPT_CONFIG_124M 
-from ch5.utils import generate
-from ch4.gpt_model import GPTModel
-from ch3.multihead_attention import ModelArgs 
+from pretraining.pretraining import GPT_CONFIG_124M 
+from pretraining.utils import generate
+from model_architecture.gpt_model import GPTModel
+from attention.multihead_attention import ModelArgs 
 import torch 
 from time import perf_counter
 import numpy as np 
@@ -46,10 +46,10 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) 
 import tiktoken 
-from ch5.pretraining import GPT_CONFIG_124M 
-from ch5.utils import generate
-from ch4.gpt_model import GPTModel
-from ch3.multihead_attention import ModelArgs 
+from pretraining.pretraining import GPT_CONFIG_124M 
+from pretraining.utils import generate
+from model_architecture.gpt_model import GPTModel
+from attention.multihead_attention import ModelArgs 
 import torch 
 from time import perf_counter
 import numpy as np 

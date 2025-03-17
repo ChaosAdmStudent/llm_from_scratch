@@ -13,7 +13,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import torch 
 import torch.nn as nn 
-from ch3.casual_self_attention import CausalSelfAttention
+from attention.casual_self_attention import CausalSelfAttention
 from dataclasses import dataclass
 
 @dataclass

@@ -7,12 +7,12 @@ import torch
 import os 
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from ch5.gpt_download import download_and_load_gpt2 
+from pretraining.gpt_download import download_and_load_gpt2 
 import numpy as np
-from ch5.pretraining import GPT_CONFIG_124M, GPTModel
+from pretraining.pretraining import GPT_CONFIG_124M, GPTModel
 import tiktoken
-from ch3.multihead_attention import ModelArgs
-from ch5.pretrained_openai import load_weights_into_gpt 
+from attention.multihead_attention import ModelArgs
+from pretraining.pretrained_openai import load_weights_into_gpt 
 
 def debug_generate_and_compare(
     model, input_tokens, block_index, check_step, max_steps=10, deterministic=True

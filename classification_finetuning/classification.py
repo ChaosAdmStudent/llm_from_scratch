@@ -7,15 +7,15 @@ import torch.nn as nn
 import os 
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) 
-from ch5.pretrained_openai import load_weights_into_gpt 
-from ch5.gpt_download import download_and_load_gpt2 
-from ch3.multihead_attention import ModelArgs
-from ch5.pretraining import GPTModel
-from ch5.utils import generate, text_to_ids, tk_ids_to_text 
+from pretraining.pretrained_openai import load_weights_into_gpt 
+from pretraining.gpt_download import download_and_load_gpt2 
+from attention.multihead_attention import ModelArgs
+from pretraining.pretraining import GPTModel
+from pretraining.utils import generate, text_to_ids, tk_ids_to_text 
 import tiktoken 
 from pathlib import Path
-from ch6.data_prep import prepare_pd_dataset, split_train_test_val, create_data_loader
-from ch6.classification_metrics import calc_accuracy_loader, calc_loss_loader
+from classification_finetuning.data_prep import prepare_pd_dataset, split_train_test_val, create_data_loader
+from classification_finetuning.classification_metrics import calc_accuracy_loader, calc_loss_loader
 
 if __name__ == '__main__': 
     

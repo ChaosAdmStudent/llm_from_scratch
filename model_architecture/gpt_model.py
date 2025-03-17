@@ -10,8 +10,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import torch 
 import torch.nn as nn 
 import tiktoken
-from ch4.utils import GELU, generate_new_tokens
-from ch3.multihead_attention import MultiHeadAttention_V2, ModelArgs
+from model_architecture.utils import GELU, generate_new_tokens
+from attention.multihead_attention import MultiHeadAttention_V2, ModelArgs
 
 class GPTModel(nn.Module): 
     def __init__(self, cfg: dict, kv_args: ModelArgs): 

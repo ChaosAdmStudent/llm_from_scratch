@@ -10,13 +10,13 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import torch 
 import torch.nn as nn
 import tiktoken 
-from ch4.gpt_model import GPTModel
-from ch5.utils import * 
-from ch5.loss import cross_entropy_loss
-from ch2.sliding_window import create_dataloader
-from ch5.utils import  generate
+from model_architecture.gpt_model import GPTModel
+from pretraining.utils import * 
+from pretraining.loss import cross_entropy_loss
+from preprocessing.sliding_window import create_dataloader
+from pretraining.utils import  generate
 from dataclasses import dataclass
-from ch3.multihead_attention import ModelArgs
+from attention.multihead_attention import ModelArgs
 
 GPT_CONFIG_124M = {
         "token_emb_dim": 768, 

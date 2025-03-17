@@ -10,8 +10,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import torch 
 import torch.nn as nn
 import tiktoken 
-from ch4.gpt_model import GPTModel
-from ch5.utils import *
+from model_architecture.gpt_model import GPTModel
+from pretraining.utils import *
 
 def cross_entropy_loss(outputs: torch.Tensor, target_tokens: torch.Tensor): 
     """

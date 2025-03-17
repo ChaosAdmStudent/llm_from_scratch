@@ -2,7 +2,7 @@ import torch
 import os 
 import sys 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) 
-from ch3.multihead_attention import ModelArgs
+from attention.multihead_attention import ModelArgs
 
 def text_to_ids(text: str, tokenizer): 
     return torch.tensor([tokenizer.encode(text)])   

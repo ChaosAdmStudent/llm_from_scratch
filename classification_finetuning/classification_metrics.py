@@ -4,7 +4,7 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  
 from torch.utils.data import DataLoader
-from ch4.gpt_model import GPTModel
+from model_architecture.gpt_model import GPTModel
 
 def calc_accuracy_loader(data_loader: DataLoader, model: GPTModel, device, num_batches=None): 
     total_examples, correct_preds = 0,0

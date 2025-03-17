@@ -4,7 +4,7 @@ In this file, I create sinusoidal absolute positional embeddings and add it to t
 
 import torch 
 import torch.nn as nn 
-from ch2.sliding_window import create_dataloader 
+from preprocessing.sliding_window import create_dataloader 
 import tiktoken 
 import math 
 
