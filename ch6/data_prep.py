@@ -78,26 +78,30 @@ class SMSDataset(Dataset):
     def __len__(self): 
         return self.y.shape[0]
     
-def create_data_loader(df, tokenizer, max_length, pad_token, batch_size, shuffle, drop_last): 
+def create_data_loader(df, tokenizer, max_length, pad_token, batch_size, shuffle, drop_last, num_workers): 
     dataset = SMSDataset(df, tokenizer, max_length, pad_token) 
     
     return DataLoader(
         dataset, 
         batch_size=batch_size, 
         shuffle=shuffle, 
-        drop_last=drop_last
+        drop_last=drop_last, 
+        num_workers=num_workers
     )
 
 if __name__ == '__main__': 
+    torch.manual_seed(123) 
+
     url = "https://archive.ics.uci.edu/static/public/228/sms+spam+collection.zip"
     zip_path = "sms_spam_collection.zip"
-    extracted_path = "sms_spam_collection"
+    extracted_path = "ch6/sms_spam_collection"
     data_file_path = Path(extracted_path) / "SMSSpamCollection.tsv" 
     tokenizer = tiktoken.get_encoding('gpt2')
     pad_token = tokenizer.encode("<|endoftext|>", allowed_special={"<|endoftext|>"})[0]
-    batch_size = 4 
+    batch_size = 8
     shuffle = True 
     drop_last = True 
+    num_workers = 2
 
     download_dataset(url, zip_path, extracted_path, data_file_path) 
     df = prepare_pd_dataset(data_file_path)    
@@ -109,14 +113,37 @@ if __name__ == '__main__':
                                       pad_token=pad_token, 
                                       batch_size=batch_size, 
                                       shuffle=shuffle, 
-                                      drop_last=drop_last) 
+                                      drop_last=drop_last, 
+                                      num_workers=num_workers) 
+
+    test_loader = create_data_loader(df_test, 
+                                      tokenizer, 
+                                      max_length=None, 
+                                      pad_token=pad_token, 
+                                      batch_size=batch_size, 
+                                      shuffle=shuffle, 
+                                      drop_last=drop_last, 
+                                      num_workers=num_workers) 
+    
+    val_loader = create_data_loader(df_val, 
+                                      tokenizer, 
+                                      max_length=None, 
+                                      pad_token=pad_token, 
+                                      batch_size=batch_size, 
+                                      shuffle=shuffle, 
+                                      drop_last=drop_last, 
+                                      num_workers=num_workers) 
 
     for x,y in train_loader: 
         print('X:', x.shape) 
         print('y: ', y.shape) 
 
-        print(f'Decoded x: {tokenizer.decode(x[0].tolist())}') 
-        print(f'Decoded y: {'ham' if y[0]=='0' else 'spam'}') 
+        # print(f'Decoded x: {tokenizer.decode(x[0].tolist())}') 
+        # print(f'Decoded y: {'ham' if y[0]=='0' else 'spam'}') 
         break 
 
     # Works!! 
+
+    print(f'Total training batches: {len(train_loader)}') 
+    print(f'Total testing batches: {len(test_loader)}') 
+    print(f'Total validation batches: {len(val_loader)}') 
