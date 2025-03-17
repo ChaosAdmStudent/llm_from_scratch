@@ -10,8 +10,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from pretraining.pretrained_openai import load_weights_into_gpt 
 from pretraining.gpt_download import download_and_load_gpt2 
 from attention.multihead_attention import ModelArgs
-from pretraining.pretraining import GPTModel
-from pretraining.utils import generate, text_to_ids, tk_ids_to_text 
+from model_architecture.gpt_model import GPTModel
+from pretraining.utils import generate
 import tiktoken 
 from pathlib import Path
 from classification_finetuning.data_prep import prepare_pd_dataset, split_train_test_val, create_data_loader
