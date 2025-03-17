@@ -41,7 +41,7 @@ if __name__ == '__main__':
     device = 'cuda' if torch.cuda.is_available() else 'cpu' 
     
     # Load weights into model 
-    settings, params = download_and_load_gpt2(model_size="124M", models_dir='ch5/gpt2') 
+    settings, params = download_and_load_gpt2(model_size="124M", models_dir='pretraining/gpt2') 
     load_weights_into_gpt(model, params) 
     model = model.to(device) 
 
