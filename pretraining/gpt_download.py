@@ -76,7 +76,6 @@ def download_file(url, destination, backup_url=None):
 
     try:
         if _attempt_download(url):
-            print(f"Downloaded: {url}")
             return
     except (urllib.error.HTTPError, urllib.error.URLError):
         if backup_url is not None:
