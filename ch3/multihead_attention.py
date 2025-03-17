@@ -20,7 +20,7 @@ from dataclasses import dataclass
 class ModelArgs: 
 
     # Required for KV Cache
-    max_batch_size: int = 4
+    max_batch_size: int = 8
     max_seq_len: int = 2000
 
 class MultiHeadAttentionWrapperClass_V1(nn.Module): 
