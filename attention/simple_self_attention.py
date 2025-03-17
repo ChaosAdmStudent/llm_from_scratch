@@ -13,7 +13,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import torch 
 import torch.nn as nn 
 import tiktoken 
-from ch2.sinusoidal_PE import SinusoidalEmbeddingLayer 
+from preprocessing.sinusoidal_PE import SinusoidalEmbeddingLayer 
 
 def self_attention_one_token(input_token_embeddings): 
     # Simple Self Attention Mechanism for one query token 
