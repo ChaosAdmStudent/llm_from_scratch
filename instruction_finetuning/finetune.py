@@ -9,9 +9,12 @@ from attention.multihead_attention import ModelArgs
 from pretraining.gpt_download import download_and_load_gpt2 
 from pretraining.pretrained_openai import load_weights_into_gpt 
 from pretraining.utils import generate
-from instruction_finetuning.data_prep import format_input_alpaca
+from instruction_finetuning.data_prep import format_input_alpaca, download_and_load_file, split_train_val_test
+from pathlib import Path
 
 if __name__ == '__main__': 
+    torch.manual_seed(123) 
+
     # Load base model 
     BASE_CONFIG = {
         "vocab_size": 50257, 
@@ -39,12 +42,19 @@ if __name__ == '__main__':
     model = model.to(device) 
 
     # Model output before fine-tuning 
-    entry = {'instruction': 'Convert the active sentence to passive', 
-             'input': f'\'The chef cooks the meal every day.\''} 
-    
+    file_path = Path('instruction_finetuning/instruction-data.json') 
+    url = (
+        "https://raw.githubusercontent.com/rasbt/LLMs-from-scratch"
+        "/main/ch07/01_main-chapter-code/instruction-data.json"
+    )
+
+    data = download_and_load_file(file_path, url)
+    train_data, val_data, test_data = split_train_val_test(data) 
     tokenizer = tiktoken.get_encoding('gpt2') 
-    texts = format_input_alpaca(entry)
-    input_token_ids = torch.tensor([tokenizer.encode(text) for text in texts])
+    input_text = format_input_alpaca(val_data[0])
+    print('Input instruction:\n\t',input_text) 
+    print('-----------------------------')
+    input_token_ids = torch.tensor([tokenizer.encode(input_text)])  
      
     model.toggle_kv_cache(True)
     out_tk_ids = generate(
@@ -56,4 +66,8 @@ if __name__ == '__main__':
         use_kv_cache=True
     ) 
 
-    print(out_tk_ids.shape) 
+    print('Output before fine tuning: ') 
+    for out_tks in out_tk_ids: 
+        output_text = tokenizer.decode(out_tks.tolist())
+        print(output_text[len(input_text):]) 
+    
