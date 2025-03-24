@@ -7,6 +7,7 @@ from torch.utils.data import DataLoader
 from model_architecture.gpt_model import GPTModel
 
 def calc_accuracy_loader(data_loader: DataLoader, model: GPTModel, device, num_batches=None): 
+    model.eval() 
     total_examples, correct_preds = 0,0
     
     if num_batches == None: 
@@ -25,12 +26,13 @@ def calc_accuracy_loader(data_loader: DataLoader, model: GPTModel, device, num_b
             useful_logits = output_logits[:,-1,:] # Last token's logits will have info taking all tokens into account
             pred_labels = torch.argmax(useful_logits, dim=-1) # (B,) 
 
-            total_examples += output_logits.shape[0] * output_logits.shape[1] 
+            total_examples += output_logits.shape[0] 
             correct_preds += (pred_labels == y_train).sum().item() 
 
         else: 
             break 
     
+    model.train() 
     return correct_preds/total_examples
 
 def calc_loss_batch(input_batch: torch.Tensor , target_batch: torch.Tensor, model, device): 
@@ -48,7 +50,7 @@ def calc_loss_batch(input_batch: torch.Tensor , target_batch: torch.Tensor, mode
     
 
 def calc_loss_loader(data_loader: DataLoader, model: GPTModel, device, num_batches=None): 
-    total_loss = 0
+    total_loss = 0.0
     
     if num_batches == None: 
         num_batches = len(data_loader) 
@@ -64,4 +66,11 @@ def calc_loss_loader(data_loader: DataLoader, model: GPTModel, device, num_batch
         else: 
             break 
     
-    return total_loss/num_batches
+    return total_loss/num_batches 
+
+def evaluate_model(train_loader, val_loader, model, device, num_batches): 
+    model.eval() 
+    with torch.no_grad(): 
+        train_loss = calc_loss_loader(train_loader, model, device, num_batches)  
+        val_loss = calc_loss_loader(val_loader, model, device, num_batches)   
+    return train_loss, val_loss 

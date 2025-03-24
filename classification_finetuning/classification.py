@@ -15,9 +15,50 @@ from pretraining.utils import generate
 import tiktoken 
 from pathlib import Path
 from classification_finetuning.data_prep import prepare_pd_dataset, split_train_test_val, create_data_loader
-from classification_finetuning.classification_metrics import calc_accuracy_loader, calc_loss_loader
+from classification_finetuning.classification_metrics import calc_accuracy_loader, calc_loss_loader, calc_loss_batch, evaluate_model 
+from classification_finetuning.utils import plot_values, seed_everything
+import random
+import numpy as np
+
+def train_classifier_simple(model, train_loader, val_loader, device, num_epochs, eval_freq, num_batches=None):  
+    optimizer = torch.optim.AdamW(model.parameters()) 
+    optimizer.zero_grad() 
+    
+    train_accs, val_accs, train_losses, val_losses = [], [], [], []
+    total_examples_seen, global_step = 0 , -1
+
+    for epoch in range(num_epochs): 
+        model.train() 
+        for i, (x_train, y_train) in enumerate(train_loader): 
+            x_train = x_train.to(device) 
+            y_train = y_train.to(device) 
+
+            loss = calc_loss_batch(x_train, y_train, model, device) 
+            loss.backward() 
+            optimizer.step() 
+            optimizer.zero_grad() 
+
+            total_examples_seen += x_train.shape[0] 
+            
+            global_step += 1 
+            if global_step % eval_freq == 0: 
+                train_loss, val_loss = evaluate_model(train_loader, val_loader, model, device, num_batches)
+                train_losses.append(train_loss) 
+                val_losses.append(val_loss) 
+
+                print(f'Epoch {epoch} step {i}/{len(train_loader)}') 
+                print(f'\t train_loss: {train_loss}, val_loss: {val_loss}')
+
+        train_accuracy = calc_accuracy_loader(train_loader, model, device, num_batches) 
+        val_accuracy = calc_accuracy_loader(val_loader, model, device, num_batches) 
+        train_accs.append(train_accuracy) 
+        val_accs.append(val_accuracy) 
+
+    return train_accs, val_accs, train_losses, val_losses, total_examples_seen
 
 if __name__ == '__main__': 
+
+    seed_everything(23) 
     
     # Load base model 
     BASE_CONFIG = {
@@ -41,7 +82,7 @@ if __name__ == '__main__':
     device = 'cuda' if torch.cuda.is_available() else 'cpu' 
     
     # Load weights into model 
-    settings, params = download_and_load_gpt2(model_size="124M", models_dir='ch5/gpt2') 
+    settings, params = download_and_load_gpt2(model_size="124M", models_dir='pretraining/gpt2') 
     load_weights_into_gpt(model, params) 
     model = model.to(device) 
 
@@ -74,12 +115,17 @@ if __name__ == '__main__':
         param.requires_grad_(True) 
     for param in model.final_norm.parameters(): 
         param.requires_grad_(True) 
+
+    print('Unfreezed model weights: ')
+    for name, param in model.named_parameters(): 
+        if param.requires_grad: 
+            print('\t',name) 
     
     model.toggle_kv_cache(False)
     model = model.to(device) 
 
     # Create data loaders 
-    extracted_path = "ch6/sms_spam_collection"
+    extracted_path = "classification_finetuning/sms_spam_collection"
     data_file_path = Path(extracted_path) / "SMSSpamCollection.tsv" 
     df = prepare_pd_dataset(data_file_path)    
     df_train, df_test, df_val = split_train_test_val(df)
@@ -100,8 +146,34 @@ if __name__ == '__main__':
                                       shuffle=shuffle, drop_last=drop_last, num_workers=num_workers)
 
 
-    # Find classification accuracy on loader before fine-tuning
+    # Metrics on loader BEFORE fine-tuning
     print(f'Train loader classification accuracy PRE fine-tuning: {calc_accuracy_loader(train_loader, model, device)* 100:.2f}%') 
     print(f'Val loader classification accuracy PRE fine-tuning: {calc_accuracy_loader(val_loader, model, device)* 100:.2f}%')
     print(f'Test loader classification accuracy PRE fine-tuning: {calc_accuracy_loader(test_loader, model, device)* 100:.2f}%')
+    print() 
+    print(f'Train loader loss PRE fine-tuning: {calc_loss_loader(train_loader, model, device):.4f}')
+    print(f'Val loader loss PRE fine-tuning: {calc_loss_loader(val_loader, model, device):.4f}')
+    print(f'Test loader loss PRE fine-tuning: {calc_loss_loader(test_loader, model, device):.4f}')  
 
+    # Fine tune model 
+    num_epochs = 5 
+    eval_freq = 50 # Every 50th global step, we print 
+    train_accs, val_accs, train_losses, val_losses, examples_seen = train_classifier_simple(model, train_loader, val_loader, device, num_epochs, eval_freq) 
+
+    # Plot model performance
+    examples_seen_tensor = torch.linspace(0, examples_seen, len(train_losses)) 
+    epochs_seen_tensor = torch.linspace(0, num_epochs, len(train_losses))
+    plot_values(epochs_seen_tensor, examples_seen_tensor, train_losses, val_losses, label='loss') 
+
+    examples_seen_tensor = torch.linspace(0, examples_seen, len(train_accs)) 
+    epochs_seen_tensor = torch.linspace(0, num_epochs, len(train_accs))
+    plot_values(epochs_seen_tensor, examples_seen_tensor, train_accs, val_accs, label='accuracy') 
+
+    # Metrics on loader AFTER fine-tuning
+    print(f'Train loader classification accuracy AFTER fine-tuning: {calc_accuracy_loader(train_loader, model, device)* 100:.2f}%') 
+    print(f'Val loader classification accuracy AFTER fine-tuning: {calc_accuracy_loader(val_loader, model, device)* 100:.2f}%')
+    print(f'Test loader classification accuracy AFTER fine-tuning: {calc_accuracy_loader(test_loader, model, device)* 100:.2f}%')
+    print() 
+    print(f'Train loader loss AFTER fine-tuning: {calc_loss_loader(train_loader, model, device):.4f}')
+    print(f'Val loader loss AFTER fine-tuning: {calc_loss_loader(val_loader, model, device):.4f}')
+    print(f'Test loader loss AFTER fine-tuning: {calc_loss_loader(test_loader, model, device):.4f}') 
