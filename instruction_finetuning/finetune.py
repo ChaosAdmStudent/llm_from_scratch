@@ -1,3 +1,5 @@
+#  TODO: Change generate function to stop generating if we encounter endoftext
+
 import os 
 import sys 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -26,6 +28,10 @@ def train_instruction_finetune(model, train_loader, val_loader, optimizer, devic
     start_tokens = torch.tensor([tokenizer.encode(start_context)], device=device)  
     train_losses, val_losses, track_tokens_seen = [],[],[] 
     total_tokens_seen, global_step = 0, -1 
+
+    train_loss, val_loss = evaluate_model(train_loader, val_loader, model, device, num_batches) 
+    print('Train loss: ', train_loss) 
+    print('Val loss: ', val_loss) 
     
     for epoch in range(num_epochs): 
         for i, (x_train, y_train) in enumerate(train_loader): 
@@ -49,6 +55,8 @@ def train_instruction_finetune(model, train_loader, val_loader, optimizer, devic
         # Check how start_context is being replied to after each epoch 
         output_text = generate_out_text_response(model, input_text, start_tokens, context_length, tokenizer, device)
         print(f'#########Epoch {epoch}##############') 
+        print('\t Train loss: ', train_loss) 
+        print('\t Val loss: ', val_loss) 
         print(f'\t {output_text}')
     
     return train_losses, val_losses, track_tokens_seen
@@ -112,8 +120,8 @@ if __name__ == '__main__':
     test_loader = create_dataloader_instruction(test_data, tokenizer, format_input_alpaca, collate_fn_dynamic_padding, 
                                                  batch_size=batch_size, device=device) 
 
-    optimizer = torch.optim.AdamW(model.parameters(), lr=5e-4, weight_decay=0.1) 
-    num_epochs = 3 
+    optimizer = torch.optim.AdamW(model.parameters(), lr=5e-5, weight_decay=0.1) 
+    num_epochs = 3
     eval_freq = 5
     
     train_losses, val_losses, track_tokens_seen = train_instruction_finetune(model, train_loader, val_loader, 
