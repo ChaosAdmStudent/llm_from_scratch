@@ -59,8 +59,12 @@ def split_train_test_val(df: DataFrame, train_frac=0.7, val_frac=0.1, test_frac=
 
 class SMSDataset(Dataset): 
     def __init__(self, df, tokenizer, max_length=None, pad_token=50256):
+        self.encoded_texts = [] 
+        for text in df['Text']: 
+            self.encoded_texts.append(tokenizer.encode(text)) 
+        
         if max_length is None: 
-            self.max_length = len(max(df['Text'], key=len)) 
+            self.max_length = max(self.encoded_texts, key=len)
         else: 
             self.max_length = max_length
 
@@ -68,8 +72,8 @@ class SMSDataset(Dataset):
         self.x = torch.full((len(df), self.max_length), fill_value=pad_token) # (num_samples, max_length) 
         self.y = torch.tensor(df['Label'].map({'ham': 0, 'spam': 1}).to_numpy()) # (num_samples,) 
 
-        for i, text in enumerate(df['Text']): 
-            tokens = torch.tensor(tokenizer.encode(text)) 
+        for i, encoded_text in enumerate(self.encoded_texts): 
+            tokens = torch.tensor(encoded_text)[:self.max_length]
             self.x[i, :len(tokens)] = tokens 
 
     def __getitem__(self, index):
