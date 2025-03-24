@@ -103,8 +103,8 @@ def collate_fn_dynamic_padding(batch, pad_token=50256, device='cpu', ignore_inde
         inputs_lst.append(inputs) 
         outputs_lst.append(outputs) 
 
-    inputs_tensor = torch.stack(inputs_lst).to(device) 
-    outputs_tensor = torch.stack(outputs_lst).to(device)
+    inputs_tensor = torch.stack(inputs_lst)
+    outputs_tensor = torch.stack(outputs_lst)
 
     return inputs_tensor, outputs_tensor 
 

@@ -9,8 +9,49 @@ from attention.multihead_attention import ModelArgs
 from pretraining.gpt_download import download_and_load_gpt2 
 from pretraining.pretrained_openai import load_weights_into_gpt 
 from pretraining.utils import generate
-from instruction_finetuning.data_prep import format_input_alpaca, download_and_load_file, split_train_val_test
+from instruction_finetuning.data_prep import format_input_alpaca, download_and_load_file, split_train_val_test, create_dataloader_instruction
+from instruction_finetuning.data_prep import collate_fn_dynamic_padding
+from pretraining.pretraining import calc_loss_batch, calc_loss_loader, evaluate_model
 from pathlib import Path
+from instruction_finetuning.utils import generate_out_text_response
+from classification_finetuning.utils import plot_values
+
+def train_instruction_finetune(model, train_loader, val_loader, optimizer, device, num_epochs, eval_freq, start_context: str, context_length, tokenizer, num_batches=None):  
+    print('###################################')
+    print('Started training: ') 
+    print('Monitoring given instruction: ') 
+    print(start_context)
+    print('###################################')  
+
+    start_tokens = torch.tensor([tokenizer.encode(start_context)], device=device)  
+    train_losses, val_losses, track_tokens_seen = [],[],[] 
+    total_tokens_seen, global_step = 0, -1 
+    
+    for epoch in range(num_epochs): 
+        for i, (x_train, y_train) in enumerate(train_loader): 
+            model.train() 
+            x_train = x_train.to(device) 
+            y_train = y_train.to(device) 
+            loss = calc_loss_batch(x_train, y_train, model, device) 
+            loss.backward() 
+            optimizer.step() 
+            optimizer.zero_grad() 
+
+            total_tokens_seen += x_train.numel() 
+            global_step += 1 
+
+            if global_step % eval_freq == 0: 
+                train_loss, val_loss = evaluate_model(train_loader, val_loader, model, device, num_batches) 
+                train_losses.append(train_loss) 
+                val_losses.append(val_loss) 
+                track_tokens_seen.append(total_tokens_seen) 
+
+        # Check how start_context is being replied to after each epoch 
+        output_text = generate_out_text_response(model, input_text, start_tokens, context_length, tokenizer, device)
+        print(f'#########Epoch {epoch}##############') 
+        print(f'\t {output_text}')
+    
+    return train_losses, val_losses, track_tokens_seen
 
 if __name__ == '__main__': 
     torch.manual_seed(123) 
@@ -55,19 +96,33 @@ if __name__ == '__main__':
     print('Input instruction:\n\t',input_text) 
     print('-----------------------------')
     input_token_ids = torch.tensor([tokenizer.encode(input_text)])  
-     
-    model.toggle_kv_cache(True)
-    out_tk_ids = generate(
-        max_new_tokens=35, 
-        model= model, 
-        input_token_embeddings=input_token_ids, 
-        context_length=BASE_CONFIG["context_length"], 
-        device=device, 
-        use_kv_cache=True
-    ) 
-
-    print('Output before fine tuning: ') 
-    for out_tks in out_tk_ids: 
-        output_text = tokenizer.decode(out_tks.tolist())
-        print(output_text[len(input_text):]) 
     
+    print('Before finetuning: ')
+    print(generate_out_text_response(model, input_text, input_token_ids, BASE_CONFIG['context_length'], tokenizer, device)) 
+
+    # Finetune training 
+    batch_size = 8
+
+    train_loader = create_dataloader_instruction(train_data, tokenizer, format_input_alpaca, collate_fn_dynamic_padding, 
+                                                 batch_size=batch_size, device=device) 
+    
+    val_loader = create_dataloader_instruction(val_data, tokenizer, format_input_alpaca, collate_fn_dynamic_padding, 
+                                                 batch_size=batch_size, device=device)  
+
+    test_loader = create_dataloader_instruction(test_data, tokenizer, format_input_alpaca, collate_fn_dynamic_padding, 
+                                                 batch_size=batch_size, device=device) 
+
+    optimizer = torch.optim.AdamW(model.parameters(), lr=5e-4, weight_decay=0.1) 
+    num_epochs = 3 
+    eval_freq = 5
+    
+    train_losses, val_losses, track_tokens_seen = train_instruction_finetune(model, train_loader, val_loader, 
+                                                                             optimizer, device, num_epochs, eval_freq, input_text, 
+                                                                             BASE_CONFIG['context_length'], tokenizer)
+
+    # Generate loss plot 
+    epochs_seen_tensor = torch.linspace(0, num_epochs, len(train_losses))
+    plot_values(epochs_seen_tensor, torch.tensor(track_tokens_seen), train_losses, val_losses, label='loss', plot_dir='instruction_finetuning/plots')   
+
+    # Model output after fine-tuning 
+    print(generate_out_text_response(model, input_text, input_token_ids, BASE_CONFIG['context_length'], tokenizer, device))
