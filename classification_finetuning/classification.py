@@ -163,11 +163,11 @@ if __name__ == '__main__':
     # Plot model performance
     examples_seen_tensor = torch.linspace(0, examples_seen, len(train_losses)) 
     epochs_seen_tensor = torch.linspace(0, num_epochs, len(train_losses))
-    plot_values(epochs_seen_tensor, examples_seen_tensor, train_losses, val_losses, label='loss') 
+    plot_values(epochs_seen_tensor, examples_seen_tensor, train_losses, val_losses, label='loss', plot_dir='classification_finetuning/plots') 
 
     examples_seen_tensor = torch.linspace(0, examples_seen, len(train_accs)) 
     epochs_seen_tensor = torch.linspace(0, num_epochs, len(train_accs))
-    plot_values(epochs_seen_tensor, examples_seen_tensor, train_accs, val_accs, label='accuracy') 
+    plot_values(epochs_seen_tensor, examples_seen_tensor, train_accs, val_accs, label='accuracy', plot_dir='classification_finetuning/plots') 
 
     # Metrics on loader AFTER fine-tuning
     print(f'Train loader classification accuracy AFTER fine-tuning: {calc_accuracy_loader(train_loader, model, device)* 100:.2f}%') 

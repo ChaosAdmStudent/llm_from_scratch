@@ -4,7 +4,7 @@ import random
 import numpy as np 
 import torch 
 
-def plot_values(epochs_seen, examples_seen, train_values, val_values, label:str): 
+def plot_values(epochs_seen, examples_seen, train_values, val_values, label:str, plot_dir): 
     fig, ax1 = plt.subplots(figsize=(5,3)) 
 
     # Plot Train values 
@@ -21,7 +21,6 @@ def plot_values(epochs_seen, examples_seen, train_values, val_values, label:str)
 
     fig.tight_layout() 
 
-    plot_dir = 'classification_finetuning/plots'
     os.makedirs(plot_dir, exist_ok=True)
     plt.savefig(f'{plot_dir}/model_{label}.png', bbox_inches='tight') 
 
