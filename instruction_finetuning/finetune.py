@@ -51,13 +51,13 @@ def train_instruction_finetune(model, train_loader, val_loader, optimizer, devic
                 train_losses.append(train_loss) 
                 val_losses.append(val_loss) 
                 track_tokens_seen.append(total_tokens_seen) 
+                print(f'\t Epoch {epoch} step {global_step}, train_loss: {train_loss}, val_loss: {val_loss}')
 
         # Check how start_context is being replied to after each epoch 
         output_text = generate_out_text_response(model, input_text, start_tokens, context_length, tokenizer, device)
         print(f'#########Epoch {epoch}##############') 
-        print('\t Train loss: ', train_loss) 
-        print('\t Val loss: ', val_loss) 
-        print(f'\t {output_text}')
+        print(f'{output_text}')
+        print(f'#########Epoch {epoch}##############')
     
     return train_losses, val_losses, track_tokens_seen
 
@@ -121,12 +121,13 @@ if __name__ == '__main__':
                                                  batch_size=batch_size, device=device) 
 
     optimizer = torch.optim.AdamW(model.parameters(), lr=5e-5, weight_decay=0.1) 
-    num_epochs = 3
+    num_epochs = 2
     eval_freq = 5
+    num_batches = 5
     
     train_losses, val_losses, track_tokens_seen = train_instruction_finetune(model, train_loader, val_loader, 
                                                                              optimizer, device, num_epochs, eval_freq, input_text, 
-                                                                             BASE_CONFIG['context_length'], tokenizer)
+                                                                             BASE_CONFIG['context_length'], tokenizer, num_batches)
 
     # Generate loss plot 
     epochs_seen_tensor = torch.linspace(0, num_epochs, len(train_losses))

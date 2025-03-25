@@ -25,7 +25,7 @@ def print_sampled_tokens(probas: torch.Tensor, vocab):
     for token_id, freq in enumerate(sampled_bincount): 
         print(f'\t{vocab[token_id]} -> {freq} times') 
 
-def generate(max_new_tokens: int, model, input_token_embeddings: torch.Tensor, context_length: int, device, temperature=0.0, top_k=None, eos_id=None, use_kv_cache=False): 
+def generate(max_new_tokens: int, model, input_token_embeddings: torch.Tensor, context_length: int, device, temperature=0.0, top_k=None, eos_id=50256, use_kv_cache=False): 
     
     """
     Takes input_token_embeddings and generates new tokens from the LLM model 
@@ -76,7 +76,7 @@ def generate(max_new_tokens: int, model, input_token_embeddings: torch.Tensor, c
             else: 
                 next_token_ids = torch.argmax(last_token_logits, dim=-1, keepdim=True) # (B,1) 
 
-            if next_token_ids.shape[0] == 1 and next_token_ids == eos_id: # Only stop generation if batch size of 1 is given (inference)
+            if next_token_ids.shape[0] == 1 and next_token_ids[0] == eos_id: # Only stop generation if batch size of 1 is given (inference)
                 break 
             
             out_token_embeddings = torch.cat((out_token_embeddings, next_token_ids), dim=1) # (B, token_id+1) 
