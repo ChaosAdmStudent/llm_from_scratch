@@ -134,4 +134,5 @@ if __name__ == '__main__':
     plot_values(epochs_seen_tensor, torch.tensor(track_tokens_seen), train_losses, val_losses, label='loss', plot_dir='instruction_finetuning/plots')   
 
     # Model output after fine-tuning 
+    print('After finetuning: ')
     print(generate_out_text_response(model, input_text, input_token_ids, BASE_CONFIG['context_length'], tokenizer, device))
