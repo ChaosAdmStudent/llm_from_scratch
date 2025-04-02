@@ -112,7 +112,7 @@ class InstructionDataset(Dataset):
     def __init__(self, data: List, tokenizer, format_input_fn): 
         self.data = data  
         self.encoded_formatted_inputs = [tokenizer.encode(format_input_fn(entry)) for entry in data] 
-        self.encoded_formatted_outputs = [tokenizer.encode(entry['output']) for entry in data]
+        self.encoded_formatted_outputs = [tokenizer.encode(f"### Response: {entry['output']}") for entry in data]
 
     def __len__(self): 
         return len(self.encoded_formatted_inputs)

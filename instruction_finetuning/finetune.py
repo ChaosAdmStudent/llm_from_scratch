@@ -15,7 +15,7 @@ from instruction_finetuning.data_prep import format_input_alpaca, download_and_l
 from instruction_finetuning.data_prep import collate_fn_dynamic_padding
 from pretraining.pretraining import calc_loss_batch, calc_loss_loader, evaluate_model
 from pathlib import Path
-from instruction_finetuning.utils import generate_out_text_response
+from instruction_finetuning.utils import generate_out_text_response, generate_model_responses
 from classification_finetuning.utils import plot_values
 
 def train_instruction_finetune(model, train_loader, val_loader, optimizer, device, num_epochs, eval_freq, start_context: str, context_length, tokenizer, num_batches=None):  
@@ -58,6 +58,9 @@ def train_instruction_finetune(model, train_loader, val_loader, optimizer, devic
         print(f'#########Epoch {epoch}##############') 
         print(f'{output_text}')
         print(f'#########Epoch {epoch}##############')
+
+    torch.save(model.state_dict(), 'instruction_finetuning/finetune_model_chk.pth')
+    print('Model saved!')
     
     return train_losses, val_losses, track_tokens_seen
 
@@ -135,4 +138,11 @@ if __name__ == '__main__':
 
     # Model output after fine-tuning 
     print('After finetuning: ')
-    print(generate_out_text_response(model, input_text, input_token_ids, BASE_CONFIG['context_length'], tokenizer, device))
+    print(generate_out_text_response(model, input_text, input_token_ids, BASE_CONFIG['context_length'], tokenizer, device)) 
+    print('------------------------------------------------------------------')
+
+    # Generate test data model outputs 
+    file_path = 'instruction_finetuning/test-data-responses.json' 
+    print('Generating test data responses')
+    generate_model_responses(file_path, model, test_data, tokenizer, BASE_CONFIG['context_length'], device)  
+    print(f'Test data responses created and stored in {file_path}') 
