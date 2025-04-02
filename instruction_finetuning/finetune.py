@@ -15,7 +15,7 @@ from instruction_finetuning.data_prep import format_input_alpaca, download_and_l
 from instruction_finetuning.data_prep import collate_fn_dynamic_padding
 from pretraining.pretraining import calc_loss_batch, calc_loss_loader, evaluate_model
 from pathlib import Path
-from instruction_finetuning.utils import generate_out_text_response, generate_model_responses
+from instruction_finetuning.utils import generate_out_text_response, store_model_responses, store_openai_responses
 from classification_finetuning.utils import plot_values
 
 def train_instruction_finetune(model, train_loader, val_loader, optimizer, device, num_epochs, eval_freq, start_context: str, context_length, tokenizer, num_batches=None):  
@@ -141,8 +141,11 @@ if __name__ == '__main__':
     print(generate_out_text_response(model, input_text, input_token_ids, BASE_CONFIG['context_length'], tokenizer, device)) 
     print('------------------------------------------------------------------')
 
-    # Generate test data model outputs 
-    file_path = 'instruction_finetuning/test-data-responses.json' 
+    # Generate test data model outputs using fine-tuned model
+    file_path = 'instruction_finetuning/finetune-responses.json' 
     print('Generating test data responses')
-    generate_model_responses(file_path, model, test_data, tokenizer, BASE_CONFIG['context_length'], device)  
-    print(f'Test data responses created and stored in {file_path}') 
+    store_model_responses(file_path, model, test_data, tokenizer, BASE_CONFIG['context_length'], device)  
+    print(f'Test data responses created and stored in {file_path}')  
+
+    # Generate test data model outputs using ChatGPT 
+    store_openai_responses(test_data) 

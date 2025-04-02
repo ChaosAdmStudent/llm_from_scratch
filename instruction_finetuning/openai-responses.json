@@ -3,97 +3,97 @@
         "instruction": "Identify the adjective in the sentence.",
         "input": "The quick fox jumped over the lazy dog.",
         "output": "The adjectives in the sentence are 'quick' and 'lazy'.",
-        "model_response": "The adjective in the sentence is 'quick.'"
+        "model_response": "The adjectives in the sentence are \"quick\" and \"lazy.\""
     },
     {
         "instruction": "Name a punctuation mark used to indicate possession.",
         "input": "",
         "output": "A punctuation mark used to indicate possession is the apostrophe (').",
-        "model_response": "A punctuation mark used to indicate possession is the question mark (?)."
+        "model_response": "The apostrophe (') is used to indicate possession."
     },
     {
         "instruction": "What is an antonym of 'bright'?",
         "input": "",
         "output": "An antonym of 'bright' is 'dark'.",
-        "model_response": "An antonym of 'bright' is 'diligent.'"
+        "model_response": "An antonym of 'bright' is 'dark'."
     },
     {
         "instruction": "Provide the correct contraction for 'they are'.",
         "input": "",
         "output": "The contraction for 'they are' is 'they're'.",
-        "model_response": "They are reading books."
+        "model_response": "The correct contraction for 'they are' is 'they're'."
     },
     {
         "instruction": "Transform the given statement into an imperative sentence.",
         "input": "I would like you to turn off the light.",
         "output": "Please turn off the light.",
-        "model_response": "I would like you to turn the light off."
+        "model_response": "Turn off the light."
     },
     {
         "instruction": "What is a synonym for 'enormous'?",
         "input": "",
         "output": "A synonym for 'enormous' is 'gigantic'.",
-        "model_response": "A synonym for 'enormous' is 'stunning.'"
+        "model_response": "A synonym for 'enormous' is 'gigantic'."
     },
     {
         "instruction": "Transform the following sentence into the passive voice.",
         "input": "They will build a new park.",
         "output": "A new park will be built by them.",
-        "model_response": "A new park will be built by them."
+        "model_response": "A new park will be built."
     },
     {
         "instruction": "Convert 1000 milliliters to liters.",
         "input": "",
         "output": "1000 milliliters is equivalent to 1 liter.",
-        "model_response": "1000 milliliters is equal to 1 liter."
+        "model_response": "1000 milliliters is equivalent to 1 liter."
     },
     {
         "instruction": "Name the process by which plants absorb water through their roots.",
         "input": "",
         "output": "The process by which plants absorb water through their roots is called absorption.",
-        "model_response": "The process by which plants absorb water through their roots is called transpiration."
+        "model_response": "The process by which plants absorb water through their roots is called osmosis."
     },
     {
         "instruction": "Calculate the area of a triangle with a base of 10 units and height of 5 units.",
         "input": "",
         "output": "25 square units.",
-        "model_response": "The area of the triangle is 25.27 square meters."
+        "model_response": "The area \\(A\\) of a triangle can be calculated using the formula:\n\n\\[\nA = \\frac{1}{2} \\times \\text{base} \\times \\text{height}\n\\]\n\nGiven that the base \\(b\\) is 10 units and the height \\(h\\) is 5 units,\n\n\\[\nA = \\frac{1}{2} \\times 10 \\times 5\n\\]\n\n\\[\nA = \\frac{1}{2} \\times 50 = 25\n\\]\n\nTherefore, the area of the triangle is 25 square units."
     },
     {
         "instruction": "Give an example of a metaphor.",
         "input": "",
         "output": "An example of a metaphor is saying, 'Time is a thief,' which suggests that time, like a thief, can take away life moments without literally stealing.",
-        "model_response": "A metaphor is a figure of speech in which a word or phrase is applied to an object or action."
+        "model_response": "**Example of a metaphor:**\n\"Time is a thief.\""
     },
     {
         "instruction": "What is the boiling point of water in Celsius?",
         "input": "",
         "output": "The boiling point of water is 100 degrees Celsius.",
-        "model_response": "The boiling point of water is 212 degrees Celsius."
+        "model_response": "The boiling point of water in Celsius is 100 degrees."
     },
     {
         "instruction": "Categorize the given list of animals.",
         "input": "Shark, Dolphin, Trout",
         "output": "Fish: Shark, Trout\nMammals: Dolphin",
-        "model_response": "Animals: Shark, Dolphin, Trout"
+        "model_response": "### Category: Aquatic Animals\n\n- **Shark** - A cartilaginous fish known for its predatory nature, primarily found in marine environments.\n- **Dolphin** - A marine mammal renowned for its intelligence and playful behavior, commonly seen in oceans worldwide.\n- **Trout** - A freshwater fish popular among anglers, found in cold waters across various continents."
     },
     {
         "instruction": "Convert the following number from decimal to hexadecimal: 255.",
         "input": "",
         "output": "The hexadecimal equivalent of the decimal number 255 is FF.",
-        "model_response": "0.0.0/10The hexadecimal equivalent of the decimal number 255.0.0.0/10 is 9999999."
+        "model_response": "The hexadecimal representation of the decimal number 255 is **FF**."
     },
     {
         "instruction": "Generate a sentence using the word 'compassionate'.",
         "input": "",
         "output": "She is very compassionate and always helps those in need.",
-        "model_response": "She is compassionate and always helps others in need."
+        "model_response": "She displayed her compassionate nature by volunteering every weekend at the animal shelter."
     },
     {
         "instruction": "Create a sentence that begins with \"If only,\"",
         "input": "",
         "output": "If only I had known the truth earlier...",
-        "model_response": "If only I had studied harder...\""
+        "model_response": "If only I had remembered to bring an umbrella, I wouldn't be soaking wet right now."
     },
     {
         "instruction": "Convert the given sentence into active voice.",
@@ -105,19 +105,19 @@
         "instruction": "What is a synonym of 'luminous'?",
         "input": "",
         "output": "A synonym for 'luminous' is 'bright'.",
-        "model_response": "A synonym for 'luminous' is 'stunning'."
+        "model_response": "A synonym of 'luminous' is 'radiant'."
     },
     {
         "instruction": "Change the following sentence to past continuous tense.",
         "input": "They finish the game.",
         "output": "They were finishing the game.",
-        "model_response": "They had finished the game."
+        "model_response": "They were finishing the game."
     },
     {
         "instruction": "What is the chemical symbol for gold?",
         "input": "",
         "output": "The chemical symbol for gold is Au.",
-        "model_response": "The chemical symbol for gold is Ag."
+        "model_response": "The chemical symbol for gold is Au."
     },
     {
         "instruction": "What is the capital of the United States?",
@@ -129,49 +129,49 @@
         "instruction": "Convert the number 5 from decimal to binary.",
         "input": "",
         "output": "The binary equivalent of the decimal number 5 is 101.",
-        "model_response": "The binary equivalent of the decimal number 5 is 1010."
+        "model_response": "The number 5 in decimal converts to 101 in binary."
     },
     {
         "instruction": "Translate 'Where are you from?' into French.",
         "input": "",
         "output": "The French translation of 'Where are you from?' is 'D'o\u00f9 viens-tu?'.",
-        "model_response": "The French translation of 'Where are you from?' is 'Je suis heureux' (if the speaker is male) or 'Je suis he"
+        "model_response": "\"Where are you from?\" in French is translated as \"D'o\u00f9 viens-tu ?\" (informal) or \"D'o\u00f9 venez-vous ?\" (formal)."
     },
     {
         "instruction": "Name three types of clouds.",
         "input": "",
         "output": "Three types of clouds are cumulus, stratus, and cirrus.",
-        "model_response": "The three types of clouds are cumulonimbus, cumulonimbus cumulonimbus, and cumulonimbus cumulus."
+        "model_response": "Three types of clouds are cumulus, stratus, and cirrus."
     },
     {
         "instruction": "Change the following sentence to present perfect tense.",
         "input": "They finish the game.",
         "output": "They have finished the game.",
-        "model_response": "They had finished the game."
+        "model_response": "They have finished the game."
     },
     {
         "instruction": "What is the pH of soap?",
         "input": "",
         "output": "The pH of soap is typically between 9 and 10.",
-        "model_response": "The pH of soap is typically around 2.5."
+        "model_response": "The pH of soap typically ranges from 9 to 10, indicating that it is slightly alkaline. This higher pH level helps soap effectively remove oils and dirt from surfaces, including human skin."
     },
     {
         "instruction": "Convert the sentence to use an indefinite pronoun.",
         "input": "Someone left a note.",
         "output": "A note was left by someone.",
-        "model_response": "A note was left by someone."
+        "model_response": "Something was left."
     },
     {
         "instruction": "Combine the given sentences into one cohesive sentence.",
         "input": "It is raining. I cannot go to the park.",
         "output": "Since it is raining, I cannot go to the park.",
-        "model_response": "It is raining."
+        "model_response": "Since it is raining, I cannot go to the park."
     },
     {
         "instruction": "Identify the predicate in the sentence.",
         "input": "The quick brown fox jumps over the lazy dog.",
         "output": "The predicate in the sentence is 'jumps over the lazy dog.'",
-        "model_response": "The predicate in the sentence is 'jump.'"
+        "model_response": "The predicate in the sentence is \"jumps over the lazy dog.\""
     },
     {
         "instruction": "Make the first sentence a dependent clause.",
@@ -183,19 +183,19 @@
         "instruction": "Identify the preposition in the sentence.",
         "input": "The cat is under the table.",
         "output": "The preposition in the sentence is 'under'.",
-        "model_response": "The preposition in the sentence is 'on the table.'"
+        "model_response": "The preposition in the sentence is \"under.\""
     },
     {
         "instruction": "Construct a sentence using the words 'achieve,' 'goal,' and 'dedication.'",
         "input": "",
         "output": "With dedication, you can achieve any goal.",
-        "model_response": "She achieved her goal."
+        "model_response": "With unwavering dedication, she was able to achieve her goal of becoming a doctor."
     },
     {
         "instruction": "What is the pH of baking soda solution?",
         "input": "",
         "output": "The pH of a baking soda solution is typically around 9.",
-        "model_response": "The pH of baking soda solution is typically around 2.5."
+        "model_response": "The pH of a baking soda solution is typically around 8 to 9. This indicates that the solution is mildly alkaline. Baking soda, chemically known as sodium bicarbonate (NaHCO3), when dissolved in water, releases bicarbonate ion (HCO3-) which moderately increases the pH of the solution."
     },
     {
         "instruction": "What is the chemical symbol for mercury?",
@@ -207,25 +207,25 @@
         "instruction": "Provide a synonym for 'excited'.",
         "input": "",
         "output": "A synonym for 'excited' is 'thrilled'.",
-        "model_response": "A synonym for 'excited' is 'overjoyed'."
+        "model_response": "Enthusiastic"
     },
     {
         "instruction": "Classify the following numbers as even or odd.",
         "input": "2, 5, 18, 21",
         "output": "Even numbers: 2, 18\nOdd numbers: 5, 21",
-        "model_response": ", 3, 7Even numbers: 2, 5, 11, 3, 7"
+        "model_response": "- 2 is even.\n- 5 is odd.\n- 18 is even.\n- 21 is odd."
     },
     {
         "instruction": "Change the given verb to its present perfect form.",
         "input": "go",
         "output": "Gone.",
-        "model_response": "The present perfect form of 'go' is 'to go'."
+        "model_response": "I have gone."
     },
     {
         "instruction": "Name the literary device used in 'The wind whispered through the trees.'",
         "input": "",
         "output": "The literary device used is personification.",
-        "model_response": "The literary device used is metaphor."
+        "model_response": "The literary device used in \"The wind whispered through the trees\" is personification. This device attributes human qualities to an inanimate object or abstract idea, here implying that the wind can \"whisper\" like a human."
     },
     {
         "instruction": "Convert 1000 millimeters to meters.",
@@ -237,145 +237,145 @@
         "instruction": "What is the capital of the Netherlands?",
         "input": "",
         "output": "The capital of the Netherlands is Amsterdam.",
-        "model_response": "The capital of the Netherlands is The Hague."
+        "model_response": "The capital of the Netherlands is Amsterdam."
     },
     {
         "instruction": "Explain the process of erosion.",
         "input": "",
         "output": "Erosion is the process by which soil, rock, and other surface material are worn away and transported by natural forces such as wind or water. It can shape landscapes and affect ecosystems.",
-        "model_response": "Erosion is the process by which water changes from a liquid to a gas or vapor. It typically occurs due to the action of water molecules interacting with each"
+        "model_response": "Erosion is a natural process that involves the breaking down and removal of soil and rock materials from one location to another. This process can occur through several mechanisms, primarily driven by water, wind, ice (glaciers), and gravity. Here\u2019s a breakdown of how these forces contribute to erosion:\n\n1. **Water Erosion**: This is the most predominant form of erosion and can happen in numerous ways:\n   - **Rainfall and Runoff**: As rain falls to the earth, it can cause erosion directly by the impact of raindrops on soil, which can dislodge particles. As these particles are loosened, water runoff carries them away. The intensity and duration of rainfalls significantly affect the degree of erosion.\n   - **Rivers and Streams**: Flowing water gradually wears away the river banks and beds. The speed and volume of the water determine the extent of erosion; faster and fuller streams result in more significant erosion.\n   - **Ocean Waves**: Coastal erosion occurs as waves repeatedly hit shorelines, wearing them down and carrying the material out to sea.\n\n2. **Wind Erosion**: This type occurs mainly in arid and semi-arid regions where vegetation is sparse, leaving the ground exposed. Wind can pick up loose particles of dirt and sand and transport them over great distances. Over time, these airborne particles polish surfaces like rocks and erode them.\n\n3. **Ice Erosion**: Glaciers cause erosion mainly through a process called plucking and abrasion. As glaciers move, they freeze and thaw, picking up rocks and sediment. These materials, once frozen into the ice, act like sandpaper as the glacier moves, grinding down the rock surfaces over which they travel.\n\n4. **Gravity Erosion**: Triggered by gravity, this type of erosion causes rocks and soil to move downhill. This can occur through landslide, mudflows, or more gradual soil creep - all processes facilitated by gravitational pull.\n\nEach type of erosion shapes the landscape over time, contributing to phenomena such as the formation of valleys, canyons, and deltas. Factors such as climate, soil type, topography, vegetation cover, and human activity influence the rate and extent of erosion in any given area. Understanding these processes is crucial for managing land and preventing adverse effects of erosion, such as loss of fertile soil and sedimentation that can lead to pollution of waterways."
     },
     {
         "instruction": "Identify the literary term used in 'It's raining cats and dogs.'",
         "input": "",
         "output": "The literary term used is an idiom.",
-        "model_response": "The literary term used is 'it's raining cats and dogs.'"
+        "model_response": "The literary term used in the phrase \"It's raining cats and dogs\" is an idiom. An idiom is a phrase or an expression that has a figurative meaning that is different from its literal meaning, and it is typically understood by native speakers within a particular culture or community. In this case, \"It's raining cats and dogs\" means it is raining very heavily."
     },
     {
         "instruction": "Provide a synonym for 'pretty'.",
         "input": "",
         "output": "A synonym for 'pretty' is 'attractive'.",
-        "model_response": "A synonym for 'pretty' is 'gorgeous'."
+        "model_response": "Attractive"
     },
     {
         "instruction": "Suggest a continuation for the sentence.",
         "input": "Once the sun rose,",
         "output": "'the city came to life.'",
-        "model_response": "\"the sky turned a brilliant shade of orange, casting a warm glow over the city.\""
+        "model_response": "the golden hues painted a breathtaking canvas across the horizon, inviting the day to start with a promise of new beginnings."
     },
     {
         "instruction": "Classify the given sentiment as either positive, negative, or neutral.",
         "input": "This is a great opportunity!",
         "output": "Positive",
-        "model_response": "Negative"
+        "model_response": "Positive"
     },
     {
         "instruction": "Name a synonym for 'exciting'.",
         "input": "",
         "output": "A synonym for 'exciting' is 'thrilling'.",
-        "model_response": "A synonym for 'exciting' is 'stunning'."
+        "model_response": "Thrilling"
     },
     {
         "instruction": "Translate 'How are you?' into French.",
         "input": "",
         "output": "The French translation of 'How are you?' is 'Comment \u00e7a va?'.",
-        "model_response": "O\u00f9 est le proche?"
+        "model_response": "'How are you?' in French is translated as 'Comment allez-vous?'"
     },
     {
         "instruction": "What is the melting point of copper in Celsius?",
         "input": "",
         "output": "The melting point of copper is 1085 degrees Celsius.",
-        "model_response": "The melting point of copper is 231.9 degrees Celsius."
+        "model_response": "The melting point of copper is 1,084 degrees Celsius."
     },
     {
         "instruction": "Edit the following sentence for clarity and style.",
         "input": "She response to the question was quick.",
         "output": "Her response to the question was quick.",
-        "model_response": "She quickly responded to the question."
+        "model_response": "Her response to the question was quick."
     },
     {
         "instruction": "Translate the phrase 'I love you' into Italian.",
         "input": "",
         "output": "The Italian translation of 'I love you' is 'Ti amo'.",
-        "model_response": "The Italian translation of 'I love you' is 'Mi vivere pi\u00f9 vicino pi\u00f9 perd\u00f3n'."
+        "model_response": "The phrase 'I love you' in Italian is translated as 'Ti amo'."
     },
     {
         "instruction": "What is the atomic mass of carbon?",
         "input": "",
         "output": "The atomic mass of carbon is approximately 12.01 atomic mass units.",
-        "model_response": "The atomic mass of carbon is 6."
+        "model_response": "The atomic mass of carbon is approximately 12.01 atomic mass units (amu)."
     },
     {
         "instruction": "What is the freezing point of water in Celsius?",
         "input": "",
         "output": "The freezing point of water is 0 degrees Celsius.",
-        "model_response": "The freezing point of water is 32 degrees Celsius."
+        "model_response": "The freezing point of water in Celsius is 0 degrees."
     },
     {
         "instruction": "What type of bond is formed when electrons are shared between atoms?",
         "input": "",
         "output": "The type of bond formed when electrons are shared between atoms is a covalent bond.",
-        "model_response": "The type of bond formed when electrons are shared between atoms is an ionic bond."
+        "model_response": "The type of bond formed when electrons are shared between atoms is called a covalent bond. Covalent bonding typically occurs between nonmetals, facilitating the formation of molecules. This sharing allows each atom involved to reach a more stable electronic configuration resembling that of noble gases."
     },
     {
         "instruction": "Rewrite the sentence using a metaphor.",
         "input": "The night is very peaceful.",
         "output": "The night is a blanket of calm.",
-        "model_response": "The night is a tranquil sea."
+        "model_response": "The night is a tranquil ocean."
     },
     {
         "instruction": "What is the boiling point of sulfur in Celsius?",
         "input": "",
         "output": "The boiling point of sulfur is 444.6 degrees Celsius.",
-        "model_response": "The boiling point of sulfur is -161.9 degrees Celsius."
+        "model_response": "The boiling point of sulfur in Celsius is 444.6 degrees."
     },
     {
         "instruction": "Identify the correct spelling of the following word.",
         "input": "Definately",
         "output": "The correct spelling is 'Definitely.'",
-        "model_response": "The correct spelling is 'Definitive'."
+        "model_response": "The correct spelling of the word is \"definitely.\""
     },
     {
         "instruction": "Convert the following number from Roman numerals: IX.",
         "input": "",
         "output": "The number IX in Roman numerals is 9.",
-        "model_response": "5 to English numerals: X.The Roman numerals for this number are: IX, V, I, O, E, S."
+        "model_response": "The Roman numeral IX converts to the number 9."
     },
     {
         "instruction": "What is the chemical formula for glucose?",
         "input": "",
         "output": "The chemical formula for glucose is C6H12O6.",
-        "model_response": "The chemical formula for glucose is glucose."
+        "model_response": "The chemical formula for glucose is C6H12O6."
     },
     {
         "instruction": "Translate 'He likes to play football' into French.",
         "input": "",
         "output": "Il aime jouer au football.",
-        "model_response": "The French translation of 'He likes to play football' is 'Je suis heureux' (if the player is male) or 'Je suis"
+        "model_response": "Il aime jouer au football."
     },
     {
         "instruction": "Generate three adjectives to describe a mountain.",
         "input": "",
         "output": "1. Majestic\n2. Rugged\n3. Towering",
-        "model_response": "1. Mountaintop\n2. Mountaintop-dwelling\n3. Mountaintop-determined"
+        "model_response": "Majestic, towering, rugged"
     },
     {
         "instruction": "Explain what a sonnet is.",
         "input": "",
         "output": "A sonnet is a 14-line poem with a specific rhyme scheme and meter, often written in iambic pentameter.",
-        "model_response": "A sonnet is a humorous poem with a specific rhythm and rhyme scheme, typically AABBA."
+        "model_response": "A sonnet is a form of poetry originating in Italy and famously associated with William Shakespeare. It traditionally consists of 14 lines and follows a specific rhyming scheme and metrical pattern. There are several types of sonnets, but the most common are the Petrarchan (or Italian) and the Shakespearean (or Elizabethan).\n\nThe Petrarchan sonnet is divided into two parts: an octet (the first eight lines) typically following the rhyme scheme ABBAABBA, and a sestet (the last six lines) which can vary but often follows CDCDCD or CDECDE patterns. This structure usually presents a problem or question in the octet that is resolved or examined in the sestet.\n\nThe Shakespearean sonnet, on the other hand, comprises three quatrains (four-line stanzas) followed by a final rhymed couplet. The rhyme scheme is typically ABABCDCDEFEFGG. This form often explores themes of love, morality, death, and time, culminating in a dramatic or reflective conclusion in the final couplet.\n\nThrough strict structural confines, sonnets challenge poets to express rich and complex ideas compactly and efficiently, making it a revered form in literary traditions around the world."
     },
     {
         "instruction": "Generate a sentence using the word 'transient.'",
         "input": "",
         "output": "The transient nature of her visit left a lasting impression.",
-        "model_response": "His stay in the city was transient, lasting only a couple of days."
+        "model_response": "The transient beauty of a sunset never fails to inspire awe and remind us of nature's fleeting moments."
     },
     {
         "instruction": "What is the pH level of pure water?",
         "input": "",
         "output": "The pH level of pure water is 7, which is neutral.",
-        "model_response": "The pH level of pure water is typically around 2.5."
+        "model_response": "The pH level of pure water at 25 degrees Celsius is 7. This indicates that pure water is neutral, as the pH scale ranges from 0 to 14, with 7 being the midpoint representing neutrality."
     },
     {
         "instruction": "What is the capital of Japan?",
@@ -387,37 +387,37 @@
         "instruction": "Define the term 'hyperbole'.",
         "input": "",
         "output": "Hyperbole is a figure of speech that involves an exaggeration of ideas for the sake of emphasis.",
-        "model_response": "\"The sky is very blue.\""
+        "model_response": "Hyperbole is a figure of speech that involves an exaggeration of ideas for the sake of emphasis. It is not intended to be taken literally; rather, it is used to create a strong impression and add dramatic effect. For example, saying \"I've told you a million times\" is a hyperbole used to emphasize that something has been said many times."
     },
     {
         "instruction": "What is the square root of 16?",
         "input": "",
         "output": "The square root of 16 is 4.",
-        "model_response": "The square root of 16 is 9."
+        "model_response": "The square root of 16 is 4."
     },
     {
         "instruction": "Rewrite the sentence using a metaphor.",
         "input": "Her voice is very soothing.",
         "output": "Her voice is a lullaby.",
-        "model_response": "Her voice is a soothing sound."
+        "model_response": "Her voice is a gentle stream, washing over your thoughts with serenity."
     },
     {
         "instruction": "Calculate the perimeter of an equilateral triangle with each side measuring 8 cm.",
         "input": "",
         "output": "The perimeter of the equilateral triangle is 24 cm.",
-        "model_response": "The perimeter of the triangle is 12 cm."
+        "model_response": "The perimeter of an equilateral triangle is calculated by adding up the lengths of all three sides. Since each side of the triangle measures 8 cm, the perimeter \\( P \\) can be calculated by the formula:\n\n\\[ P = 3 \\times \\text{side length} \\]\n\nSubstituting the given side length:\n\\[ P = 3 \\times 8 \\text{ cm} = 24 \\text{ cm} \\]\n\nTherefore, the perimeter of the equilateral triangle is 24 cm."
     },
     {
         "instruction": "Name the process by which leaves change color in autumn.",
         "input": "",
         "output": "The process by which leaves change color in autumn is called senescence.",
-        "model_response": "The process by which leaves change color in autumn is called transpiration."
+        "model_response": "The process by which leaves change color in autumn is called senescence. This is part of the broader process of deciduous trees preparing for winter, involving the breakdown of chlorophyll, which leads to the prominence of other pigments and results in the vivid colors typically seen in fall foliage."
     },
     {
         "instruction": "Convert the following verb to its past participle form: 'see'",
         "input": "",
         "output": "The past participle form of 'see' is 'seen'.",
-        "model_response": "The past participle form of 'see' is 'sheep.'"
+        "model_response": "The past participle form of the verb 'see' is 'seen'."
     },
     {
         "instruction": "Correct the punctuation in the sentence.",
@@ -429,73 +429,73 @@
         "instruction": "Evaluate this sentence for spelling and grammar mistakes.",
         "input": "I beleive this is a grate idea.",
         "output": "There are two errors in the sentence. The corrected sentence should be: 'I believe this is a great idea.'",
-        "model_response": "There are two errors in the sentence. The corrected sentence should be: 'I beleive this is a grate idea.'"
+        "model_response": "### Evaluation:\nThere are two spelling errors in the sentence:\n1. \"beleive\" should be corrected to \"believe.\"\n2. \"grate\" should be corrected to \"great.\"\n\n### Corrected Sentence:\nI believe this is a great idea."
     },
     {
         "instruction": "What is the smallest planet in our solar system?",
         "input": "",
         "output": "The smallest planet in our solar system is Mercury.",
-        "model_response": "The smallest planet in our solar system is Pluto."
+        "model_response": "The smallest planet in our solar system is Mercury."
     },
     {
         "instruction": "Convert 15 feet to meters.",
         "input": "",
         "output": "15 feet is equal to approximately 4.572 meters.",
-        "model_response": "15 feet is 1500 meters."
+        "model_response": "To convert feet to meters, you use the conversion factor where 1 foot equals 0.3048 meters. \n\nSo, to convert 15 feet to meters:\n\\[ 15 \\text{ feet} \\times 0.3048 \\text{ meters/foot} = 4.572 \\text{ meters} \\]\n\nTherefore, 15 feet is equivalent to approximately 4.572 meters."
     },
     {
         "instruction": "What is the atomic number of helium?",
         "input": "",
         "output": "The atomic number of helium is 2.",
-        "model_response": "The atomic number of helium is 6."
+        "model_response": "The atomic number of helium is 2."
     },
     {
         "instruction": "Generate a sentence using the word 'innovative'.",
         "input": "",
         "output": "The company is known for its innovative products.",
-        "model_response": "Her innovative ideas led to the success of the project."
+        "model_response": "The company introduced an innovative new product that completely revolutionized the way consumers use technology."
     },
     {
         "instruction": "Rewrite the sentence using a metaphor.",
         "input": "The computer is very slow.",
         "output": "The computer is a snail.",
-        "model_response": "The computer is a beast."
+        "model_response": "The computer is a sluggish tortoise."
     },
     {
         "instruction": "Explain the term 'ecosystem'.",
         "input": "",
         "output": "An ecosystem is a community of living organisms interacting with each other and their physical environment. It includes biotic (plants, animals, microbes) and abiotic (climate, soil, water) components.",
-        "model_response": "An ecosystem is a community of interacting organisms and their physical environment."
+        "model_response": "An 'ecosystem' refers to a complex and interconnected community of living organisms, including plants, animals, and microbes, interacting with their physical environment, such as air, soil, and water. Ecosystems can vary greatly in size and can be as large as a desert or as small as a small pond. Each component of an ecosystem depends on the others for survival, and the elements of the system exchange energy and nutrients in a cycle of interdependence. Factors like climate, geographic factors, and resource availability significantly shape the structure and functioning of an ecosystem. Ecosystems play critical roles in maintaining ecological balance and supporting biodiversity."
     },
     {
         "instruction": "What is the primary purpose of photosynthesis?",
         "input": "",
         "output": "The primary purpose of photosynthesis is to convert light energy into chemical energy stored in glucose, which can be used by plants to fuel their activities.",
-        "model_response": "Photosynthesis is the process by which green plants use sunlight to synthesize foods from carbon dioxide and water."
+        "model_response": "The primary purpose of photosynthesis is to convert light energy into chemical energy stored in glucose, which plants and other photosynthetic organisms use as a source of energy to carry out their metabolic functions. This process also results in the production of oxygen as a byproduct, which is essential for the respiration of most living organisms on Earth."
     },
     {
         "instruction": "What is the melting point of platinum in Celsius?",
         "input": "",
         "output": "The melting point of platinum is 1768 degrees Celsius.",
-        "model_response": "The melting point of platinum is 419.9 degrees Celsius."
+        "model_response": "The melting point of platinum is 1,768 degrees Celsius."
     },
     {
         "instruction": "Identify the tense used in the sentence.",
         "input": "They are watching a movie.",
         "output": "The tense used in the sentence \"They are watching a movie\" is the present continuous tense.",
-        "model_response": "The tense used in the sentence 'They are watching a movie' is the past perfect tense."
+        "model_response": "The tense used in the sentence \"They are watching a movie\" is present continuous."
     },
     {
         "instruction": "Identify the antagonist in 'Harry Potter and the Sorcerer's Stone'.",
         "input": "",
         "output": "The antagonist in 'Harry Potter and the Sorcerer's Stone' is Voldemort.",
-        "model_response": "The antagonist in 'Harry Potter and the Sorcerer's Stone' is Voldemort."
+        "model_response": "The antagonist in 'Harry Potter and the Sorcerer's Stone' is Lord Voldemort. In the novel, he is primarily featured as the dark figure from Harry Potter's past and is intricately linked to the protagonist's fate. Though his presence is mostly felt rather than seen, Voldemort's earlier alter ego, Tom Riddle, works through the possession of Professor Quirrell and is ultimately revealed to be actively seeking the Sorcerer's Stone to regain his power and physical form."
     },
     {
         "instruction": "Provide a word that rhymes with \"care.\"",
         "input": "",
         "output": "A word that rhymes with \"care\" is \"fare.\"",
-        "model_response": "A word that rhymes with \"care\" is \"courage.\""
+        "model_response": "bare"
     },
     {
         "instruction": "What is the capital of France?",
@@ -507,31 +507,31 @@
         "instruction": "Translate 'Thank you for your help' into Mandarin Chinese.",
         "input": "",
         "output": "The Mandarin Chinese translation of 'Thank you for your help' is '\u8c22\u8c22\u4f60\u7684\u5e2e\u52a9' (Xi\u00e8xi\u00e8 n\u01d0 de b\u0101ngzh\u00f9).",
-        "model_response": "The Mandarin translation of 'Thank you for your help' is '\u5f00\u5fc3\u9664\u5143\u9664' (Wu\u00e1n zh"
+        "model_response": "\u8c22\u8c22\u4f60\u7684\u5e2e\u52a9"
     },
     {
         "instruction": "What is the chemical formula for ammonia?",
         "input": "",
         "output": "The chemical formula for ammonia is NH3.",
-        "model_response": "The chemical formula for ammonia is NH4NO3."
+        "model_response": "The chemical formula for ammonia is NH\u2083."
     },
     {
         "instruction": "What is an antonym of 'progressive'?",
         "input": "",
         "output": "An antonym of 'progressive' is 'regressive'.",
-        "model_response": "An antonym of 'progressive' is 'anti-antonym'."
+        "model_response": "An antonym of 'progressive' is 'regressive'."
     },
     {
         "instruction": "What is the chemical formula for potassium nitrate?",
         "input": "",
         "output": "The chemical formula for potassium nitrate is KNO3.",
-        "model_response": "The chemical formula for potassium nitrate is KNO3."
+        "model_response": "The chemical formula for potassium nitrate is KNO\u2083."
     },
     {
         "instruction": "Classify the following fruit according to its type.",
         "input": "Banana",
         "output": "The fruit 'Banana' is typically classified as a tropical fruit.",
-        "model_response": "Banana"
+        "model_response": "### Response: Banana is classified as a berry."
     },
     {
         "instruction": "What is the opposite of 'cold'?",
@@ -549,79 +549,79 @@
         "instruction": "Insert a suitable adjective to complete the sentence.",
         "input": "The movie was _____.",
         "output": "The movie was thrilling.",
-        "model_response": "The movie was a spectacle."
+        "model_response": "The movie was captivating."
     },
     {
         "instruction": "What is the opposite of 'gain'?",
         "input": "",
         "output": "The opposite of 'gain' is 'lose.'",
-        "model_response": "The opposite of 'gain' is 'lose'."
+        "model_response": "The opposite of 'gain' is 'loss'."
     },
     {
         "instruction": "Convert 5 miles to kilometers.",
         "input": "",
         "output": "5 miles is approximately 8.05 kilometers.",
-        "model_response": "5 miles is 5000 kilometers."
+        "model_response": "To convert 5 miles to kilometers, you use the conversion factor where 1 mile is equivalent to approximately 1.60934 kilometers.\n\nSo, to convert 5 miles to kilometers:\n\\[ 5 \\text{ miles} \\times 1.60934 \\text{ km/mile} = 8.0467 \\text{ kilometers} \\]\n\nTherefore, 5 miles is equal to about 8.0467 kilometers."
     },
     {
         "instruction": "Rewrite the following sentence to include a hyperbole: 'I'm very hungry.'",
         "input": "I'm very hungry.",
         "output": "I'm so hungry I could eat a horse.",
-        "model_response": "I'm so hungry I could eat a mountain."
+        "model_response": "I'm so hungry I could eat a horse."
     },
     {
         "instruction": "Evaluate the following phrase by transforming it into the correct spelling given.",
         "input": "recieve --> receive",
         "output": "The spelling of the given phrase 'recieve' is incorrect, the correct spelling is 'receive.'",
-        "model_response": ""
+        "model_response": "The given input \"recieve\" is misspelled and should be corrected to \"receive.\" This correction follows the common spelling rule \"i before e except after c.\""
     },
     {
         "instruction": "Generate a random alphanumeric code of 8 characters.",
         "input": "",
         "output": "Here is a randomly generated 8-character alphanumeric code: A3F8J7K2.",
-        "model_response": "Here is a randomly generated alphanumeric code of 8 characters: aaabcdcdefghijklmnopqrstuvwxyz"
+        "model_response": "Here's a randomly generated alphanumeric code of 8 characters: R5X2K7DF"
     },
     {
         "instruction": "Change the sentences from active voice to passive voice.",
         "input": "The chef will prepare the meal.",
         "output": "The meal will be prepared by the chef.",
-        "model_response": "The chef will prepare the meal."
+        "model_response": "The meal will be prepared by the chef."
     },
     {
         "instruction": "Explain the primary function of the human heart.",
         "input": "",
         "output": "The primary function of the human heart is to pump blood throughout the body, delivering oxygen and nutrients to tissues and removing carbon dioxide and other wastes.",
-        "model_response": "The primary function of the human heart is to pump blood to the body's tissues and to return carbon dioxide from the tissues to the lungs."
+        "model_response": "The primary function of the human heart is to pump blood throughout the body, delivering oxygen and nutrients to tissues and removing waste products like carbon dioxide. The heart, located in the thorax between the lungs in a compartment called the mediastinum, operates as a pump controlled by electrical signals that dictate its rhythm. It has four chambers: two upper chambers called atria and two lower chambers called ventricles. The systematic pumping action occurs as the heart contracts (systole) and relaxes (diastole), maintaining a continuous flow of blood through the circulatory system, which is crucial for sustaining life and maintaining the health of tissues."
     },
     {
         "instruction": "Classify the following items: gold ring, daisy, python.",
         "input": "",
         "output": "Animals: Python\nPlants: Daisy\nMinerals: Gold ring",
-        "model_response": "Animals: Elephant\nPlants: Strawberry\nElectronics: Raspberry"
+        "model_response": "Classification of the items based on their categories:\n\n1. **Gold Ring** - Category: Jewelry or Fashion accessory\n2. **Daisy** - Category: Plant or Flower\n3. **Python** - Category: Animal or Reptile"
     },
     {
         "instruction": "Convert the following verb to its gerund form: 'eat'",
         "input": "",
         "output": "The gerund form of 'eat' is 'eating'.",
-        "model_response": "The gerund form of 'eat' is 'eaten'."
+        "model_response": "Eating"
     },
     {
         "instruction": "Categorize the given list of animals.",
         "input": "Dog, Eagle, Trout",
         "output": "Mammals: Dog\nBirds: Eagle\nFish: Trout",
-        "model_response": "Animals: Shark, Tiger, Lion"
+        "model_response": "### Response: Categorization by Habitat\n\n1. **Terrestrial**\n   - Dog\n\n2. **Aerial**\n   - Eagle\n\n3. **Aquatic**\n   - Trout"
     },
     {
         "instruction": "Rewrite the sentence using a simile.",
         "input": "He runs very fast.",
         "output": "He runs as fast as a cheetah.",
-        "model_response": "He is as fast as a cheetah."
+        "model_response": "He runs as fast as the wind."
     },
     {
         "instruction": "Suggest a simpler word to replace the word in braces.",
         "input": "He moved {expeditiously} through the crowd.",
         "output": "He moved quickly through the crowd.",
-        "model_response": "Suggest a simpler word to replace the word in braces."
+        "model_response": "quickly"
     },
     {
         "instruction": "Edit the given text to ensure all plural nouns are spelled correctly.",
@@ -633,7 +633,7 @@
         "instruction": "Generate a question that could logically follow the statement below.",
         "input": "I just returned from a vacation in Spain.",
         "output": "How was your vacation in Spain?",
-        "model_response": "What was your favorite vacation?"
+        "model_response": "What part of Spain did you visit?"
     },
     {
         "instruction": "What is the opposite of 'expand'?",
@@ -645,115 +645,115 @@
         "instruction": "Rewrite the sentence using a metaphor.",
         "input": "The book is very interesting.",
         "output": "The book is a page-turner.",
-        "model_response": "The book is a piece of cake."
+        "model_response": "The book is a treasure chest of intrigue."
     },
     {
         "instruction": "What is the prime factorization of 210?",
         "input": "",
         "output": "2 \u00d7 3 \u00d7 5 \u00d7 7.",
-        "model_response": "The prime factorization of 210 is 3x10^18."
+        "model_response": "The prime factorization of 210 can be found by breaking it down into its prime factors.\n\n1. First, we find the smallest prime number that divides 210. We start with 2, and since 210 is even, we can divide by 2.\n   \\[ 210 \\div 2 = 105 \\]\n\n2. Next, we move to the next smallest prime number, which is 3. Check if 105 is divisible by 3.\n   \\[ 105 \\div 3 = 35 \\]\n\n3. Continue to the next prime number, which is 5. Test if 35 is divisible by 5.\n   \\[ 35 \\div 5 = 7 \\]\n\n4. Lastly, we see that 7 is a prime number itself and cannot be divided further by any prime numbers smaller than itself.\n\nThus, the prime factorization of 210 is \\(2 \\times 3 \\times 5 \\times 7\\)."
     },
     {
         "instruction": "Identify the hypernym for the word 'rose.'",
         "input": "",
         "output": "The hypernym for the word 'rose' is 'flower.'",
-        "model_response": "The hypernym for the word 'rose' is 'rose-bud.'"
+        "model_response": "The hypernym for the word 'rose' is 'flower'."
     },
     {
         "instruction": "Explain what a haiku is.",
         "input": "",
         "output": "A haiku is a form of traditional Japanese poetry that consists of three lines with a syllable pattern of 5-7-5.",
-        "model_response": "A haiku is a humorous poem composed in a formal or formalistic manner."
+        "model_response": "A haiku is a traditional form of Japanese poetry that consists of three lines. It is known for its brevity and simplicity. The first line contains 5 syllables, the second line has 7 syllables, and the third line has 5 syllables again, making a total of 17 syllables. Haiku typically focuses on nature or the seasons and is aimed at capturing a moment in time, often linked to a poignant emotional insight or a sudden perception of nature. The format encourages economy of words and preciseness of expression, often featuring a kireji, or cutting word, that provides a form of verbal punctuation that marks a pause or gives an emotional accent to one part of the poem."
     },
     {
         "instruction": "Name the process by which iron rusts.",
         "input": "",
         "output": "The process by which iron rusts is called oxidation.",
-        "model_response": "The process by which iron rusts is called hydrolysis."
+        "model_response": "The process by which iron rusts is called oxidation."
     },
     {
         "instruction": "Classify the following animal as carnivore, herbivore, or omnivore.",
         "input": "Bear",
         "output": "Omnivore",
-        "model_response": "Herbivore"
+        "model_response": "### Response: Omnivore"
     },
     {
         "instruction": "What is the formula for the circumference of a circle?",
         "input": "",
         "output": "The formula for the circumference of a circle is 2\u03c0r, where r is the radius.",
-        "model_response": "The formula for the circumference of a circle is C = \u03c0/2\u03c0r."
+        "model_response": "The formula for the circumference of a circle is \\( C = 2\\pi r \\), where \\( C \\) represents the circumference and \\( r \\) is the radius of the circle. Alternatively, it can be expressed as \\( C = \\pi d \\), where \\( d \\) is the diameter of the circle."
     },
     {
         "instruction": "Translate 'Where can I buy tickets?' into Italian.",
         "input": "",
         "output": "The Italian translation for 'Where can I buy tickets?' is 'Dove posso comprare i biglietti?'",
-        "model_response": "The Italian translation of 'Where can I buy tickets?' is 'Dove \u00e8 l'ombre pi\u00f9 vicino pi\u00f9?'."
+        "model_response": "You can translate 'Where can I buy tickets?' into Italian as 'Dove posso comprare i biglietti?'"
     },
     {
         "instruction": "Name 3 different animals that are nocturnal.",
         "input": "",
         "output": "1. Owl\n2. Bat\n3. Raccoon",
-        "model_response": "1. Cat\n2. Dog\n3. Owl"
+        "model_response": "1. Owls\n2. Bats\n3. Raccoons"
     },
     {
         "instruction": "What is the opposite of 'light'?",
         "input": "",
         "output": "The opposite of 'light' is 'heavy'.",
-        "model_response": "The opposite of 'light' is 'dark'."
+        "model_response": "The opposite of 'light' can be interpreted in different ways based on context:\n\n1. In terms of weight, the opposite of 'light' is 'heavy'.\n2. In terms of luminosity or brightness, the opposite of 'light' is 'dark'.\n3. In terms of color when dealing with pigments, such as in painting or printing, the opposite of a light color would be a dark color."
     },
     {
         "instruction": "Look up the boiling point of ethanol.",
         "input": "",
         "output": "The boiling point of ethanol is approximately 78.37 degrees Celsius or 173.07 degrees Fahrenheit.",
-        "model_response": "The boiling point of ethanol is -114.5 degrees Celsius."
+        "model_response": "The boiling point of ethanol is 78.37 degrees Celsius (173.1 degrees Fahrenheit)."
     },
     {
         "instruction": "Generate a sentence using the word 'brilliant'.",
         "input": "",
         "output": "The scientist had a brilliant idea that changed the world.",
-        "model_response": "The students in the class were very bright."
+        "model_response": "She had a brilliant idea that completely solved the problem."
     },
     {
         "instruction": "What is the hypotenuse of a right triangle with legs of 3 cm and 4 cm?",
         "input": "",
         "output": "The hypotenuse of the triangle is 5 cm.",
-        "model_response": "The hypotenuse of the right triangle is 3 cm."
+        "model_response": "To find the hypotenuse of a right triangle when the lengths of the legs are known, you can use the Pythagorean Theorem. This theorem states that in a right triangle, the square of the length of the hypotenuse (c) is equal to the sum of the squares of the lengths of the other two sides (a and b). The formula is expressed as:\n\n\\[ c^2 = a^2 + b^2 \\]\n\nGiven:\n- \\( a = 3 \\) cm\n- \\( b = 4 \\) cm\n\nPlugging in the values:\n\\[ c^2 = 3^2 + 4^2 \\]\n\\[ c^2 = 9 + 16 \\]\n\\[ c^2 = 25 \\]\n\nTo find \\( c \\) (the length of the hypotenuse), take the square root of 25:\n\\[ c = \\sqrt{25} \\]\n\\[ c = 5 \\] cm\n\nTherefore, the hypotenuse of the right triangle is 5 cm."
     },
     {
         "instruction": "What is the formula for calculating the volume of a cylinder?",
         "input": "",
         "output": "The formula for calculating the volume of a cylinder is \u03c0r\u00b2h, where r is the radius and h is the height.",
-        "model_response": "The formula for calculating the volume of a cylinder is V = 0.5 * base * height."
+        "model_response": "The formula for calculating the volume of a cylinder is given by:\n\n\\[ V = \\pi r^2 h \\]\n\nwhere:\n- \\( V \\) is the volume of the cylinder,\n- \\( r \\) is the radius of the base of the cylinder, and\n- \\( h \\) is the height of the cylinder."
     },
     {
         "instruction": "Identify the main verb in the sentence.",
         "input": "The dog barked loudly.",
         "output": "The main verb in the sentence is 'barked'.",
-        "model_response": "The main verb in the sentence 'Barked loudly' is 'Barked.'"
+        "model_response": "The main verb in the sentence is \"barked.\""
     },
     {
         "instruction": "What is the cube of 4?",
         "input": "",
         "output": "The cube of 4 is 64.",
-        "model_response": "The cube of 4 is 27."
+        "model_response": "The cube of 4 is \\(4^3\\), which equals 64."
     },
     {
         "instruction": "Provide a word that rhymes with 'light.'",
         "input": "",
         "output": "A word that rhymes with 'light' is 'might.'",
-        "model_response": "A word that rhymes with 'light' is 'crisp.'"
+        "model_response": "Might"
     },
     {
         "instruction": "What is the symbol for the chemical element iron?",
         "input": "",
         "output": "The symbol for the chemical element iron is Fe.",
-        "model_response": "The symbol for the chemical element iron is Ag."
+        "model_response": "The symbol for the chemical element iron is Fe."
     },
     {
         "instruction": "Classify the following species as dogs or cats.",
         "input": "Siamese",
         "output": "Siamese is a cat.",
-        "model_response": "Cats"
+        "model_response": "### Response: Cat"
     },
     {
         "instruction": "What is the opposite of 'brave'?",
@@ -765,19 +765,19 @@
         "instruction": "Calculate the perimeter of a hexagon with side lengths of 4 cm.",
         "input": "",
         "output": "The perimeter of the hexagon is 24 cm.",
-        "model_response": "The perimeter of the hexagon is 12 cm."
+        "model_response": "To calculate the perimeter of a hexagon with each side measuring 4 cm, you multiply the length of one side by the number of sides in a hexagon.\n\nSince a hexagon has 6 sides, the calculation will be:\n\nPerimeter = Side length \u00d7 Number of sides\n           = 4 cm \u00d7 6\n           = 24 cm\n\nThus, the perimeter of the hexagon is 24 cm."
     },
     {
         "instruction": "Identify the protagonist in 'The Great Gatsby'.",
         "input": "",
         "output": "The protagonist of 'The Great Gatsby' is Jay Gatsby.",
-        "model_response": "The protagonist in 'The Great Gatsby' is not named 'Gatsby'."
+        "model_response": "The protagonist in 'The Great Gatsby' is Jay Gatsby."
     },
     {
         "instruction": "What is a synonym for 'assist'?",
         "input": "",
         "output": "A synonym for 'assist' is 'help'.",
-        "model_response": "A synonym for 'assist' is 'resource.'"
+        "model_response": "A synonym for \"assist\" is \"help.\""
     },
     {
         "instruction": "Change this sentence grammatically.",
@@ -789,37 +789,37 @@
         "instruction": "What is the normal body temperature in Celsius?",
         "input": "",
         "output": "The normal body temperature is approximately 37 degrees Celsius.",
-        "model_response": "The normal body temperature in Celsius is 32 degrees Celsius."
+        "model_response": "The normal body temperature in Celsius is approximately 37 degrees."
     },
     {
         "instruction": "Classify each sentence as either declarative, interrogative, imperative, or exclamatory.",
         "input": "Can you help me?",
         "output": "The classification of the sentence \"Can you help me?\" is interrogative.",
-        "model_response": "The classification of the sentence 'Can you help me?' is imperative."
+        "model_response": "Interrogative"
     },
     {
         "instruction": "Translate 'I am learning Spanish' into Spanish.",
         "input": "",
         "output": "Estoy aprendiendo espa\u00f1ol.",
-        "model_response": "The Spanish translation of 'I am learning Spanish' is 'Adi\u00f3s'."
+        "model_response": "Estoy aprendiendo espa\u00f1ol."
     },
     {
         "instruction": "Edit the sentence.",
         "input": "She enjoys reading books.",
         "output": "She enjoys reading books.",
-        "model_response": "She enjoys reading books."
+        "model_response": "She loves reading books."
     },
     {
         "instruction": "What are the first 5 multiples of 4?",
         "input": "",
         "output": "4, 8, 12, 16, 20.",
-        "model_response": "The first 5 multiples of 4 are: 3, 5, 7, 9, 11."
+        "model_response": "The first 5 multiples of 4 are 4, 8, 12, 16, 20."
     },
     {
         "instruction": "What is the chemical formula for sodium hydroxide?",
         "input": "",
         "output": "The chemical formula for sodium hydroxide is NaOH.",
-        "model_response": "The chemical formula for sodium hydroxide is NaHCO3."
+        "model_response": "The chemical formula for sodium hydroxide is NaOH."
     },
     {
         "instruction": "What is the capital of Norway?",
@@ -831,193 +831,193 @@
         "instruction": "What is the speed of sound?",
         "input": "",
         "output": "The speed of sound is approximately 343 meters per second at sea level and at 20\u00b0C.",
-        "model_response": "The speed of sound is approximately 343 meters per second."
+        "model_response": "The speed of sound varies depending on the medium through which it travels. In dry air at 20 degrees Celsius (68 degrees Fahrenheit), the speed of sound is approximately 343 meters per second (1,125 feet per second). This speed can change with temperature, humidity, and the medium's density. In water and solids like steel, the speed of sound is generally faster than in air."
     },
     {
         "instruction": "Generate a sentence using the word 'gregarious.'",
         "input": "",
         "output": "He was known for his gregarious nature, always enjoying social gatherings.",
-        "model_response": "He is very friendly and always helps those in need."
+        "model_response": "Mark is so gregarious that he makes friends effortlessly at every social gathering he attends."
     },
     {
         "instruction": "Generate a random alphanumeric code of 10 characters.",
         "input": "",
         "output": "Here is a randomly generated 10-character alphanumeric code: 3F8G6H7JQ2.",
-        "model_response": "Here is a randomly generated alphanumeric code of 10 characters: '1234'."
+        "model_response": "Here is a randomly generated alphanumeric code of 10 characters: B4T9F2R0XZ"
     },
     {
         "instruction": "Suggest a more formal synonym for 'happy.'",
         "input": "",
         "output": "A more formal synonym for 'happy' is 'joyful.'",
-        "model_response": "A more formal synonym for 'happy' is 'content.'"
+        "model_response": "Joyful."
     },
     {
         "instruction": "Edit the sentence to make it grammatically correct.",
         "input": "He is more happier now.",
         "output": "He is happier now.",
-        "model_response": "He is more happy now."
+        "model_response": "He is happier now."
     },
     {
         "instruction": "Classify the following numbers as even or odd.",
         "input": "2, 7, 19, 20",
         "output": "Even numbers: 2, 20\nOdd numbers: 7, 19",
-        "model_response": "Even numbers: 2, 7, 19, 20"
+        "model_response": "The numbers are classified as follows:\n\n- 2 is even\n- 7 is odd\n- 19 is odd\n- 20 is even"
     },
     {
         "instruction": "Generate a random 8-digit number.",
         "input": "",
         "output": "Here is a randomly generated 8-digit number: 47382916.",
-        "model_response": "Here is a randomly generated 8-digit number: 7272727272727272727272727272727272727272727"
+        "model_response": "85649237"
     },
     {
         "instruction": "What is the opposite of the adjective 'generous'?",
         "input": "",
         "output": "The opposite of 'generous' is 'stingy' or 'miserly'.",
-        "model_response": "The opposite of the adjective 'generous' is 'generous-hearted'."
+        "model_response": "The opposite of the adjective 'generous' is 'stingy'."
     },
     {
         "instruction": "Convert the following statement into an exclamation.",
         "input": "This is amazing",
         "output": "This is amazing!",
-        "model_response": "!Exclamation!"
+        "model_response": "This is amazing!"
     },
     {
         "instruction": "Describe how a rainbow is formed.",
         "input": "",
         "output": "A rainbow is formed when sunlight is refracted, dispersed, and reflected in water droplets, resulting in a spectrum of light appearing in the sky.",
-        "model_response": "A rainbow is a complex pattern of colors that is formed by the rainbow's colors changing from red to yellow to blue to green."
+        "model_response": "A rainbow is formed through the interaction of sunlight with moisture in the Earth's atmosphere. This process begins when rays of sunlight enter individual rain droplets suspended in the air. As the light enters the water droplet, it slows down and bends, a process known as refraction. This bending of light occurs because light travels slower in water than it does in air.\n\nInside the droplet, the light hits the back surface and gets reflected back, towards the direction it came from. As it exits the droplet, the light bends once again due to refraction. During this entire process, the light also undergoes dispersion: the light is separated into different colors because each color has a slightly different wavelength and thus bends at a slightly different angle. Red light bends the least, while violet bends the most.\n\nConsequently, when the light exits the droplet, it is spread out into its spectral colors, forming a circular arc with red on the outside and violet on the inside. This array of colored light is received by the observer as a rainbow. Note, however, that a rainbow is not located at a specific distance from the observer; rather, it is a collection of light rays being reflected and refracted by numerous droplets seen from a particular angle relative to the light source, typically 42 degrees away from the direct line opposite the sun."
     },
     {
         "instruction": "Convert this declarative sentence into an interrogative sentence.",
         "input": "You need help.",
         "output": "Do you need help?",
-        "model_response": "You should have called."
+        "model_response": "Do you need help?"
     },
     {
         "instruction": "Generate a sentence using the word 'elucidate'.",
         "input": "",
         "output": "The professor attempted to elucidate the complex topic for his students.",
-        "model_response": "She was able to quickly figure out the correct spelling."
+        "model_response": "The professor used simple analogies to elucidate complex scientific concepts during his lecture."
     },
     {
         "instruction": "Evaluate the following phrase by transforming it into the spelling given.",
         "input": "freind --> friend",
         "output": "The spelling of the given phrase \"freind\" is incorrect, the correct spelling is \"friend\".",
-        "model_response": ".The correct spelling is 'freedommen'."
+        "model_response": "The correct spelling of \"freind\" is \"friend.\""
     },
     {
         "instruction": "Translate the term 'sustainable development' into German.",
         "input": "",
         "output": "The German translation of 'sustainable development' is 'nachhaltige Entwicklung'.",
-        "model_response": "The German translation of 'sustainable development' is 'sustainable development f\u00fcr alle'."
+        "model_response": "The German translation of the term 'sustainable development' is 'nachhaltige Entwicklung'."
     },
     {
         "instruction": "Explain the water cycle in simple terms.",
         "input": "",
         "output": "The water cycle describes how water evaporates from the surface of the earth, rises into the atmosphere, cools and condenses into rain or snow in clouds, and falls again to the surface as precipitation.",
-        "model_response": "The water cycle is the process by which water changes from liquid to gas or vapor."
+        "model_response": "The water cycle, also known as the hydrologic cycle, is a continuous process that describes how water moves around the Earth and its atmosphere. Here\u2019s a simple explanation of the steps involved:\n\n1. **Evaporation**: Water from oceans, rivers, lakes, and other bodies of water heats up from the sun and turns into vapor or steam, rising into the air.\n\n2. **Condensation**: As the water vapor goes higher, it cools down and turns back into tiny droplets of liquid water, forming clouds. This is similar to how steam in a bathroom condenses on a mirror after a hot shower.\n\n3. **Precipitation**: When the clouds get heavy with water, they release it in the form of precipitation, which can be rain, snow, sleet, or hail, depending on the temperature.\n\n4. **Collection**: After falling to the ground, the water collects in various places like rivers, lakes, oceans, and also seeps into the ground, replenishing groundwater sources.\n\nThese steps keep repeating, continuously cycling water throughout the environment. This cycle is essential because it distributes water around the planet, supporting plants, animals, and humans with the fresh water necessary for life."
     },
     {
         "instruction": "Convert the sentence to passive voice: 'They will hold the meeting tomorrow.'",
         "input": "They will hold the meeting tomorrow.",
         "output": "The meeting will be held tomorrow by them.",
-        "model_response": "They will hold the meeting tomorrow."
+        "model_response": "The meeting will be held tomorrow."
     },
     {
         "instruction": "Translate 'Good night' into German.",
         "input": "",
         "output": "The German translation of 'Good night' is 'Gute Nacht'.",
-        "model_response": "The German translation of 'Good night' is 'Willkommen'."
+        "model_response": "'Good night' in German is 'Gute Nacht'."
     },
     {
         "instruction": "Define the term 'simile'.",
         "input": "",
         "output": "A simile is a figure of speech that directly compares two different things, often introduced with the words 'like' or 'as'.",
-        "model_response": "A simile is a humorous or allegorical figure of speech."
+        "model_response": "A simile is a figure of speech that compares two different things in an interesting way. It typically uses the words \"like\" or \"as\" to draw a comparison, helping to create a vivid image or to illustrate a similarity. For example, saying \"she is as brave as a lion\" uses a simile to compare her bravery to that of a lion."
     },
     {
         "instruction": "Determine the area of a square with side length of 8 meters.",
         "input": "",
         "output": "The area of the square is 64 square meters.",
-        "model_response": "The area of the square is approximately 32.5 square meters."
+        "model_response": "To find the area of a square, we use the formula \\( \\text{Area} = \\text{side length} \\times \\text{side length} \\). Given that the side length of the square is 8 meters, the area calculation would be:\n\n\\[ \\text{Area} = 8 \\, \\text{m} \\times 8 \\, \\text{m} = 64 \\, \\text{m}^2 \\]\n\nTherefore, the area of the square is \\( 64 \\, \\text{square meters} \\)."
     },
     {
         "instruction": "Translate 'Happy Birthday' into Spanish.",
         "input": "",
         "output": "The Spanish translation of 'Happy Birthday' is 'Feliz Cumplea\u00f1os'.",
-        "model_response": "The Spanish translation of 'Happy Birthday' is 'Adi\u00f3s'."
+        "model_response": "Feliz cumplea\u00f1os"
     },
     {
         "instruction": "Identify the adjective in the sentence.",
         "input": "The large dog barked loudly.",
         "output": "The adjective in the sentence is 'large'.",
-        "model_response": "The large dog barked loudly."
+        "model_response": "The adjective in the sentence is \"large.\""
     },
     {
         "instruction": "Generate a five-word phrase using the words 'star,' 'night,' and 'bright.'",
         "input": "",
         "output": "'The bright star illuminated night.'",
-        "model_response": "\"Star is the most magnificent object in the sky.\""
+        "model_response": "Star bright night sparkles clear."
     },
     {
         "instruction": "Convert the temperature from Celsius to Kelvin.",
         "input": "25 degrees Celsius",
         "output": "25 degrees Celsius is 298.15 Kelvin.",
-        "model_response": "25 degrees Celsius is 86 degrees Kelvin."
+        "model_response": "To convert the temperature from Celsius to Kelvin, you can use the following formula:\n\n\\[ K = C + 273.15 \\]\n\nWhere \\( K \\) is the temperature in Kelvin and \\( C \\) is the temperature in Celsius.\n\nGiven the input of 25 degrees Celsius, the conversion is calculated as follows:\n\n\\[ K = 25 + 273.15 = 298.15 \\]\n\nThus, 25 degrees Celsius is equivalent to 298.15 Kelvin."
     },
     {
         "instruction": "Scramble the given phrase.",
         "input": "A random phrase",
         "output": "A nmaodr hrasep",
-        "model_response": "A random phrase could be: 'Scramble the following.'"
+        "model_response": "To correctly respond to the instruction, I would need the specific \"random phrase\" you want scrambled. Could you please provide the phrase?"
     },
     {
         "instruction": "What is the opposite of 'weak'?",
         "input": "",
         "output": "The opposite of 'weak' is 'strong'.",
-        "model_response": "The opposite of 'weak' is 'strong.'"
+        "model_response": "The opposite of 'weak' is 'strong'."
     },
     {
         "instruction": "Look up the freezing point of water.",
         "input": "",
         "output": "The freezing point of water is 0 degrees Celsius or 32 degrees Fahrenheit.",
-        "model_response": "The freezing point of water is 32 degrees Celsius."
+        "model_response": "The freezing point of water is 0 degrees Celsius (32 degrees Fahrenheit)."
     },
     {
         "instruction": "Rewrite the sentence using a simile.",
         "input": "The room was very hot.",
         "output": "The room was as hot as an oven.",
-        "model_response": "The room was as hot as a sauna."
+        "model_response": "The room was as hot as an oven."
     },
     {
         "instruction": "Translate 'I love you' into Spanish.",
         "input": "",
         "output": "Te amo",
-        "model_response": "The Spanish translation of 'I love you' is 'Adi\u00f3s'."
+        "model_response": "'Te amo'"
     },
     {
         "instruction": "What is the symbol for the chemical element gold?",
         "input": "",
         "output": "The symbol for the chemical element gold is Au.",
-        "model_response": "The symbol for the chemical element gold is Ag."
+        "model_response": "The symbol for the chemical element gold is Au."
     },
     {
         "instruction": "What is the plural form of \"goose\"?",
         "input": "",
         "output": "The plural form of \"goose\" is \"geese.\"",
-        "model_response": "The plural form of \"goose\" is \"goose-bears.\""
+        "model_response": "The plural form of \"goose\" is \"geese.\""
     },
     {
         "instruction": "Rewrite the sentence using a metaphor.",
         "input": "The night is very dark.",
         "output": "The night is a black canvas.",
-        "model_response": "The night is a dark and stormy one."
+        "model_response": "The night is a black velvet curtain."
     },
     {
         "instruction": "What is the chemical formula for calcium chloride?",
         "input": "",
         "output": "The chemical formula for calcium chloride is CaCl2.",
-        "model_response": "The chemical formula for calcium chloride is CaCl2."
+        "model_response": "The chemical formula for calcium chloride is CaCl\u2082."
     },
     {
         "instruction": "Rewrite the sentence using a simile.",
@@ -1029,7 +1029,7 @@
         "instruction": "Convert this active sentence to passive: 'The company employs ten workers.'",
         "input": "",
         "output": "Ten workers are employed by the company.",
-        "model_response": "The company employs ten workers."
+        "model_response": "Ten workers are employed by the company."
     },
     {
         "instruction": "What is an antonym of 'ascend'?",
@@ -1041,25 +1041,25 @@
         "instruction": "What is an antonym of 'advanced'?",
         "input": "",
         "output": "An antonym of 'advanced' is 'primitive'.",
-        "model_response": "An antonym of 'advanced' is 'basic.'"
+        "model_response": "An antonym of 'advanced' is 'primitive'.\n"
     },
     {
         "instruction": "What is the chemical formula for nitric acid?",
         "input": "",
         "output": "The chemical formula for nitric acid is HNO3.",
-        "model_response": "The chemical formula for nitric acid is NH4NO3."
+        "model_response": "The chemical formula for nitric acid is \\( HNO_3 \\)."
     },
     {
         "instruction": "Translate 'We go to school together' into Spanish.",
         "input": "",
         "output": "Vamos juntos a la escuela.",
-        "model_response": "\u00bfPuedes ayudarme?"
+        "model_response": "Nosotros vamos juntos a la escuela."
     },
     {
         "instruction": "Convert 30 kilometers to miles.",
         "input": "",
         "output": "30 kilometers is approximately 18.64 miles.",
-        "model_response": "30 kilometers is 3000 meters."
+        "model_response": "To convert kilometers to miles, you can use the conversion factor: 1 kilometer is approximately equal to 0.621371 miles. \n\nGiven: 30 kilometers\n\nCalculation: \n\\[ 30 \\text{ kilometers} \\times 0.621371 \\text{ miles per kilometer} = 18.64113 \\text{ miles} \\]\n\nThus, 30 kilometers is equivalent to approximately 18.64 miles."
     },
     {
         "instruction": "Correct the verb tense error in the sentence.",
@@ -1071,97 +1071,97 @@
         "instruction": "Convert 1 liter to milliliters.",
         "input": "",
         "output": "1 liter is 1000 milliliters.",
-        "model_response": "1 liter is 2000 milliliters."
+        "model_response": "1 liter is equal to 1000 milliliters."
     },
     {
         "instruction": "Convert the active sentence to passive: 'They paint the house every year.'",
         "input": "",
         "output": "The house is painted every year by them.",
-        "model_response": "They paint the house every year."
+        "model_response": "The house is painted every year."
     },
     {
         "instruction": "Arrange the following events in chronological order: Invention of the airplane, Fall of the Berlin Wall, Discovery of America.",
         "input": "",
         "output": "1. Discovery of America\n2. Invention of the airplane\n3. Fall of the Berlin Wall",
-        "model_response": "1. Invention of the airplane\n2. Fall of the Berlin Wall\n3. Discovery of America"
+        "model_response": "1. Discovery of America (1492)\n2. Invention of the airplane (1903)\n3. Fall of the Berlin Wall (1989)"
     },
     {
         "instruction": "Capitalize each word in the sentence.",
         "input": "i love watching the sunrise",
         "output": "I Love Watching The Sunrise",
-        "model_response": ".The sunrise was beautiful."
+        "model_response": "I Love Watching The Sunrise"
     },
     {
         "instruction": "What is the boiling point of gold in Celsius?",
         "input": "",
         "output": "The boiling point of gold is 2970 degrees Celsius.",
-        "model_response": "The boiling point of gold is 356 degrees Celsius."
+        "model_response": "The boiling point of gold is approximately 2,970 degrees Celsius (\u00b0C)."
     },
     {
         "instruction": "What is a synonym of 'content'?",
         "input": "",
         "output": "A synonym for 'content' is 'satisfied.'",
-        "model_response": "A synonym for 'content' is 'content.'"
+        "model_response": "A synonym of 'content' could be 'satisfied'."
     },
     {
         "instruction": "What is a synonym of 'lazy'?",
         "input": "",
         "output": "A synonym for 'lazy' is 'indolent'.",
-        "model_response": "A synonym for 'lazy' is 'diligent'."
+        "model_response": "A synonym of 'lazy' is 'idle'."
     },
     {
         "instruction": "Translate the sentence to French: 'How old are you?'",
         "input": "",
         "output": "Quel \u00e2ge avez-vous?",
-        "model_response": "The French translation of 'How old are you?' is 'Je suis heureux' (young)."
+        "model_response": "Quel \u00e2ge as-tu ?"
     },
     {
         "instruction": "What are the first 10 odd numbers?",
         "input": "",
         "output": "1, 3, 5, 7, 9, 11, 13, 15, 17, 19.",
-        "model_response": "The first 10 even numbers are: 9, 11, 13, 15, 19, 22, 29, 32, 35, 39, 43, 47."
+        "model_response": "The first 10 odd numbers are 1, 3, 5, 7, 9, 11, 13, 15, 17, and 19."
     },
     {
         "instruction": "What is the cube of 5?",
         "input": "",
         "output": "The cube of 5 is 125.",
-        "model_response": "The cube of 5 is 25."
+        "model_response": "The cube of 5 is \\(5^3\\), which equals 125."
     },
     {
         "instruction": "What is an antonym of 'expand'?",
         "input": "",
         "output": "An antonym of 'expand' is 'contract'.",
-        "model_response": "An antonym of 'expand' is 'contract.'"
+        "model_response": "An antonym of 'expand' is 'contract'."
     },
     {
         "instruction": "What is the chemical formula for carbonic acid?",
         "input": "",
         "output": "The chemical formula for carbonic acid is H2CO3.",
-        "model_response": "The chemical formula for carbonic acid is CH3COOH."
+        "model_response": "The chemical formula for carbonic acid is H2CO3."
     },
     {
         "instruction": "Calculate the area of a circle with a radius of 5 meters.",
         "input": "",
         "output": "The area of the circle is approximately 78.54 square meters.",
-        "model_response": "The area of the circle is approximately 25.07 square meters."
+        "model_response": "To calculate the area of a circle, you can use the formula:\n\n\\[ \\text{Area} = \\pi \\times r^2 \\]\n\nWhere \\( \\pi \\) (pi) is approximately 3.14159, and \\( r \\) is the radius of the circle.\n\nGiven that the radius of the circle is 5 meters:\n\n\\[ \\text{Area} = 3.14159 \\times (5^2) = 3.14159 \\times 25 = 78.53975 \\]\n\nThus, the area of the circle is approximately \\( 78.54 \\) square meters."
     },
     {
         "instruction": "List the ingredients required to make a sandwich.",
         "input": "",
         "output": "Ingredients for a sandwich typically include bread, meat or vegetables, cheese, and condiments.",
-        "model_response": "Ingredients for a sandwich typically include: lettuce, tomato, and mayonnaise."
+        "model_response": "Here are the basic ingredients required to make a simple sandwich:\n\n1. Bread (2 slices) - You can use white, whole wheat, multigrain, or any other type of bread you prefer.\n2. Butter or a spread (optional) - Such as mayonnaise, mustard, or hummus.\n3. Protein - Choices include sliced deli meats like turkey, ham, roast beef, or alternatives like tuna, chicken salad, or sliced boiled egg.\n4. Cheese (optional) - Such as Swiss, cheddar, or provolone.\n5. Vegetables - Typically lettuce, tomatoes, and cucumbers. You can also include onions, bell peppers, or pickles.\n6. Seasoning - Salt, pepper, or other spices and herbs to taste.\n\nFeel free to customize your sandwich with additional ingredients or condiments according to your preferences."
     },
     {
         "instruction": "What type of animal is an octopus?",
         "input": "",
         "output": "An octopus is a cephalopod mollusk.",
-        "model_response": "An octopus is a type of fish."
+        "model_response": "An octopus is a type of marine animal known scientifically as a cephalopod. It is characterized by its bilaterally symmetrical body, bulbous head, and eight arms lined with suction cups. Octopuses are known for their intelligence, ability to camouflage, and sometimes even use tools."
     },
     {
         "instruction": "Generate a sentence using the word 'charismatic'.",
         "input": "",
         "output": "The politician was very charismatic and attracted many followers.",
-        "model_response": "Her presence was a beacon in the dark."
+        "model_response": "Her charismatic personality made her the obvious choice for leading the new project team."
     },
     {
         "instruction": "What is the opposite of 'exclude'?",
@@ -1173,37 +1173,37 @@
         "instruction": "Classify this sentence into one of the following topics: health, economy, technology, music",
         "input": "Electric cars are revolutionizing the automotive industry.",
         "output": "The topic of the given sentence is technology.",
-        "model_response": "The topic of the given sentence is \"car revolutionizing the automotive industry.\""
+        "model_response": "### Topic: Technology"
     },
     {
         "instruction": "What is the speed of light?",
         "input": "",
         "output": "The speed of light is approximately 299,792 kilometers per second.",
-        "model_response": "The speed of light is 186,000 miles per hour."
+        "model_response": "The speed of light in a vacuum is approximately 299,792 kilometers per second (or about 186,282 miles per second)."
     },
     {
         "instruction": "Provide the past tense form of the verb 'swim.'",
         "input": "",
         "output": "The past tense of the verb 'swim' is 'swam.'",
-        "model_response": "The past tense of the verb 'swim' is 'swam.'"
+        "model_response": "The past tense form of the verb 'swim' is 'swam.'"
     },
     {
         "instruction": "Provide a synonym for 'brave'.",
         "input": "",
         "output": "A synonym for 'brave' is 'fearless'.",
-        "model_response": "A synonym for 'brave' is 'courageous'."
+        "model_response": "Courageous."
     },
     {
         "instruction": "Generate a sentence using the word 'illuminate.'",
         "input": "",
         "output": "The streetlights illuminate the pathway at night.",
-        "model_response": "The lamp helped to illuminate the dark room."
+        "model_response": "The soft glow of the candles served to illuminate the room, casting a warm, inviting light across the faces of everyone present."
     },
     {
         "instruction": "Convert the following verb to its past participle form: 'go'",
         "input": "go",
         "output": "The past participle form of 'go' is 'gone'.",
-        "model_response": "The past participle form of 'go' is 'goose.'"
+        "model_response": "### Output: gone"
     },
     {
         "instruction": "What is the capital of Spain?",
@@ -1215,73 +1215,73 @@
         "instruction": "Reverse the order of the given phrase.",
         "input": "sun and moon",
         "output": "moon and sun",
-        "model_response": "The sun and moon will be at noon."
+        "model_response": "### Output: moon and sun"
     },
     {
         "instruction": "What is the unit for measuring electrical resistance?",
         "input": "",
         "output": "The unit for measuring electrical resistance is the ohm.",
-        "model_response": "The unit for measuring electrical resistance is the ohm."
+        "model_response": "The unit for measuring electrical resistance is the ohm, symbolized by the Greek letter omega (\u03a9)."
     },
     {
         "instruction": "Transform the following sentence into a question using 'would.'",
         "input": "You can lend me a pen.",
         "output": "Would you lend me a pen?",
-        "model_response": "Could you lend me a pen?"
+        "model_response": "Would you lend me a pen?"
     },
     {
         "instruction": "Provide a word that rhymes with 'day.'",
         "input": "",
         "output": "A word that rhymes with 'day' is 'play.'",
-        "model_response": "A word that rhymes with 'day' is 'happy.'"
+        "model_response": "May"
     },
     {
         "instruction": "Translate 'library' into Spanish.",
         "input": "",
         "output": "The Spanish word for 'library' is 'biblioteca'.",
-        "model_response": "The Spanish translation of 'library' is 'la biblioteca'."
+        "model_response": "The word 'library' in Spanish is translated as 'biblioteca'."
     },
     {
         "instruction": "Name the process by which animals release energy from food.",
         "input": "",
         "output": "The process by which animals release energy from food is called respiration.",
-        "model_response": "The process by which animals release energy from food is called energy conservation."
+        "model_response": "The process by which animals release energy from food is called cellular respiration."
     },
     {
         "instruction": "Name a punctuation mark used to indicate a pause.",
         "input": "",
         "output": "A punctuation mark used to indicate a pause is a comma (,).",
-        "model_response": "A punctuation mark used to indicate a pause is the period."
+        "model_response": "A comma (,) is a punctuation mark used to indicate a pause."
     },
     {
         "instruction": "Calculate the perimeter of a square with a side length of 6 meters.",
         "input": "",
         "output": "The perimeter of the square is 24 meters.",
-        "model_response": "The perimeter of the square is 12 meters."
+        "model_response": "To calculate the perimeter of a square, you can use the formula:\n\nPerimeter of a square = 4 \u00d7 side length\n\nGiven the side length of the square is 6 meters:\n\nPerimeter = 4 \u00d7 6 = 24 meters\n\nTherefore, the perimeter of the square is 24 meters."
     },
     {
         "instruction": "Classify the following species as reptiles or amphibians.",
         "input": "Frog",
         "output": "Frog is an amphibian.",
-        "model_response": "Reptile"
+        "model_response": "Amphibian"
     },
     {
         "instruction": "Generate three verbs that mean the same as 'to speak.'",
         "input": "",
         "output": "1. To talk\n2. To converse\n3. To chat",
-        "model_response": "1. To speak\n2. To compose\n3. To deliver"
+        "model_response": "Talk, converse, chat"
     },
     {
         "instruction": "Classify the following substances as acid, base, or salt.",
         "input": "Vinegar, Baking soda, Table salt",
         "output": "Acid: Vinegar\nBase: Baking soda\nSalt: Table salt",
-        "model_response": "Acid: Baking soda\nBase: Vinegar\nSodium: Baking soda"
+        "model_response": "Vinegar is an acid.\nBaking soda is a base.\nTable salt is a salt."
     },
     {
         "instruction": "Translate 'What are you doing?' into Italian.",
         "input": "",
         "output": "Cosa stai facendo?",
-        "model_response": "The Italian translation of 'What are you doing?' is 'Che ora \u00e8?'."
+        "model_response": "'What are you doing?' translates to 'Cosa stai facendo?' in Italian."
     },
     {
         "instruction": "Rewrite the sentence to improve clarity: 'He saw that the sky was clouds full.'",
@@ -1293,30 +1293,30 @@
         "instruction": "What is the boiling point of nitrogen in Celsius?",
         "input": "",
         "output": "The boiling point of nitrogen is -196 degrees Celsius.",
-        "model_response": "The boiling point of nitrogen is -195.5 degrees Celsius."
+        "model_response": "The boiling point of nitrogen in Celsius is -195.79 degrees."
     },
     {
         "instruction": "Translate the phrase 'How are you?' into Spanish.",
         "input": "",
         "output": "The Spanish translation of 'How are you?' is '\u00bfC\u00f3mo est\u00e1s?'",
-        "model_response": "The Spanish translation of 'How are you?' is 'Por favor'."
+        "model_response": "The phrase 'How are you?' translates to '\u00bfC\u00f3mo est\u00e1s?' in Spanish."
     },
     {
         "instruction": "Fix the following grammar mistake.",
         "input": "He want to go to the movies, but he has no money.",
         "output": "He wants to go to the movies, but he has no money.",
-        "model_response": "He want to go to the movies, but he has no money."
+        "model_response": "He wants to go to the movies, but he has no money."
     },
     {
         "instruction": "Edit the following sentence to remove all passive voice.",
         "input": "The song was composed by the artist.",
         "output": "The artist composed the song.",
-        "model_response": "The artist wrote the song."
+        "model_response": "The artist composed the song."
     },
     {
         "instruction": "What is the boiling point of water at sea level?",
         "input": "",
         "output": "The boiling point of water at sea level is 100 degrees Celsius.",
-        "model_response": "The boiling point of water at sea level is -161.9 degrees Celsius."
+        "model_response": "The boiling point of water at sea level is 100 degrees Celsius (212 degrees Fahrenheit)."
     }
 ]

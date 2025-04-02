@@ -90,7 +90,12 @@ def main(eval_model: str = 'openai', model: str = 'gpt-4-turbo'):
     # Load model responses JSON file 
     file_path = Path('instruction_finetuning/finetune-responses.json') 
     with open(file_path, 'r') as file: 
-        json_data = json.load(file)
+        json_data = json.load(file) 
+
+    file_path = Path('instruction_finetuning/openai-responses.json')  
+    with open(file_path, 'r') as file: 
+        openai_json_data = json.load(file) 
+
 
     if eval_model == 'openai': 
         # Load OpenAI client using API key
@@ -108,6 +113,7 @@ def main(eval_model: str = 'openai', model: str = 'gpt-4-turbo'):
 
         # Use ChatGPT for evaluation 
         evaluation_scores = generate_model_scores(json_data, 'model_response', api='openai', model='gpt-4-turbo', client=client)
+        evaluation_scores_openai = generate_model_scores(openai_json_data, 'model_response', api='openai', model='gpt-4-turbo', client=client)
 
     else: 
         # Using Ollama3 
@@ -118,8 +124,10 @@ def main(eval_model: str = 'openai', model: str = 'gpt-4-turbo'):
         
         model = 'phi3' 
         evaluation_scores = generate_model_scores(json_data, 'model_response', api='ollama', model='phi3') 
+        evaluation_scores_openai = generate_model_scores(openai_json_data, 'model_response', api='ollama', model='phi3') 
     
-    print(f'Average score with {model} model: {sum(evaluation_scores)/len(evaluation_scores):.2f}') 
+    print(f'Average score for fine-tuned model, eval with {model} model: {sum(evaluation_scores)/len(evaluation_scores):.2f}') 
+    print(f'Average score for OpenAI model, eval with {model} model: {sum(evaluation_scores_openai)/len(evaluation_scores_openai):.2f}')
  
 if __name__ == '__main__': 
     tyro.cli(main) 

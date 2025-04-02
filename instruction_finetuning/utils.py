@@ -6,6 +6,7 @@ from instruction_finetuning.data_prep import format_input_alpaca
 from tqdm import tqdm 
 import json 
 import torch 
+from openai import OpenAI
 
 def generate_out_text_response(model, input_text, input_token_embedding, context_length, tokenizer, device) -> str: 
     """
@@ -29,7 +30,7 @@ def generate_out_text_response(model, input_text, input_token_embedding, context
     output_text = tokenizer.decode(out_tk_ids.tolist()) 
     return output_text[len(input_text):] 
 
-def generate_model_responses(file_path: str, model, test_data, tokenizer, context_length, device): 
+def store_model_responses(file_path: str, model, test_data, tokenizer, context_length, device): 
     model.eval() 
     model.to(device) 
     for i, entry in tqdm(enumerate(test_data), total=len(test_data)): 
@@ -40,6 +41,23 @@ def generate_model_responses(file_path: str, model, test_data, tokenizer, contex
         test_data[i]['model_response'] = response 
     
     with open(file_path, 'w') as file: 
+        json.dump(test_data, file, indent=4) 
+
+def store_openai_responses(test_data, model = 'gpt-4-turbo'): 
+
+    cur_folder = os.path.dirname(os.path.abspath(__file__)) 
+    with open(f'{cur_folder}/config.json') as file: 
+        config = json.load(file) 
+        api_key = config['OPENAI_API_KEY'] 
+
+    client = OpenAI(api_key=api_key) 
+    
+    for i, entry in tqdm(enumerate(test_data), total=len(test_data)): 
+        input_text = format_input_alpaca(entry) 
+        model_response = run_chatgpt(input_text, client, model) 
+        test_data[i]['model_response'] = model_response
+
+    with open(f'{cur_folder}/openai-responses.json', 'w') as file: 
         json.dump(test_data, file, indent=4) 
 
 def run_chatgpt(prompt, client, model='gpt-4-turbo'): 
