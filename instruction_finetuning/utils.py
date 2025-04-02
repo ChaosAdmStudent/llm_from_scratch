@@ -41,3 +41,11 @@ def generate_model_responses(file_path: str, model, test_data, tokenizer, contex
     
     with open(file_path, 'w') as file: 
         json.dump(test_data, file, indent=4) 
+
+def run_chatgpt(prompt, client, model='gpt-4-turbo'): 
+    response = client.chat.completions.create(
+        model = model, 
+        messages = [{"role": "user", "content": prompt}] 
+    ) 
+
+    return response.choices[0].message.content

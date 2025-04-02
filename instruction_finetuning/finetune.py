@@ -124,7 +124,7 @@ if __name__ == '__main__':
                                                  batch_size=batch_size, device=device) 
 
     optimizer = torch.optim.AdamW(model.parameters(), lr=5e-5, weight_decay=0.1) 
-    num_epochs = 2
+    num_epochs = 4
     eval_freq = 5
     num_batches = 5
     

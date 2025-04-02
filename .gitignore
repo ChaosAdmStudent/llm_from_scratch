@@ -6,3 +6,4 @@ llm
 *.err
 **/gpt2
 *.sh
+**/config.json
