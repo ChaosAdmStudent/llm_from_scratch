@@ -15,11 +15,6 @@ In this repository, I am uploading every little code and experiment that I do to
 2. Grouped Query Attention
 3. KV-Cache Mechanism for faster inference. 
 
-## Topics to implement: 
-
-1. Relative Position embedding
-2. Flash attention
-
 ## Interesting observations 
 
 ### KV Cache inference speed up with increasing sequence lengths 
