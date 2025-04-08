@@ -20,44 +20,6 @@ import gc
 
 class Timer(): 
     def __init__(self):
-        self.duration = []
-
-    def __start__(self): 
-        torch.cuda.synchronize() 
-        self.start = perf_counter()  
-
-    def __end__(self): 
-        torch.cuda.synchronize() 
-        self.duration.append(perf_counter() - self.start)  
-
-    def __reset__(self): 
-        self.duration = []  
-
-    def __duration__(self): 
-        return np.mean(self.duration)  
-
-'''
-This file has code to run inference on my trained model. To use openAI weights to do inference, use pretrained_openai.py. 
-
-TODO: Add padding functionality for multi-batched inputs. All code assumes equal number of tokens for each batch right now.
-'''
-
-import os 
-import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) 
-import tiktoken 
-from pretraining.pretraining import GPT_CONFIG_124M 
-from pretraining.utils import generate
-from model_architecture.gpt_model import GPTModel
-from attention.multihead_attention import ModelArgs 
-import torch 
-from time import perf_counter
-import numpy as np 
-import matplotlib.pyplot as plt 
-import gc
-
-class Timer(): 
-    def __init__(self):
         self.duration =  []
 
     def __start__(self): 

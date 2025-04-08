@@ -65,7 +65,7 @@ def generate(max_new_tokens: int, model, input_token_embeddings: torch.Tensor, c
                 top_logits, top_pos = torch.topk(last_token_logits, k=top_k, dim=-1) 
                 last_token_logits = torch.where( 
                     condition = last_token_logits < top_logits[:, [-1]], # top_logits[-1] is the smallest element in top-k 
-                    input= torch.tensor(-torch.inf).to(last_token_logits.device) , 
+                    input= torch.full_like(last_token_logits, -torch.inf), 
                     other = last_token_logits # Retain values in indices where condition is False 
                 ) 
             
